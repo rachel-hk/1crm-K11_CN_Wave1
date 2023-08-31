@@ -1,0 +1,362 @@
+{
+	"name": "SCHEDULED_PROD_TRIGGER_useDT",
+	"properties": {
+		"activities": [
+			{
+				"name": "PROD_TRIGGER_DATA_INGESTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PROD_TRIGGER_DATA_INGESTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_CDM",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_REF",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_CDM",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_CS_LOYALTY",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_REF",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PROD_TRIGGER_DATA_INGESTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_REF",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_CS_LOYALTY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PROD_TRIGGER_DATA_INGESTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_CS_LOYALTY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG_Databricks_3_Batches",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_useDT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_SUMMARY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_SUMMARY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_RECORD_COUNT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_CDM",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SFMC_DIGIT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "GROUP_AUTO_TAG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "MANUAL_TAG_DATA_TRIGGER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "K11_AUTO_TAG_SUMMARY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "K11_CL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "GROUP_AUTO_TAG",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PROD_TRIGGER_DATA_INGESTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "GROUP_AUTO_TAG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MANUAL_TAG_DATA_TRIGGER",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG_Databricks_3_Batches",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MANUAL_TAG_DATA_TRIGGER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Databricks_3_Batches",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PROD_TRIGGER_DATA_INGESTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_Databricks_3_Batches_useDT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_CL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PROD_TRIGGER_DATA_INGESTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_CL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_FAMILY_DETAILS_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_FAMILY_DETAILS_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_PIPL_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_PIPL_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_PROFILE_EXTRA_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_PROFILE_EXTRA_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_PROFILE_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_PROFILE_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			},
+			"ch_insert_date": {
+				"type": "String",
+				"defaultValue": "XXXXXXXX"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-22T08:27:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

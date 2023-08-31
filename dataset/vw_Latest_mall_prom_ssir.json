@@ -1,0 +1,134 @@
+{
+	"name": "vw_Latest_mall_prom_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "unique_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "prom_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "start_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "end_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "origin_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "prom_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "quantity",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "total_quantity",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "return_quantity",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_pause",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_show",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "warming_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sort",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_mall_prom"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,402 @@
+{
+	"name": "vw_Latest_product_info",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_prod_volume",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "shelfLife_days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "return_days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "english_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "merchant_category_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "gross_weight",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "subtitle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "art_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "replacement_days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "merchant_prod_length",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "merchant_prod_height",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "net_weight",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "net_weight_start",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "chinese_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "guarantee_days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "merchant_prod_width",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "sale_calc_unit_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_inner_supplier",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "supplier_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "supplier_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "supplier_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "merchant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "tax_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "version_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "client_versionno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "category_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "brand_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "warehouse_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "subtitle_lan2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "use_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "machining_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "combine_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "place_origin_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fast_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mp_model",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "category_full_id_path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_invoice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_force_invoice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_vat_invoice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expiry_date_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expiry_date_value",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expiry_date_unit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expiry_date_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "face_value",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "batch_strategy_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "outbound_strategy",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "purchase_limit_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "purchase_limit_interval_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "purchase_limit_interval",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "purchase_limit_date_start",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "purchase_limit_date_end",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "purchase_limit_per_user",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "auto_refund",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "selling_points",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_drop_shipping",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ext_field1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "use_desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "use_address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "end_use_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "start_use_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "coupon_product_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shelf_display_flag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_product_info"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

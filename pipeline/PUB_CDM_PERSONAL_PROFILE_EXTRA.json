@@ -1,0 +1,109 @@
+{
+	"name": "PUB_CDM_PERSONAL_PROFILE_EXTRA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data from temp table",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('Pre_CDM_PERSONAL_PROFILE_EXTRA',formatDateTime(addhours(utcnow(),8),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBatchSize": 100000,
+						"maxConcurrentConnections": 16,
+						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"Customer_UID"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 16,
+					"dataIntegrationUnits": 16,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Par_PRE_CDM_PERSONAL_PROFILE_EXTRA_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PUB_CDM_PERSONAL_PROFILE_EXTRA_ssir",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data from temp table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[CDM_PERSONAL_PROFILE_EXTRA_ACTIVE]"
+				},
+				"linkedServiceName": {
+					"referenceName": "1crmTagMgmtSynapseProd",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Published"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T16:17:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,66 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "UTCNOW",
+							"value": {
+								"type": "Expression",
+								"content": "@utcnow()"
+							}
+						},
+						{
+							"key": "UTCNOW8",
+							"value": {
+								"type": "Expression",
+								"content": "@addhours(utcnow(),8)"
+							}
+						},
+						{
+							"key": "PipelineTriggerTime",
+							"value": {
+								"type": "Expression",
+								"content": "@pipeline().TriggerTime"
+							}
+						},
+						{
+							"key": "ConvertTimeZone",
+							"value": {
+								"type": "Expression",
+								"content": "@formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd')"
+							}
+						},
+						{
+							"key": "Trigger8",
+							"value": {
+								"type": "Expression",
+								"content": "@addhours(pipeline().TriggerTime,8)"
+							}
+						}
+					],
+					"setSystemVariable": true
+				}
+			}
+		],
+		"variables": {
+			"Test boolean": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-26T17:46:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

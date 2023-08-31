@@ -1,0 +1,88 @@
+{
+	"name": "SCHEDULED_PROD_TRIGGER_20230725",
+	"properties": {
+		"activities": [
+			{
+				"name": "PROD_TRIGGER_DATA_INGESTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PROD_TRIGGER_DATA_INGESTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG_Databricks_3_Batches",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_SUMMARY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_SUMMARY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Databricks_3_Batches",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PROD_TRIGGER_DATA_INGESTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_Databricks_3_Batches",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T17:07:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

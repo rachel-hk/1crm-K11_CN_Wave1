@@ -1,0 +1,216 @@
+{
+	"name": "Par_PRO_REF_TENANT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('PRO_REF_TENANT',formatDateTime(addhours(utcnow(),8),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Tenantship_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tenant_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Source_BU",
+				"type": "UTF8"
+			},
+			{
+				"name": "Site_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Site_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Site_Name_EN",
+				"type": "UTF8"
+			},
+			{
+				"name": "Site_Name_SC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Site_Name_TC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Contract_No",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Floor",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Cate",
+				"type": "UTF8"
+			},
+			{
+				"name": "Brand_Name_EN",
+				"type": "UTF8"
+			},
+			{
+				"name": "Brand_Name_SC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Brand_Name_TC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Brand_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "LV1_Class_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "LV1_Class_Name_EN",
+				"type": "UTF8"
+			},
+			{
+				"name": "LV2_Class_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "LV2_Class_Name_EN",
+				"type": "UTF8"
+			},
+			{
+				"name": "LV2_Class_Name_SC",
+				"type": "UTF8"
+			},
+			{
+				"name": "LV2_Class_Name_TC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Name_SC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Com_Name_EN",
+				"type": "UTF8"
+			},
+			{
+				"name": "Com_Name_SC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Com_Name_TC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Lease_Area",
+				"type": "UTF8"
+			},
+			{
+				"name": "Contract_Start",
+				"type": "UTF8"
+			},
+			{
+				"name": "Contract_End",
+				"type": "UTF8"
+			},
+			{
+				"name": "Open_Time",
+				"type": "UTF8"
+			},
+			{
+				"name": "Close_Time",
+				"type": "UTF8"
+			},
+			{
+				"name": "Parent_Tenant_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Code_Value",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cate_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cate_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Old_Class_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Old_Class_Name_EN",
+				"type": "UTF8"
+			},
+			{
+				"name": "Old_Class_Name_SC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Old_Class_Name_TC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Classify",
+				"type": "UTF8"
+			},
+			{
+				"name": "Kpos_Install",
+				"type": "UTF8"
+			},
+			{
+				"name": "Start_Date",
+				"type": "DATE"
+			},
+			{
+				"name": "Tenant_Interest_Tag",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tenant_Status",
+				"type": "UTF8"
+			},
+			{
+				"name": "End_Date",
+				"type": "DATE"
+			},
+			{
+				"name": "Is_Current",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

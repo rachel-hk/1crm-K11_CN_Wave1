@@ -1,0 +1,409 @@
+{
+	"name": "temp_u_user_identity_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/New_KGO/Raw_ouser"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "identity_type_code",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "pay_password",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pay_salt",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pay_salt_update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "is_new_member",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "source_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "province",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "subscribe",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "subscribe_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "personal_signature",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "version_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_usermac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "create_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "server_ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_usermac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "client_versionno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "constellation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "education",
+				"type": "nvarchar"
+			},
+			{
+				"name": "animal_sign",
+				"type": "nvarchar"
+			},
+			{
+				"name": "signature",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shopping_guider_remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "platform_remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bound_store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "bound_store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bound_store_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_userip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_type_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_level_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "card_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_level_end_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "user_account_flow_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_point_update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "normal_invite_user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "u_employee_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "u_employee_bind_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nickname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remarks",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sex",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "head_pic_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "birthday",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "birthday_year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday_month",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday_date",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ext_field1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "notify_type_exclude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "final_interests",
+				"type": "varbinary"
+			},
+			{
+				"name": "has_update",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "identity_card_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "identity_card_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "identity_verify_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "identity_verify_failure_num",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kdp_bind_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kdp_member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kdp_bind_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "mall_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fail_message",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wx_card_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wx_event_time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wx_auth_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wx_auth_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sync_crm_flag",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "new_invite",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_u_user_identity"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

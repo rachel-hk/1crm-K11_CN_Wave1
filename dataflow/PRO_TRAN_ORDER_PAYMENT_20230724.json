@@ -1,0 +1,227 @@
+{
+	"name": "PRO_TRAN_ORDER_PAYMENT_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_com_member_order_payment",
+						"type": "DatasetReference"
+					},
+					"name": "IngestPaymentOrder"
+				},
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_com_member_order",
+						"type": "DatasetReference"
+					},
+					"name": "MapTranOrder"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerMapping"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_TRAN_ORDER_PAYMENT",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoProcessTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "JoinOrder"
+				},
+				{
+					"name": "JoinCustomerMapping"
+				},
+				{
+					"name": "DropColumn"
+				},
+				{
+					"name": "Dedup"
+				},
+				{
+					"name": "FilterPayment"
+				},
+				{
+					"name": "FilterNormalData"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          order_code as string,",
+				"          type as string,",
+				"          type_id as string,",
+				"          kpoint as integer,",
+				"          price as string,",
+				"          is_real as integer,",
+				"          is_free as integer,",
+				"          create_at as long,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestPaymentOrder",
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          level_id as long,",
+				"          special_level_id as long,",
+				"          special_level_time as long,",
+				"          area_id as long,",
+				"          order_code as string,",
+				"          origin_order_code as string,",
+				"          origin_parent_order_code as string,",
+				"          wechat_pay_code as string,",
+				"          store_code as string,",
+				"          origin_amount as string,",
+				"          not_discount_amount as string,",
+				"          sales_amount as string,",
+				"          real_amount as string,",
+				"          kp_amount as string,",
+				"          gvamount as string,",
+				"          bonus_point as long,",
+				"          bonus_type as string,",
+				"          order_at as long,",
+				"          order_source as long,",
+				"          status as integer,",
+				"          cancel_at as long,",
+				"          remark as string,",
+				"          return_amount as string,",
+				"          return_bonus_point as long,",
+				"          api_key as string,",
+				"          async_status as integer,",
+				"          central_store_code as string,",
+				"          create_at as long,",
+				"          update_at as long,",
+				"          deleted as long,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> MapTranOrder",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CustomerMapping",
+				"JoinCustomerMapping derive(BU_Source = 'K11 PRC',",
+				"          Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"FilterPayment, FilterNormalData join(IngestPaymentOrder@order_code == MapTranOrder@order_code,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinOrder",
+				"Dedup, CustomerMapping join(member_id == K11PRC_Member_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinCustomerMapping",
+				"JoinOrder select(mapColumn(",
+				"          id = IngestPaymentOrder@id,",
+				"          order_code = IngestPaymentOrder@order_code,",
+				"          type,",
+				"          type_id,",
+				"          kpoint,",
+				"          price,",
+				"          is_real,",
+				"          is_free,",
+				"          create_at = IngestPaymentOrder@create_at,",
+				"          deleted = IngestPaymentOrder@deleted,",
+				"          File_Path = IngestPaymentOrder@File_Path,",
+				"          Insert_Date = IngestPaymentOrder@Insert_Date,",
+				"          member_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropColumn",
+				"DropColumn aggregate(groupBy(id,",
+				"          order_code,",
+				"          type,",
+				"          type_id,",
+				"          price,",
+				"          is_real,",
+				"          is_free,",
+				"          kpoint,",
+				"          create_at,",
+				"          deleted,",
+				"          File_Path,",
+				"          Insert_Date,",
+				"          member_id),",
+				"     count = count()) ~> Dedup",
+				"IngestPaymentOrder filter(toDate(Insert_Date)==addDays(currentDate(),-1)) ~> FilterPayment",
+				"MapTranOrder filter(deleted==0 && status==1) ~> FilterNormalData",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Payment_UID = id,",
+				"          Order_Code = order_code,",
+				"          Customer_UID,",
+				"          Member_ID = Hashed_Member_ID,",
+				"          BU_Source,",
+				"          Payment_Type = type,",
+				"          Type_ID = type_id,",
+				"          Payment_Kpoint = kpoint,",
+				"          Pay_Price = price,",
+				"          Is_Real = is_real,",
+				"          Is_Free = is_free,",
+				"          Create_At = AddColumn@Create_At,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoProcessTable"
+			]
+		}
+	}
+}

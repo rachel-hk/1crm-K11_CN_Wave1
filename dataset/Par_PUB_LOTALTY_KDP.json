@@ -1,0 +1,27 @@
+{
+	"name": "Par_PUB_LOTALTY_KDP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('PUB_LOYALTY_KDP',formatDateTime(utcnow(),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

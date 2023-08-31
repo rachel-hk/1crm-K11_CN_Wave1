@@ -1,0 +1,105 @@
+{
+	"name": "SFMC_CDM_PERSONAL_FAMILY_DETAILS",
+	"properties": {
+		"activities": [
+			{
+				"name": "CDM_PERSONAL_FAMILY_DETAILS EXTRACT",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "If Condition1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "SFMC_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "DataFlowReference",
+						"parameters": {
+							"Start_Date": {
+								"value": "'@{variables('Start_Date')}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@pipeline().globalParameters.Rerun",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set variable2",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Start_Date",
+								"value": {
+									"value": "@formatDateTime(convertTimeZone(pipeline().TriggerTime,'UTC','China Standard Time'),'yyyyMMdd')",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "Start_Date",
+								"value": {
+									"value": "@pipeline().globalParameters.Start_Date",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-03T14:44:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

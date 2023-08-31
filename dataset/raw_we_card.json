@@ -1,0 +1,249 @@
+{
+	"name": "raw_we_card",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/WE_CARD",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "app_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "card_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "card_source",
+				"type": "INT32"
+			},
+			{
+				"name": "card_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_put",
+				"type": "INT32"
+			},
+			{
+				"name": "is_api",
+				"type": "INT32"
+			},
+			{
+				"name": "need_push_on_view",
+				"type": "INT32"
+			},
+			{
+				"name": "logo_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "code_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "brand_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "title",
+				"type": "UTF8"
+			},
+			{
+				"name": "color",
+				"type": "UTF8"
+			},
+			{
+				"name": "notice",
+				"type": "UTF8"
+			},
+			{
+				"name": "description",
+				"type": "UTF8"
+			},
+			{
+				"name": "quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "total_quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "date_info",
+				"type": "UTF8"
+			},
+			{
+				"name": "begin_timestamp",
+				"type": "INT32"
+			},
+			{
+				"name": "end_timestamp",
+				"type": "INT32"
+			},
+			{
+				"name": "end_time",
+				"type": "INT64"
+			},
+			{
+				"name": "use_custom_code",
+				"type": "INT32"
+			},
+			{
+				"name": "bind_openid",
+				"type": "INT32"
+			},
+			{
+				"name": "service_phone",
+				"type": "UTF8"
+			},
+			{
+				"name": "location_id_list",
+				"type": "UTF8"
+			},
+			{
+				"name": "use_all_locations",
+				"type": "INT32"
+			},
+			{
+				"name": "center_item",
+				"type": "UTF8"
+			},
+			{
+				"name": "custom_item",
+				"type": "UTF8"
+			},
+			{
+				"name": "get_limit",
+				"type": "INT32"
+			},
+			{
+				"name": "get_limit_time",
+				"type": "INT32"
+			},
+			{
+				"name": "use_limit",
+				"type": "INT32"
+			},
+			{
+				"name": "can_share",
+				"type": "INT32"
+			},
+			{
+				"name": "can_give_friend",
+				"type": "INT32"
+			},
+			{
+				"name": "use_condition",
+				"type": "UTF8"
+			},
+			{
+				"name": "abstract",
+				"type": "UTF8"
+			},
+			{
+				"name": "text_image_list",
+				"type": "UTF8"
+			},
+			{
+				"name": "time_limit",
+				"type": "UTF8"
+			},
+			{
+				"name": "business_service",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT32"
+			},
+			{
+				"name": "update_time",
+				"type": "INT32"
+			},
+			{
+				"name": "reason",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "is_primary",
+				"type": "INT32"
+			},
+			{
+				"name": "app_id_list",
+				"type": "UTF8"
+			},
+			{
+				"name": "use_all_app",
+				"type": "INT32"
+			},
+			{
+				"name": "api_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "need_verify_member",
+				"type": "INT32"
+			},
+			{
+				"name": "use_refuse",
+				"type": "INT32"
+			},
+			{
+				"name": "can_provide",
+				"type": "INT32"
+			},
+			{
+				"name": "create_uid",
+				"type": "INT32"
+			},
+			{
+				"name": "update_uid",
+				"type": "INT32"
+			},
+			{
+				"name": "use_all_goods",
+				"type": "INT32"
+			},
+			{
+				"name": "group_id",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

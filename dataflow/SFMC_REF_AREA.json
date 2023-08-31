@@ -1,0 +1,100 @@
+{
+	"name": "SFMC_REF_AREA",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_AREA",
+						"type": "DatasetReference"
+					},
+					"name": "REFAREA"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_REF_AREA",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Area_ID as integer,",
+				"          Area_Name as string,",
+				"          Area_Alias as string,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Delete as integer,",
+				"          Area_Grp as integer,",
+				"          Partner_Code as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFAREA",
+				"REFAREA filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterLatestData",
+				"REFAREA aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Ref_Area',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

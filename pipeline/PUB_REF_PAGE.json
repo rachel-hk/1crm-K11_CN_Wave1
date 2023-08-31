@@ -1,0 +1,64 @@
+{
+	"name": "PUB_REF_PAGE",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Data from Processing to Published",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBatchSize": 100000,
+						"preCopyScript": "TRUNCATE TABLE K11_PUB.REF_PAGE",
+						"maxConcurrentConnections": 16,
+						"writeBehavior": "Insert",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 32,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "REF_PAGE_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PUB_REF_PAGE_ssir",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Published"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-03T02:37:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

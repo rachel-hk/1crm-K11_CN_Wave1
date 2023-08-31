@@ -1,0 +1,27 @@
+{
+	"name": "Par_mem_tag",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('mem_tag',formatDateTime(utcnow(),'yyyyMMddHH'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,32 @@
+{
+	"name": "update_policy_version_list_20230727",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "policies_version",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "policy_Ver",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "update_policy_version_list_20230727"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

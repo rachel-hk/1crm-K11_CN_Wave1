@@ -1,0 +1,125 @@
+{
+	"name": "raw_com_store",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_STORE",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT32"
+			},
+			{
+				"name": "sb_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "sb_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "logo",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_intro",
+				"type": "UTF8"
+			},
+			{
+				"name": "mall_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "floor",
+				"type": "UTF8"
+			},
+			{
+				"name": "unitcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "brand_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "brand_id_bak",
+				"type": "UTF8"
+			},
+			{
+				"name": "coupon_count",
+				"type": "INT32"
+			},
+			{
+				"name": "store_classify",
+				"type": "UTF8"
+			},
+			{
+				"name": "sb1_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "sb1_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "sb2_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "sb2_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "old_level_class_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "old_level_class_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "old_level_class_name_sc",
+				"type": "UTF8"
+			},
+			{
+				"name": "category",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "is_channel_no",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

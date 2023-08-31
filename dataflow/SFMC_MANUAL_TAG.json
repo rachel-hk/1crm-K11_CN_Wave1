@@ -1,0 +1,71 @@
+{
+	"name": "SFMC_MANUAL_TAG",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "K11_MANUAL_TAG_SUMMARY",
+						"type": "DatasetReference"
+					},
+					"name": "SourceTable"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_MANUAL_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToSFMC"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Tag_UID as integer,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          BU_Source as string,",
+				"          Tag_ID as string,",
+				"          Tag_Name as string,",
+				"          Tag_Type as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> SourceTable",
+				"SourceTable sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Tag_UID,",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          Union_ID,",
+				"          BU_Source,",
+				"          Tag_ID,",
+				"          Tag_Name,",
+				"          Tag_Type,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToSFMC"
+			]
+		}
+	}
+}

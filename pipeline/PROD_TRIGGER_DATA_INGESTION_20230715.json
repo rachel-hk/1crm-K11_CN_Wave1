@@ -1,0 +1,77 @@
+{
+	"name": "PROD_TRIGGER_DATA_INGESTION_20230715",
+	"properties": {
+		"activities": [
+			{
+				"name": "28_DIGIT_SHOP_CART",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "28_DIGIT_SHOP_CART",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "28_DIGIT_SHOP_CART",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Update_Time_Fix]"
+				},
+				"linkedServiceName": {
+					"referenceName": "1crmTagMgmtSynapseProd",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "From UTC Time",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Stored procedure1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[TIME_FROM_UTC]"
+				},
+				"linkedServiceName": {
+					"referenceName": "1crmTagMgmtSynapseProd",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-07-15T07:20:57Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

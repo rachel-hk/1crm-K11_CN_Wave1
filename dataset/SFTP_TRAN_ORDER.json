@@ -1,0 +1,31 @@
+{
+	"name": "SFTP_TRAN_ORDER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('TRAN_ORDER_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": "/import"
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

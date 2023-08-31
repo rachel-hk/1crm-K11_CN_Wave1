@@ -1,0 +1,120 @@
+{
+	"name": "SFMC_TRAN_COUPON_RECORD_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data to SFMC",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_COUPON_RECORD_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('TRAN_COUPON_RECORD',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.csv.gz",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "SftpWriteSettings",
+							"operationTimeout": "01:00:00",
+							"useTempFileRename": true
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "TEMP_TRAN_COUPON_RECORD",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SFTP_TRAN_COUPON_RECORD",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "SFMC_TRAN_COUPON_RECORD_copy1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "SFMC_TRAN_COUPON_RECORD_copy1",
+						"type": "DataFlowReference",
+						"parameters": {
+							"Start_Date": {
+								"value": "'@{variables('Start_Date')}'",
+								"type": "Expression"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-17T07:48:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

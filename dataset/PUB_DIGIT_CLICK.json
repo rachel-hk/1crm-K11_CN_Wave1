@@ -1,0 +1,128 @@
+{
+	"name": "PUB_DIGIT_CLICK",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Click_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Session_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Visitor_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Page_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Title_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_Log_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "View_Page",
+				"type": "nvarchar"
+			},
+			{
+				"name": "View_Page_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Place_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Button_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MiniProgram_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Visit_ID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "DIGIT_CLICK"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

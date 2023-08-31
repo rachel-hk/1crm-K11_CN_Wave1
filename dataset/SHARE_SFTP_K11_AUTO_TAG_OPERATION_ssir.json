@@ -1,0 +1,451 @@
+{
+	"name": "SHARE_SFTP_K11_AUTO_TAG_OPERATION_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtFileShareSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"fileName": {
+					"value": "@concat('K11_Operation_Auto_Tag_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd')",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "String"
+			},
+			{
+				"name": "Member_ID",
+				"type": "String"
+			},
+			{
+				"name": "Union_ID",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rec_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rec_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rec_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rec_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rec_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rec_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Freq_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Freq_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Freq_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Freq_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Freq_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Freq_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Monetary_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Monetary_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Monetary_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Monetary_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Monetary_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_Monetary_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "K11_RFM_Seg",
+				"type": "String"
+			},
+			{
+				"name": "K11_Active_Member",
+				"type": "String"
+			},
+			{
+				"name": "K11_Non_Trans_Member",
+				"type": "String"
+			},
+			{
+				"name": "K11_CLC_Seg",
+				"type": "String"
+			},
+			{
+				"name": "K11_White_Collar",
+				"type": "String"
+			},
+			{
+				"name": "K11_Weekday_Weekend_Shopper",
+				"type": "String"
+			},
+			{
+				"name": "K11_Rich_Female",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Freq_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Freq_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Freq_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Freq_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Amount_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Amount_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Amount_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Pur_Amount_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Click_View_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Click_View_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Click_View_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Click_View_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Browse_Duration_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Browse_Duration_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Browse_Duration_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Store_Browse_Duration_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Channel_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Channel_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Channel_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Channel_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Commun_Channel_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Commun_Channel_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Commun_Channel_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Commun_Channel_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Online_Interact_Channel_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Online_Interact_Channel_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Online_Interact_Channel_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Online_Interact_Channel_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Freq_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Freq_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Freq_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Freq_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Amount_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Amount_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Amount_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Pur_Amount_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Click_View_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Click_View_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Click_View_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Click_View_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Browse_Duration_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Browse_Duration_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Browse_Duration_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Product_Browse_Duration_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Freq_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Freq_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Freq_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Freq_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Amount_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Amount_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Amount_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Pur_Amount_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Click_View_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Click_View_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Click_View_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Click_View_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Browse_Duration_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Browse_Duration_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Browse_Duration_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_SubTrade_Cate_Browse_Duration_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Freq_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Freq_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Freq_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Freq_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Amount_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Amount_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Amount_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Pur_Amount_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Click_View_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Click_View_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Click_View_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Click_View_12M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Browse_Duration_1M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Browse_Duration_3M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Browse_Duration_6M",
+				"type": "String"
+			},
+			{
+				"name": "K11_Pref_Trade_Cate_Browse_Duration_12M",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

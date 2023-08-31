@@ -1,0 +1,86 @@
+{
+	"name": "PUB_CDM_PERSONAL_FAMILY_DETAILS",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromCDMPERSONALFAMILYDETAILS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"description": "Export data to PUB_CDM_PERSONAL_PIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          With_Kid as string,",
+				"          Kid1_Gender as integer,",
+				"          Kid1_Birthday as timestamp,",
+				"          Kid2_Gender as integer,",
+				"          Kid2_Birthday as timestamp,",
+				"          Kid3_Gender as integer,",
+				"          Kid3_Birthday as timestamp,",
+				"          Kid4_Gender as integer,",
+				"          Kid4_Birthday as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromCDMPERSONALFAMILYDETAILS",
+				"IngestionfromCDMPERSONALFAMILYDETAILS filter(Is_Current == '1') ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          With_Kid,",
+				"          Kid1_Gender,",
+				"          Kid1_Birthday,",
+				"          Kid2_Gender,",
+				"          Kid2_Birthday,",
+				"          Kid3_Gender,",
+				"          Kid3_Birthday,",
+				"          Kid4_Gender,",
+				"          Kid4_Birthday,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

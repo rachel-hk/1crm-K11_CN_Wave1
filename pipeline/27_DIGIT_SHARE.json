@@ -1,0 +1,67 @@
+{
+	"name": "27_DIGIT_SHARE",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_DIGIT_SHARE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "temp_mon_share_log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_DIGIT_SHARE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_DIGIT_SHARE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_DIGIT_SHARE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_DIGIT_SHARE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "temp_mon_share_log",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "temp_mon_share_log",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T07:02:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

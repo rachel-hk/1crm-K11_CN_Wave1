@@ -1,0 +1,124 @@
+{
+	"name": "ChatLabsOABroadcastLog",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityinstanceid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "broadcastarticleid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "broadcastid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "broadcastarticletype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "successcount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "failedcount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "totalcount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "failedreason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "journeyid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "journeyname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sendon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "interactionid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "version",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "contacttype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "contactkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "ChatLabsOABroadcastLog"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

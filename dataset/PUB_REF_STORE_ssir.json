@@ -1,0 +1,112 @@
+{
+	"name": "PUB_REF_STORE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Store_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Store_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SB_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SB_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Intro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mall_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Store_Floor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Unitcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Classify",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SB1_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SB1_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SB2_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SB2_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Cate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Channel_No",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_STORE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

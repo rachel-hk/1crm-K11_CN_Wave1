@@ -1,0 +1,83 @@
+{
+	"name": "AzureSynapseAnalyticsTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ship_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operator_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fenze_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_default",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_com_member_ship"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

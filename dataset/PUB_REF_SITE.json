@@ -1,0 +1,46 @@
+{
+	"name": "PUB_REF_SITE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Site_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_SITE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

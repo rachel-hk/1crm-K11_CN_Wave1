@@ -1,0 +1,16 @@
+{
+	"name": "1crmTagMgmtSynpaseProdSSIR",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=1crm-k11-synapse-prod.sql.azuresynapse.azure.cn;initial catalog=1crm_k11_sqlpool_prod;user id=sqladminuser",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlZTRjM2Q5YS00N2Y0LTQzOWMtOThhMC01NGQ1MTdlNDc2NjkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "1crm-k11-ir-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

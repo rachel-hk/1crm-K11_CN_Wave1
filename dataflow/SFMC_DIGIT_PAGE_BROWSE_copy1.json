@@ -1,0 +1,182 @@
+{
+	"name": "SFMC_DIGIT_PAGE_BROWSE_copy1",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_PAGE_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "DIGITPAGEBROWSE"
+				},
+				{
+					"dataset": {
+						"referenceName": "Test_Temp_1",
+						"type": "DatasetReference"
+					},
+					"name": "MissingID"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_DIGIT_PAGE_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddUID"
+				},
+				{
+					"name": "SetNullto0"
+				},
+				{
+					"name": "join"
+				},
+				{
+					"name": "DropUnwantedColumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Browse_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Session_ID as string,",
+				"          Page_ID as string,",
+				"          Title_ID as string,",
+				"          App_ID as string,",
+				"          App_Name as string,",
+				"          Visitor_ID as string,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Event_Log_ID as string,",
+				"          Event_ID as string,",
+				"          Create_Time as timestamp,",
+				"          View_Page as string,",
+				"          View_Page_Name as string,",
+				"          Area_ID as string,",
+				"          Product_SN as string,",
+				"          Product_Channel as string,",
+				"          Land_Page as string,",
+				"          Land_Page_Time as timestamp,",
+				"          Browse_Duration as integer,",
+				"          Is_Exit_Page as integer,",
+				"          Is_Landing_Page as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Channel_ID as integer,",
+				"          Visit_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     batchSize: 100000,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> DIGITPAGEBROWSE",
+				"source(output(",
+				"          Browse_ID as string,",
+				"          Visit_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> MissingID",
+				"SetNullto0 derive(Browse_UID = concat(Browse_ID,toString(Visit_ID)),",
+				"          null_string = toString(null())) ~> AddUID",
+				"DropUnwantedColumns derive(Visit_ID = iif(isNull(Visit_ID)==true(),0,toInteger(Visit_ID))) ~> SetNullto0",
+				"DIGITPAGEBROWSE, MissingID join(DIGITPAGEBROWSE@Browse_ID == MissingID@Browse_ID",
+				"     && DIGITPAGEBROWSE@Visit_ID == MissingID@Visit_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join",
+				"join select(mapColumn(",
+				"          Browse_ID = DIGITPAGEBROWSE@Browse_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Session_ID,",
+				"          Page_ID,",
+				"          Title_ID,",
+				"          App_ID,",
+				"          App_Name,",
+				"          Visitor_ID,",
+				"          User_ID,",
+				"          Member_ID,",
+				"          Event_Log_ID,",
+				"          Event_ID,",
+				"          Create_Time,",
+				"          View_Page,",
+				"          View_Page_Name,",
+				"          Area_ID,",
+				"          Product_SN,",
+				"          Product_Channel,",
+				"          Land_Page,",
+				"          Land_Page_Time,",
+				"          Browse_Duration,",
+				"          Is_Exit_Page,",
+				"          Is_Landing_Page,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Channel_ID,",
+				"          Visit_ID = DIGITPAGEBROWSE@Visit_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"AddUID sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Browse_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Session_ID,",
+				"          Page_ID,",
+				"          Title_ID,",
+				"          App_ID,",
+				"          App_Name,",
+				"          Visitor_ID,",
+				"          User_ID,",
+				"          Member_ID,",
+				"          Event_Log_ID,",
+				"          Event_ID,",
+				"          Create_Time,",
+				"          View_Page,",
+				"          View_Page_Name,",
+				"          Area_ID,",
+				"          Product_SN,",
+				"          Product_Channel,",
+				"          Land_Page,",
+				"          Land_Page_Time,",
+				"          Browse_Duration,",
+				"          Is_Exit_Page,",
+				"          Is_Landing_Page,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Channel_ID,",
+				"          Visit_ID,",
+				"          Browse_UID",
+				"     )) ~> SinkToDataLake"
+			]
+		}
+	}
+}

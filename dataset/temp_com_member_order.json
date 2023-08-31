@@ -1,0 +1,172 @@
+{
+	"name": "temp_com_member_order",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "special_level_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "special_level_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_parent_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechat_pay_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "not_discount_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sales_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "real_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kp_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gvamount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bonus_point",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "bonus_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_source",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cancel_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "return_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "return_bonus_point",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "api_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "async_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "central_store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deleted",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_member_order"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

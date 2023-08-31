@@ -1,0 +1,67 @@
+{
+	"name": "28_DIGIT_SHOP_CART",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_DIGIT_SHOP_CART",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_mall_shopping_cart",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_DIGIT_SHOP_CART",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_DIGIT_SHOP_CART",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_DIGIT_SHOP_CART",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_DIGIT_SHOP_CART",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_mall_shopping_cart",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_mall_shopping_cart",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T07:02:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,135 @@
+{
+	"name": "temp_com_store",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sb_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sb_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "logo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_intro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mall_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "floor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unitcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brand_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brand_id_bak",
+				"type": "nvarchar"
+			},
+			{
+				"name": "coupon_count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_classify",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sb1_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sb1_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sb2_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sb2_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "old_level_class_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "old_level_class_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "old_level_class_name_sc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_channel_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_store"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,91 @@
+{
+	"name": "PUB_REF_PROMOTION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Prom_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Source_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Prom_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Prom_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Pause",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Prom_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Show",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Prom_Warm_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_PROMOTION"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,90 @@
+{
+	"name": "SFMC_REF_SITE",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_SITE",
+						"type": "DatasetReference"
+					},
+					"name": "REFSITE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_REF_Site",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Account_ID as integer,",
+				"          Site_Name as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFSITE",
+				"REFSITE aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Ref_Site',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"REFSITE sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

@@ -1,0 +1,118 @@
+{
+	"name": "PRO_CDM_PERSONAL_PROFILE_EXTRA",
+	"properties": {
+		"activities": [
+			{
+				"name": "CDM_CUSTOMER_PROFILE_EXTRA",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "PRO_CDM_PERSONAL_PROFILE_EXTRA",
+						"type": "DataFlowReference",
+						"parameters": {
+							"PrimaryKey": "Customer_UID",
+							"Columns": "'Personal_Customer_ID,BU_Source,VIP_Code,Union_ID,First_Pay,Last_Pay,Is_K11,From_Know,Is_Main_Card,Card_Type,VIP_Card_Type,Up_Origin,Operator_Type,Member_Kpoint,Expire_Kpoint,Clear_Kpoint,Member_Spoint,Expire_Spoint,Clear_Spoint,Spoint_Times,Member_Balance,Sales_Total,Sales_Times,Create_At,Member_Deleted,Update_Operator,Upgrade_Type,Is_HK_Member,To_China_Times,To_China_Reason,Name_On_Card,Visit_K11_Reason,Company_Share_Info,Member_References,VIP_Club,Join_Club_Date,SMS_Contact,Email_Contact,Phone_Contact,Post_Contact,Allow_EDM,EDM_Type,Allow_Share_Info'"
+						}
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod-2",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copy data from temp table",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CDM_CUSTOMER_PROFILE_EXTRA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('PRO_CDM_PERSONAL_PROFILE_EXTRA',formatDateTime(utcnow(),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBatchSize": 100000,
+						"maxConcurrentConnections": 16,
+						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"Customer_UID",
+								"Start_Date"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 16,
+					"dataIntegrationUnits": 16,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Par_PRO_CDM_PERSONAL_PROFILE_EXTRA",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CDM_PERSONAL_PROFILE_EXTRA",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Processing"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-18T10:47:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

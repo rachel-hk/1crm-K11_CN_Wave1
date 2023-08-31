@@ -1,0 +1,151 @@
+{
+	"name": "SFMC_ChatLabsSMSActivityLogs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatLabsSuperSMSActivityLog_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsid",
+				"type": "String"
+			},
+			{
+				"name": "entity",
+				"type": "String"
+			},
+			{
+				"name": "type",
+				"type": "String"
+			},
+			{
+				"name": "sendstatus",
+				"type": "String"
+			},
+			{
+				"name": "senderrormessage",
+				"type": "String"
+			},
+			{
+				"name": "senddatetime",
+				"type": "String"
+			},
+			{
+				"name": "deliverystatus",
+				"type": "String"
+			},
+			{
+				"name": "deliveryerrormessage",
+				"type": "String"
+			},
+			{
+				"name": "deliverydatetime",
+				"type": "String"
+			},
+			{
+				"name": "smsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "smsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "journeyid",
+				"type": "String"
+			},
+			{
+				"name": "journeyname",
+				"type": "String"
+			},
+			{
+				"name": "version",
+				"type": "String"
+			},
+			{
+				"name": "activityid",
+				"type": "String"
+			},
+			{
+				"name": "activityname",
+				"type": "String"
+			},
+			{
+				"name": "contacttype",
+				"type": "String"
+			},
+			{
+				"name": "contactkey",
+				"type": "String"
+			},
+			{
+				"name": "createdon",
+				"type": "String"
+			},
+			{
+				"name": "modifiedon",
+				"type": "String"
+			},
+			{
+				"name": "lastclick",
+				"type": "String"
+			},
+			{
+				"name": "totalclicks",
+				"type": "String"
+			},
+			{
+				"name": "interactionid",
+				"type": "String"
+			},
+			{
+				"name": "activityinstanceid",
+				"type": "String"
+			},
+			{
+				"name": "sfkey",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

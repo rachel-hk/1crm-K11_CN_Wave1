@@ -1,0 +1,131 @@
+{
+	"name": "SFMC_ChatlabsOAFollower",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatLabsOAFollower_',formatDateTime(addDays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsid",
+				"type": "String"
+			},
+			{
+				"name": "openid",
+				"type": "String"
+			},
+			{
+				"name": "unionid",
+				"type": "String"
+			},
+			{
+				"name": "subscribe",
+				"type": "String"
+			},
+			{
+				"name": "nickname",
+				"type": "String"
+			},
+			{
+				"name": "sex",
+				"type": "String"
+			},
+			{
+				"name": "language",
+				"type": "String"
+			},
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "province",
+				"type": "String"
+			},
+			{
+				"name": "city",
+				"type": "String"
+			},
+			{
+				"name": "headingurl",
+				"type": "String"
+			},
+			{
+				"name": "remark",
+				"type": "String"
+			},
+			{
+				"name": "subscribedate",
+				"type": "String"
+			},
+			{
+				"name": "unsubscribedate",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "createdon",
+				"type": "String"
+			},
+			{
+				"name": "modifiedon",
+				"type": "String"
+			},
+			{
+				"name": "scanfollowingfieldvalue",
+				"type": "String"
+			},
+			{
+				"name": "scanfollowingfieldcharacter",
+				"type": "String"
+			},
+			{
+				"name": "scanfollowingfieldname",
+				"type": "String"
+			},
+			{
+				"name": "sfkey",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

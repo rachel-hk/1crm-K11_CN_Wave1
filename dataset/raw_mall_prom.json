@@ -1,0 +1,110 @@
+{
+	"name": "raw_mall_prom",
+	"properties": {
+		"description": "@concat('[MALL].[MALL_PROM]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_KGO/mall"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MALL/MALL_PROM",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "title",
+				"type": "UTF8"
+			},
+			{
+				"name": "prom_type",
+				"type": "INT32"
+			},
+			{
+				"name": "start_time",
+				"type": "INT32"
+			},
+			{
+				"name": "end_time",
+				"type": "INT32"
+			},
+			{
+				"name": "origin_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "prom_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "quantity",
+				"type": "INT64"
+			},
+			{
+				"name": "total_quantity",
+				"type": "INT64"
+			},
+			{
+				"name": "return_quantity",
+				"type": "INT64"
+			},
+			{
+				"name": "is_pause",
+				"type": "INT32"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "is_show",
+				"type": "INT32"
+			},
+			{
+				"name": "warming_time",
+				"type": "INT32"
+			},
+			{
+				"name": "sort",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

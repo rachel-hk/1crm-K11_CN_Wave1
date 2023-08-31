@@ -1,0 +1,203 @@
+{
+	"name": "03_MANUAL_MEM_MEMBER_OPTION",
+	"properties": {
+		"activities": [
+			{
+				"name": "mem_member_option",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "MemMemberOption",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.CDM_PERSONAL_PROFILE"
+					},
+					{
+						"name": "Destination",
+						"value": "mem_member_option"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('MANUAL_TAG_MEM_MEMBER_OPTION',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureMySqlSink",
+						"writeBatchSize": 10000,
+						"writeBatchTimeout": "00:00:30",
+						"preCopyScript": "truncate table loyalty_datahub_v1_20220721.mem_member_option_temp"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "id",
+									"precision": 19
+								},
+								"sink": {
+									"name": "id",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "member_id",
+									"physicalType": "bigint",
+									"precision": 19
+								},
+								"sink": {
+									"name": "member_id",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "option_type"
+								},
+								"sink": {
+									"name": "option_type",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "option_value"
+								},
+								"sink": {
+									"name": "option_value",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "active_flag",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "active_flag",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "create_by",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "create_by",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "create_date",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								},
+								"sink": {
+									"name": "create_date",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "tenant_id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "tenant_id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Par_MANUAL_TAG_MEM_MEMBER_OPTION",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "mem_member_option_temp",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "MemMemberOption",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_OPTION",
+						"type": "DataFlowReference"
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-11T12:35:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

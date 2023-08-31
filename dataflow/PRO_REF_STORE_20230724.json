@@ -1,0 +1,138 @@
+{
+	"name": "PRO_REF_STORE_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_com_store",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFSTORE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_STORE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as integer,",
+				"          sb_code as string,",
+				"          sb_name as string,",
+				"          store_code as string,",
+				"          store_name as string,",
+				"          logo as string,",
+				"          store_intro as string,",
+				"          mall_code as string,",
+				"          status as integer,",
+				"          floor as string,",
+				"          unitcode as string,",
+				"          brand_code as string,",
+				"          brand_id_bak as string,",
+				"          coupon_count as integer,",
+				"          store_classify as string,",
+				"          sb1_code as string,",
+				"          sb1_name as string,",
+				"          sb2_code as string,",
+				"          sb2_name as string,",
+				"          old_level_class_code as string,",
+				"          old_level_class_name as string,",
+				"          old_level_class_name_sc as string,",
+				"          category as integer,",
+				"          update_at as long,",
+				"          is_channel_no as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFSTORE",
+				"FilterLatest select(mapColumn(",
+				"          SB_Code = sb_code,",
+				"          SB_Name = sb_name,",
+				"          Store_Code = store_code,",
+				"          Store_Name = store_name,",
+				"          Store_Intro = store_intro,",
+				"          Mall_Code = mall_code,",
+				"          Store_Status = status,",
+				"          Store_Floor = floor,",
+				"          Store_Unitcode = unitcode,",
+				"          Store_Classify = store_classify,",
+				"          SB1_Code = sb1_code,",
+				"          SB1_Name = sb1_name,",
+				"          SB2_Code = sb2_code,",
+				"          SB2_Name = sb2_name,",
+				"          Store_Cate = category,",
+				"          Is_Channel_No = is_channel_no,",
+				"          Store_ID = id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Store_BU = 'K11 PRC',",
+				"          Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1) ~> AddColumn",
+				"IngestREFSTORE filter(toDate(Insert_Date)==addDays(currentDate(),-1)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Store_Code,",
+				"          Store_BU,",
+				"          SB_code = SB_Code,",
+				"          SB_name = SB_Name,",
+				"          Store_Name,",
+				"          Store_Intro,",
+				"          Mall_Code,",
+				"          Store_Status,",
+				"          Store_Floor,",
+				"          Store_Unitcode,",
+				"          Store_Classify,",
+				"          SB1_Code,",
+				"          SB1_Name,",
+				"          SB2_Code,",
+				"          SB2_Name,",
+				"          Store_Cate,",
+				"          Is_Channel_No,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Store_ID",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

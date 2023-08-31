@@ -1,0 +1,166 @@
+{
+	"name": "PRO_CDM_PERSONAL_SPECIAL_CARD_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_member_special_card_type",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawComMemberSpecialCardType"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerMapping"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_CDM_PERSONAL_SPECIAL_CARD",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				},
+				{
+					"name": "JoinCustomerUID"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          special_card_id as long,",
+				"          area_id as integer,",
+				"          card_area_id as long,",
+				"          member_id as string,",
+				"          union_id as string,",
+				"          birthday as integer,",
+				"          start_at as long,",
+				"          end_at as decimal(38,18),",
+				"          order_id as long,",
+				"          level as integer,",
+				"          card_type as integer,",
+				"          is_get_benefits as integer,",
+				"          is_get_birthday_benefits as integer,",
+				"          delay_birthday_benefits as integer,",
+				"          disabled_at as long,",
+				"          disabled_remark as string,",
+				"          remark as string,",
+				"          origin_id as long,",
+				"          create_at as long,",
+				"          update_at as long,",
+				"          create_by as long,",
+				"          update_by as long,",
+				"          deleted as long,",
+				"          delete_by as long,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestRawComMemberSpecialCardType",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CustomerMapping",
+				"JoinCustomerUID derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1,",
+				"          BU_Source = 'K11 PRC',",
+				"          Start_At = toTimestamp((toInteger(toString(start_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          End_At = toTimestamp((toInteger(toString(end_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Disable_At = case(disabled_at == 0,toTimestamp(null()),toTimestamp((toInteger(toString(disabled_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')),",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_At = case(toInteger(update_at)== 0,toTimestamp(toLong(toString(create_at))*1000,'yyyy-MM-dd HH:mm:ss') ,toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'))) ~> AddColumn",
+				"IngestRawComMemberSpecialCardType filter(toDate(Insert_Date) == addDays(currentDate(),-1)) ~> FilterLatest",
+				"FilterLatest, CustomerMapping join(member_id == K11PRC_Member_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinCustomerUID",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Special_Card_UID = id,",
+				"          Special_Card_Type = special_card_id,",
+				"          Area_ID = area_id,",
+				"          Card_Area_ID = card_area_id,",
+				"          Member_ID = Hashed_Member_ID,",
+				"          Union_ID = IngestRawComMemberSpecialCardType@union_id,",
+				"          Start_At = AddColumn@Start_At,",
+				"          End_At = AddColumn@End_At,",
+				"          Order_ID = order_id,",
+				"          Card_Level = level,",
+				"          Card_Type = card_type,",
+				"          Is_Get_Benefits = is_get_benefits,",
+				"          Is_Get_Birthday_Benefits = is_get_birthday_benefits,",
+				"          Delay_Birthday_Benefits = delay_birthday_benefits,",
+				"          Disabled_At = Disable_At,",
+				"          Disabled_Remark = disabled_remark,",
+				"          Card_Remark = remark,",
+				"          Origin_ID = origin_id,",
+				"          Create_At = AddColumn@Create_At,",
+				"          Update_At = AddColumn@Update_At,",
+				"          Create_By = create_by,",
+				"          Update_By = update_by,",
+				"          Is_Deleted = deleted,",
+				"          Delete_By = delete_by,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          BU_Source,",
+				"          Customer_UID",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

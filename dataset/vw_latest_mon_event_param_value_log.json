@@ -1,0 +1,77 @@
+{
+	"name": "vw_latest_mon_event_param_value_log",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "dim_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "event_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "param_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "value_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "value",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_mon_event_param_value_log"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

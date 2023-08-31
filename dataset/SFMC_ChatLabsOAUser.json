@@ -1,0 +1,63 @@
+{
+	"name": "SFMC_ChatLabsOAUser",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatLabsOAUser_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,248 @@
+{
+	"name": "raw_category",
+	"properties": {
+		"description": "@concat('[PRODUCT].[PRODUCT]_',formatDateTime(utcnow(),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_New_KGO/product"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "PRODUCT/CATEGORY",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "buckle_point",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "category_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "code",
+				"type": "UTF8"
+			},
+			{
+				"name": "description",
+				"type": "UTF8"
+			},
+			{
+				"name": "full_id_path",
+				"type": "UTF8"
+			},
+			{
+				"name": "full_name_path",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_highlight",
+				"type": "INT32"
+			},
+			{
+				"name": "is_visible",
+				"type": "INT32"
+			},
+			{
+				"name": "is_leaves",
+				"type": "INT32"
+			},
+			{
+				"name": "level",
+				"type": "INT32"
+			},
+			{
+				"name": "list_sort",
+				"type": "INT32"
+			},
+			{
+				"name": "merchant_id",
+				"type": "INT64"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			},
+			{
+				"name": "parent_id",
+				"type": "INT64"
+			},
+			{
+				"name": "picture_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "taxRate",
+				"type": "UTF8"
+			},
+			{
+				"name": "third_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "first_category_id",
+				"type": "INT64"
+			},
+			{
+				"name": "enable_add_att",
+				"type": "INT32"
+			},
+			{
+				"name": "high_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "low_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "high_gross_margin",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "low_gross_margin",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "tax_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field1",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field2",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field3",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field4",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field5",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_available",
+				"type": "INT32"
+			},
+			{
+				"name": "is_deleted",
+				"type": "INT64"
+			},
+			{
+				"name": "version_no",
+				"type": "INT32"
+			},
+			{
+				"name": "create_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "create_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_userip",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_usermac",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "create_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "server_ip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "update_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_usermac",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "update_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "client_versionno",
+				"type": "UTF8"
+			},
+			{
+				"name": "company_id",
+				"type": "INT64"
+			},
+			{
+				"name": "store_id",
+				"type": "INT64"
+			},
+			{
+				"name": "ref_id",
+				"type": "INT64"
+			},
+			{
+				"name": "full_name_path_lan2",
+				"type": "UTF8"
+			},
+			{
+				"name": "name_lan2",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

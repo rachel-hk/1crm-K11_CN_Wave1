@@ -1,0 +1,163 @@
+{
+	"name": "SFMC_TRAN_CS_LOYALTY",
+	"properties": {
+		"activities": [
+			{
+				"name": "SFMC_TRAN_ORDER",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_ORDER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_ORDER_DETAILS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_ORDER",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_ORDER_DETAILS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_LOTTERY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_ORDER_DETAILS",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_LOTTERY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_GIFT_RECORD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_LOTTERY",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_GIFT_RECORD",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_COUPON_RECORD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_GIFT_RECORD",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_COUPON_RECORD",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_CAR_PARK",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_COUPON_RECORD",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_CAR_PARK",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_CS_RETURN",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_CAR_PARK",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_CS_RETURN",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_LOYALTY_KDP",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_CS_RETURN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_LOYALTY_KDP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-07-26T04:15:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

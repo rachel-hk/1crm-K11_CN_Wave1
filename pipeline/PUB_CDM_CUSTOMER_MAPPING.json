@@ -1,0 +1,111 @@
+{
+	"name": "PUB_CDM_CUSTOMER_MAPPING",
+	"properties": {
+		"activities": [
+			{
+				"name": "PUB_CDM_CUSTOMER_MAPPING",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DataFlowReference"
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "PUB_CDM_CUSTOMER_MAPPING",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('PUB_CDM_CUSTOMER_MAPPING',formatDateTime(addhours(utcnow(),8),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBatchSize": 100000,
+						"maxConcurrentConnections": 16,
+						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"Customer_UID"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 32,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Par_PUB_CDM_CUSTOMER_MAPPING_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING_ssir",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Published"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T11:46:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

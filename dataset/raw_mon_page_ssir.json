@@ -1,0 +1,53 @@
+{
+	"name": "raw_mon_page_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm_tool"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM_TOOL/MON_PAGE",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "app_id",
+				"type": "INT64"
+			},
+			{
+				"name": "page_id",
+				"type": "INT64"
+			},
+			{
+				"name": "page",
+				"type": "UTF8"
+			},
+			{
+				"name": "title_id",
+				"type": "INT64"
+			},
+			{
+				"name": "title",
+				"type": "UTF8"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

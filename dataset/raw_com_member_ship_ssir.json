@@ -1,0 +1,69 @@
+{
+	"name": "raw_com_member_ship_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_SHIP",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "ship_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT32"
+			},
+			{
+				"name": "operator_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "fenze_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "is_default",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

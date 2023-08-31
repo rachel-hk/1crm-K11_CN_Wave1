@@ -1,0 +1,41 @@
+{
+	"name": "MANUAL_TAG_TRIGGER",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "K11_MANUAL_TAG_SUMMARY",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-07-05T00:00:00",
+				"timeZone": "China Standard Time",
+				"schedule": {
+					"hours": [
+						0,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20
+					]
+				}
+			}
+		}
+	}
+}

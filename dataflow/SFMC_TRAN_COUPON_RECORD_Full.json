@@ -1,0 +1,167 @@
+{
+	"name": "SFMC_TRAN_COUPON_RECORD_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_COUPON_RECORD",
+						"type": "DatasetReference"
+					},
+					"name": "TRANCOUPONRECORD"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_TRAN_COUPON_RECORD",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "nullstring"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Coupon_UID as string,",
+				"          Coupon_Code as string,",
+				"          Customer_UID as string,",
+				"          Coupon_ID as string,",
+				"          BU_Source as string,",
+				"          Account_ID as integer,",
+				"          App_ID as string,",
+				"          Coupon_Type as string,",
+				"          Acquire_ID as integer,",
+				"          Acquaire_Name as string,",
+				"          Consume_Name as string,",
+				"          Open_ID as string,",
+				"          Union_ID as string,",
+				"          Customer_ID as string,",
+				"          Tier_ID as integer,",
+				"          Is_Give as integer,",
+				"          Give_Code as string,",
+				"          Give_Open_ID as string,",
+				"          Consume_Source as string,",
+				"          Staff_Open_ID as string,",
+				"          Delete_At as timestamp,",
+				"          Consume_At as timestamp,",
+				"          Consume_Amount as decimal(18,0),",
+				"          Consume_Store_Code as string,",
+				"          Consume_App_ID as long,",
+				"          Consume_Tier_ID as integer,",
+				"          Consume_Origin_Order_Code as string,",
+				"          Give_At as timestamp,",
+				"          Location_Name as string,",
+				"          Coupon_Status as integer,",
+				"          Start_At as timestamp,",
+				"          End_At as timestamp,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Exchange_No as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> TRANCOUPONRECORD",
+				"TRANCOUPONRECORD aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Coupon_Record',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"TRANCOUPONRECORD derive(null_string = toString(null())) ~> nullstring",
+				"nullstring sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Coupon_UID,",
+				"          Coupon_Code,",
+				"          Customer_UID,",
+				"          Coupon_ID,",
+				"          BU_Source,",
+				"          Account_ID,",
+				"          App_ID,",
+				"          Coupon_Type,",
+				"          Acquire_ID,",
+				"          Acquaire_Name,",
+				"          Consume_Name,",
+				"          Open_ID = null_string,",
+				"          Union_ID = null_string,",
+				"          Customer_ID = null_string,",
+				"          Tier_ID,",
+				"          Is_Give,",
+				"          Give_Code,",
+				"          Give_Open_ID,",
+				"          Consume_Source,",
+				"          Staff_Open_ID,",
+				"          Delete_At,",
+				"          Consume_At,",
+				"          Consume_Amount,",
+				"          Consume_Store_Code,",
+				"          Consume_App_ID,",
+				"          Consume_Tier_ID,",
+				"          Consume_Origin_Order_Code,",
+				"          Give_At,",
+				"          Location_Name,",
+				"          Coupon_Status,",
+				"          Start_At,",
+				"          End_At,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Exchange_No,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

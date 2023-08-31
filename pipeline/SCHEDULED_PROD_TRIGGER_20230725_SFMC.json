@@ -1,0 +1,107 @@
+{
+	"name": "SCHEDULED_PROD_TRIGGER_20230725_SFMC",
+	"properties": {
+		"activities": [
+			{
+				"name": "SFMC_CDM",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_REF",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_CDM",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_TRAN_CS_LOYALTY",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_REF",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_REF",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_TRAN_CS_LOYALTY",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_TRAN_CS_LOYALTY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_RECORD_COUNT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_CDM",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "SFMC_DIGIT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-26T04:35:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,467 @@
+{
+	"name": "ChatLabsSMSActivityLogs",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "File_Name",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "Insert_Date",
+								"value": {
+									"value": "@pipeline().TriggerTime",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "masked_entity",
+								"value": "''"
+							}
+						],
+						"storeSettings": {
+							"type": "SftpReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false,
+							"disableChunking": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "chatlabsid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "chatlabsid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "uniqueid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "uniqueid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "masked_entity",
+									"type": "String"
+								},
+								"sink": {
+									"name": "entity",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "type",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "type",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "sendstatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sendstatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "senderrormessage",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "senderrormessage",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "deliverystatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "deliverystatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "deliveryerrormessage",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "deliveryerrormessage",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "senddatetime",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "senddatetime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "deliverydatetime",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "deliverydatetime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "wechataccountid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "wechataccountid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "wechataccountname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "wechataccountname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chatlabsaccountid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ChatLabsaccountid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chatlabsaccountname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ChatLabsaccountname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "contactkey",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "contactkey",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "contacttype",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "contacttype",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "createdon",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "createdon",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "modifiedon",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "modifiedon",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "activityname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "activityname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "totalclicks",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "totalclicks",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "lastclick",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "lastclick",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "smsaccountid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "smsaccountid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "smsaccountname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "smsaccountname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "journeyid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "journeyid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "journeyname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "journeyname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "version",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "version",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "activityid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "activityid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "interactionid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "interactionid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "activityinstanceid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "activityinstanceid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "sfkey",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sfkey",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "File_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "File_Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Insert_Date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Insert_Date",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SFMC_ChatLabsSMSActivityLogs",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ChatLabsSMSActivityLogs",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "ChatLabs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T04:09:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

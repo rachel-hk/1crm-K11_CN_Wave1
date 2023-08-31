@@ -1,0 +1,58 @@
+{
+	"name": "raw_com_member_privacy_policy_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_PRIVACY_POLICY]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_PRIVACY_POLICY",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "policy_version",
+				"type": "INT32"
+			},
+			{
+				"name": "api_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

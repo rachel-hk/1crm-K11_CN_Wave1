@@ -1,0 +1,142 @@
+{
+	"name": "SFMC_DIGIT_SHARE_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_SHARE",
+						"type": "DatasetReference"
+					},
+					"name": "DIGITSHARE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_DIGIT_SHARE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake",
+					"description": "Export data to TEMP_SFMC_REF_PRODUCT"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "nullstring"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Share_Unique_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          App_ID as long,",
+				"          App_Name as string,",
+				"          Session_ID as long,",
+				"          Visitor_ID as long,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Channel_ID as long,",
+				"          Page_ID as long,",
+				"          Page_Title as string,",
+				"          Share_Page_ID as long,",
+				"          Follow_ID as integer,",
+				"          Follow_Type as integer,",
+				"          Follow_Index as integer,",
+				"          Share_ID as long,",
+				"          From_Share_ID as long,",
+				"          Share_Level as integer,",
+				"          Share_From_User_ID as string,",
+				"          Pv_From_Share as integer,",
+				"          Share_By_Other as integer,",
+				"          Create_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> DIGITSHARE",
+				"DIGITSHARE aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Digit_Share',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"DIGITSHARE derive(null_string = toString(null())) ~> nullstring",
+				"nullstring sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Share_Unique_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          App_ID,",
+				"          App_Name,",
+				"          Session_ID,",
+				"          Visitor_ID,",
+				"          User_ID = null_string,",
+				"          Member_ID = null_string,",
+				"          Channel_ID,",
+				"          Page_ID,",
+				"          Page_Title,",
+				"          Share_Page_ID,",
+				"          Follow_ID,",
+				"          Follow_Type,",
+				"          Follow_Index,",
+				"          Share_ID,",
+				"          From_Share_ID,",
+				"          Share_Level,",
+				"          Share_From_User_ID = null_string,",
+				"          Pv_From_Share,",
+				"          Share_By_Other,",
+				"          Create_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

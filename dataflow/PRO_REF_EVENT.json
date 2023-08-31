@@ -1,0 +1,153 @@
+{
+	"name": "PRO_REF_EVENT",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_com_event",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFEVENT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_EVENT",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoProcessTableREFCOUPON"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          account_id as integer,",
+				"          event_no as string,",
+				"          name as string,",
+				"          remark as string,",
+				"          is_permanent as integer,",
+				"          start_at as integer,",
+				"          end_at as integer,",
+				"          status as integer,",
+				"          can_reused as integer,",
+				"          diff_event_reused as integer,",
+				"          diff_event_reused_times as long,",
+				"          same_event_reused as integer,",
+				"          same_event_reused_times as long,",
+				"          times_limit_cycle as integer,",
+				"          times_limit as integer,",
+				"          participation_amount_limit as integer,",
+				"          participation_amount_min as integer,",
+				"          participation_amount_max as integer,",
+				"          total_quantity_limit as integer,",
+				"          create_at as integer,",
+				"          update_at as integer,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFEVENT",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          account_id,",
+				"          event_no,",
+				"          name,",
+				"          remark,",
+				"          is_permanent,",
+				"          start_at,",
+				"          end_at,",
+				"          status,",
+				"          can_reused,",
+				"          diff_event_reused,",
+				"          diff_event_reused_times,",
+				"          same_event_reused,",
+				"          same_event_reused_times,",
+				"          times_limit_cycle,",
+				"          times_limit,",
+				"          participation_amount_limit,",
+				"          participation_amount_min,",
+				"          participation_amount_max,",
+				"          total_quantity_limit,",
+				"          create_at,",
+				"          update_at,",
+				"          deleted,",
+				"          File_Path,",
+				"          Insert_Date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Source_BU = 'K11 PRC',",
+				"          Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          Start_At = toTimestamp((toInteger(toString(start_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          End_At = toTimestamp((toInteger(toString(end_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_At = toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestREFEVENT filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Unique_ID = id,",
+				"          Account_ID = account_id,",
+				"          Event_No = event_no,",
+				"          Event_Name = name,",
+				"          Event_Remark = remark,",
+				"          Is_Perm = is_permanent,",
+				"          Start_At = AddColumn@Start_At,",
+				"          End_At = AddColumn@End_At,",
+				"          Event_Status = status,",
+				"          Can_Reused = can_reused,",
+				"          Diff_Event_Reused = diff_event_reused,",
+				"          Diff_Event_Reused_Times = diff_event_reused_times,",
+				"          Same_Event_Reused = same_event_reused,",
+				"          Same_Event_Reused_Times = same_event_reused_times,",
+				"          Times_Limit_Cycle = times_limit_cycle,",
+				"          Times_Limit = times_limit,",
+				"          Participation_Amount_Limit = participation_amount_limit,",
+				"          Participation_Amount_Min = participation_amount_min,",
+				"          Participation_Amount_Max = participation_amount_max,",
+				"          Total_Quantity_Limit = total_quantity_limit,",
+				"          Create_At = AddColumn@Create_At,",
+				"          Update_At = AddColumn@Update_At,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoProcessTableREFCOUPON"
+			]
+		}
+	}
+}

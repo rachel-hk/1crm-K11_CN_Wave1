@@ -1,0 +1,92 @@
+{
+	"name": "17B_TRAN_ORDER_DETAIL",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_TRAN_ORDER_DETAILS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_so_item",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_TRAN_ORDER_DETAILS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_TRAN_ORDER_DETAILS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_TRAN_ORDER_DETAILS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_TRAN_ORDER_DETAILS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_so_item",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_mall_order_goods_map",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_so_item",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_mall_order_goods_map",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_mall_order_goods_map",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T09:17:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

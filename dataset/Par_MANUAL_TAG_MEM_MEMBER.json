@@ -1,0 +1,188 @@
+{
+	"name": "Par_MANUAL_TAG_MEM_MEMBER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('MANUAL_TAG_MEM_MEMBER',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_tier_id",
+				"type": "INT32"
+			},
+			{
+				"name": "member_status_id",
+				"type": "INT32"
+			},
+			{
+				"name": "full_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "gender_id",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday_year",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday_month",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday_day",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday",
+				"type": "DATE"
+			},
+			{
+				"name": "email",
+				"type": "UTF8"
+			},
+			{
+				"name": "register_date_utc",
+				"type": "INT96"
+			},
+			{
+				"name": "register_date_local",
+				"type": "INT96"
+			},
+			{
+				"name": "register_date_str",
+				"type": "UTF8"
+			},
+			{
+				"name": "zip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "address",
+				"type": "UTF8"
+			},
+			{
+				"name": "active_flag",
+				"type": "INT32"
+			},
+			{
+				"name": "create_by",
+				"type": "INT32"
+			},
+			{
+				"name": "create_date",
+				"type": "INT96"
+			},
+			{
+				"name": "province_dictionary_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "city_dictionary_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "district_dictionary_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "point",
+				"type": "INT32"
+			},
+			{
+				"name": "tier_effective_from_date_utc",
+				"type": "INT96"
+			},
+			{
+				"name": "tier_effective_from_date_local",
+				"type": "INT96"
+			},
+			{
+				"name": "tier_effective_from_date_str",
+				"type": "UTF8"
+			},
+			{
+				"name": "tier_effective_to_date_utc",
+				"type": "INT96"
+			},
+			{
+				"name": "tier_effective_to_date_local",
+				"type": "INT96"
+			},
+			{
+				"name": "tier_effective_to_date_str",
+				"type": "UTF8"
+			},
+			{
+				"name": "policies_version",
+				"type": "INT32"
+			},
+			{
+				"name": "mobile_region_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "search_static_content",
+				"type": "UTF8"
+			},
+			{
+				"name": "ts",
+				"type": "INT96"
+			},
+			{
+				"name": "azure_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "k11_member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "special_card_type",
+				"type": "INT32"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "area_name",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

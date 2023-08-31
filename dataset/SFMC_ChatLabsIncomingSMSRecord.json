@@ -1,0 +1,75 @@
+{
+	"name": "SFMC_ChatLabsIncomingSMSRecord",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatlabsIncomingSMSRecord_',formatDateTime(addDays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsid",
+				"type": "String"
+			},
+			{
+				"name": "entity",
+				"type": "String"
+			},
+			{
+				"name": "type",
+				"type": "String"
+			},
+			{
+				"name": "text",
+				"type": "String"
+			},
+			{
+				"name": "datetime",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "unionid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

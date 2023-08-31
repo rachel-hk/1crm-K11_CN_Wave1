@@ -1,0 +1,47 @@
+{
+	"name": "12D_CDM_PERSONAL_FAMILY_DETAILS_20230802",
+	"properties": {
+		"activities": [
+			{
+				"name": "PUB_CDM_PERSONAL_FAMILY_DETAILS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRE_PRO_CDM_PERSONAL_FAMILY_DETAILS_20230802",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRE_PRO_CDM_PERSONAL_FAMILY_DETAILS_20230802",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRE_PRO_CDM_PERSONAL_FAMILY_DETAILS_20230802",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-02T03:53:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

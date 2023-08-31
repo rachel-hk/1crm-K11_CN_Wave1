@@ -1,0 +1,143 @@
+{
+	"name": "PUB_REF_EVENT",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "REF_EVENT",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromREFEVENT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_EVENT",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Unique_ID as string,",
+				"          Account_ID as string,",
+				"          Event_No as string,",
+				"          Event_Name as string,",
+				"          Event_Remark as string,",
+				"          Is_Perm as integer,",
+				"          Start_At as timestamp,",
+				"          End_At as timestamp,",
+				"          Event_Status as integer,",
+				"          Can_Reused as integer,",
+				"          Diff_Event_Reused as integer,",
+				"          Diff_Event_Reused_Times as integer,",
+				"          Same_Event_Reused as integer,",
+				"          Same_Event_Reused_Times as integer,",
+				"          Times_Limit_Cycle as integer,",
+				"          Times_Limit as integer,",
+				"          Participation_Amount_Limit as integer,",
+				"          Participation_Amount_Min as integer,",
+				"          Participation_Amount_Max as integer,",
+				"          Total_Quantity_Limit as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromREFEVENT",
+				"IngestionfromREFEVENT filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Unique_ID as string,",
+				"          Account_ID as string,",
+				"          Event_No as string,",
+				"          Event_Name as string,",
+				"          Event_Remark as string,",
+				"          Is_Perm as integer,",
+				"          Start_At as timestamp,",
+				"          End_At as timestamp,",
+				"          Event_Status as integer,",
+				"          Can_Reused as integer,",
+				"          Diff_Event_Reused as integer,",
+				"          Diff_Event_Reused_Times as integer,",
+				"          Same_Event_Reused as integer,",
+				"          Same_Event_Reused_Times as integer,",
+				"          Times_Limit_Cycle as integer,",
+				"          Times_Limit as integer,",
+				"          Participation_Amount_Limit as integer,",
+				"          Participation_Amount_Min as integer,",
+				"          Participation_Amount_Max as integer,",
+				"          Total_Quantity_Limit as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['DELETE FROM REF_EVENT WHERE Start_Date = FORMAT(GetDate(), \\'yyyy-MM-dd\\');'],",
+				"     postSQLs:['WITH TEMP AS (\\nSELECT [Unique_ID], ROW_NUMBER() OVER (PARTITION BY \\n[Account_ID]\\n,[Event_No]\\n,[Event_Name]\\n ORDER BY Start_Date DESC) AS SEQUENCE \\n FROM [dbo].[REF_EVENT])\\n\\nDelete from REF_EVENT where CONCAT([Unique_ID],START_DATE) in (select CONCAT([Unique_ID],START_DATE) from TEMP where SEQUENCE > 1);'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Unique_ID,",
+				"          Account_ID,",
+				"          Event_No,",
+				"          Event_Name,",
+				"          Event_Remark,",
+				"          Is_Perm,",
+				"          Start_At,",
+				"          End_At,",
+				"          Event_Status,",
+				"          Can_Reused,",
+				"          Diff_Event_Reused,",
+				"          Diff_Event_Reused_Times,",
+				"          Same_Event_Reused,",
+				"          Same_Event_Reused_Times,",
+				"          Times_Limit_Cycle,",
+				"          Times_Limit,",
+				"          Participation_Amount_Limit,",
+				"          Participation_Amount_Min,",
+				"          Participation_Amount_Max,",
+				"          Total_Quantity_Limit,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

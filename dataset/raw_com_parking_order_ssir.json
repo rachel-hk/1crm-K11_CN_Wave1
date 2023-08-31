@@ -1,0 +1,106 @@
+{
+	"name": "raw_com_parking_order_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[COM_PARKING_ORDER]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_PARKING_ORDER",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "license_plate",
+				"type": "UTF8"
+			},
+			{
+				"name": "car_member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "pay_time",
+				"type": "INT64"
+			},
+			{
+				"name": "member_level",
+				"type": "INT32"
+			},
+			{
+				"name": "total_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "order_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "coupon_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "payment_channel",
+				"type": "INT32"
+			},
+			{
+				"name": "vehicle_type",
+				"type": "INT32"
+			},
+			{
+				"name": "enter_time",
+				"type": "INT64"
+			},
+			{
+				"name": "leave_time",
+				"type": "INT64"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

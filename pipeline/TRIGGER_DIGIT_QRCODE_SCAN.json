@@ -1,0 +1,43 @@
+{
+	"name": "TRIGGER_DIGIT_QRCODE_SCAN",
+	"properties": {
+		"activities": [
+			{
+				"name": "08_REF_QRCODE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "08_REF_QRCODE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "26_DIGIT_QRCODE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "08_REF_QRCODE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "26_DIGIT_QRCODE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:45:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

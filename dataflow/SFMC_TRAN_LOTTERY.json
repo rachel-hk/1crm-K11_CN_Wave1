@@ -1,0 +1,127 @@
+{
+	"name": "SFMC_TRAN_LOTTERY",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_LOTTERY",
+						"type": "DatasetReference"
+					},
+					"name": "TRANLOTTERY"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_TRAN_LOTTERY",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "nullstring"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Lottery_Unique_ID as string,",
+				"          Campaign_ID as long,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Lottery_Awards_ID as long,",
+				"          Status as integer,",
+				"          User_ID as string,",
+				"          User_Mobile as string,",
+				"          Use_Order_Code as string,",
+				"          Use_Status as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Company_ID as long,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> TRANLOTTERY",
+				"TRANLOTTERY filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterLatestData",
+				"TRANLOTTERY aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_NewKGO_Lottery',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"FilterLatestData derive(null_string = toString(null())) ~> nullstring",
+				"nullstring sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Lottery_Unique_ID,",
+				"          Campaign_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Lottery_Awards_ID,",
+				"          Status,",
+				"          User_ID = null_string,",
+				"          User_Mobile = null_string,",
+				"          Use_Order_Code,",
+				"          Use_Status,",
+				"          Is_Deleted,",
+				"          Create_Time,",
+				"          Update_Time,",
+				"          Company_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

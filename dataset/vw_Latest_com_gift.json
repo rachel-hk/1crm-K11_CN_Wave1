@@ -1,0 +1,142 @@
+{
+	"name": "vw_Latest_com_gift",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gift_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "total",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_permanent",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "start_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "end_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "spoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "non_member_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "quantity_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "quantity_limit_cycle",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "quantity_limit_json",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pic_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_com_gift"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

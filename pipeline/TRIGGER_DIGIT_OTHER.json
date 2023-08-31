@@ -1,0 +1,43 @@
+{
+	"name": "TRIGGER_DIGIT_OTHER",
+	"properties": {
+		"activities": [
+			{
+				"name": "25_DIGIT_KGO_BROWSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "25_DIGIT_KGO_BROWSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "27_DIGIT_SHARE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "25_DIGIT_KGO_BROWSE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "27_DIGIT_SHARE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:44:33Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,376 @@
+{
+	"name": "SFTP_SHAREABLE_AUTO_TAG_FACT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('Shareable_Fact_Auto_Tag_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": "/import"
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "String"
+			},
+			{
+				"name": "Age_Range",
+				"type": "String"
+			},
+			{
+				"name": "Gender",
+				"type": "String"
+			},
+			{
+				"name": "Birth_Month",
+				"type": "String"
+			},
+			{
+				"name": "Edu_level",
+				"type": "String"
+			},
+			{
+				"name": "Whether_driver",
+				"type": "String"
+			},
+			{
+				"name": "Res_Region",
+				"type": "String"
+			},
+			{
+				"name": "Res_Province",
+				"type": "String"
+			},
+			{
+				"name": "Res_City",
+				"type": "String"
+			},
+			{
+				"name": "Res_District",
+				"type": "String"
+			},
+			{
+				"name": "Com_City",
+				"type": "String"
+			},
+			{
+				"name": "Com_District",
+				"type": "String"
+			},
+			{
+				"name": "Member_Occupation",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Art_Design",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Investment",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Property",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Dining",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Fashion",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Jewelry",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Watches",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Beauty",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Sports",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Health_Wellness",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Wine",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Travel",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Environment_Protection",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Dressing",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Store_Exploration",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Exhibition",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Trendy_Tech",
+				"type": "String"
+			},
+			{
+				"name": "Interest_Shopping",
+				"type": "String"
+			},
+			{
+				"name": "Marriage_Status",
+				"type": "String"
+			},
+			{
+				"name": "Number_of_Kids",
+				"type": "String"
+			},
+			{
+				"name": "Member_Prog",
+				"type": "String"
+			},
+			{
+				"name": "No_Member_Prog_Joined",
+				"type": "String"
+			},
+			{
+				"name": "Member_CTF_Edu_Group",
+				"type": "String"
+			},
+			{
+				"name": "Member_KLUB_11_HK",
+				"type": "String"
+			},
+			{
+				"name": "Member_KLUB_11_PRC",
+				"type": "String"
+			},
+			{
+				"name": "Member_NWC",
+				"type": "String"
+			},
+			{
+				"name": "Member_NWCL",
+				"type": "String"
+			},
+			{
+				"name": "Member_Artists_club",
+				"type": "String"
+			},
+			{
+				"name": "MAtelier_Customer",
+				"type": "String"
+			},
+			{
+				"name": "Member_Dpark",
+				"type": "String"
+			},
+			{
+				"name": "Member_FreeDuty",
+				"type": "String"
+			},
+			{
+				"name": "Member_NWDS",
+				"type": "String"
+			},
+			{
+				"name": "Member_BabyKingdom",
+				"type": "String"
+			},
+			{
+				"name": "Member_FTLife",
+				"type": "String"
+			},
+			{
+				"name": "Member_HKTicketing",
+				"type": "String"
+			},
+			{
+				"name": "Member_GTA",
+				"type": "String"
+			},
+			{
+				"name": "Member_Artus",
+				"type": "String"
+			},
+			{
+				"name": "Member_Humamsa_Noah",
+				"type": "String"
+			},
+			{
+				"name": "Member_Humamsa",
+				"type": "String"
+			},
+			{
+				"name": "Member_Humamsa_Health",
+				"type": "String"
+			},
+			{
+				"name": "Member_Dmind",
+				"type": "String"
+			},
+			{
+				"name": "Member_PassageN",
+				"type": "String"
+			},
+			{
+				"name": "Member_The_Forest",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_CTF_Edu_Group",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_KLUB_11_HK",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_KLUB_11_PRC",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_NWC",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_NWCL",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Artists_club",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Dpark",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_FreeDuty",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_NWDS",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_BabyKingdom",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_FTLife",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_HKTicketing",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_GTA",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Artus",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Humamsa",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Humamsa_Noah",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Humamsa_Health",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_Dmind",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_PassageN",
+				"type": "String"
+			},
+			{
+				"name": "Reg_Date_The_Forest",
+				"type": "String"
+			},
+			{
+				"name": "No_Res_Prop",
+				"type": "String"
+			},
+			{
+				"name": "Asset_Value_Range_Prop1_HK",
+				"type": "String"
+			},
+			{
+				"name": "Asset_Value_Range_Prop1_PRC",
+				"type": "String"
+			},
+			{
+				"name": "Purchase_Type_Prop1",
+				"type": "String"
+			},
+			{
+				"name": "Whether_Has_Car",
+				"type": "String"
+			},
+			{
+				"name": "Whether_Carpark_User",
+				"type": "String"
+			},
+			{
+				"name": "Chinese_Tourist",
+				"type": "String"
+			},
+			{
+				"name": "Member_Tier_NWC",
+				"type": "String"
+			},
+			{
+				"name": "Member_Tier_NWCL",
+				"type": "String"
+			},
+			{
+				"name": "Member_Tier_NWDS",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

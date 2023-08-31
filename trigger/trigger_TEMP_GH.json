@@ -1,0 +1,25 @@
+{
+	"name": "trigger_TEMP_GH",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "K11_AUTO_TAG_Databricks_3_Batches_useDT",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2023-08-24T07:10:00",
+				"endTime": "2023-08-25T10:10:00",
+				"timeZone": "China Standard Time"
+			}
+		}
+	}
+}

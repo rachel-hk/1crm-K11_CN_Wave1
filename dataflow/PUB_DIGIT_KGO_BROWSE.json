@@ -1,0 +1,99 @@
+{
+	"name": "PUB_DIGIT_KGO_BROWSE",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DIGIT_KGO_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromDIGITKGOBROWSE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_DIGIT_KGO_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Browse_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Platform_ID as integer,",
+				"          User_ID as long,",
+				"          Domain_Info_ID as long,",
+				"          Parent_ID as long,",
+				"          Mp_ID as long,",
+				"          Merchant_ID as long,",
+				"          Store_ID as long,",
+				"          Browsing_Time as timestamp,",
+				"          Business_Type as integer,",
+				"          Is_Available as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Create_Time_Db as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Update_Time_Db as timestamp,",
+				"          Company_ID as long,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromDIGITKGOBROWSE",
+				"IngestionfromDIGITKGOBROWSE filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Browse_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Platform_ID,",
+				"          User_ID,",
+				"          Domain_Info_ID,",
+				"          Parent_ID,",
+				"          Mp_ID,",
+				"          Merchant_ID,",
+				"          Store_ID,",
+				"          Browsing_Time,",
+				"          Business_Type,",
+				"          Is_Available,",
+				"          Is_Deleted,",
+				"          Create_Time,",
+				"          Create_Time_Db,",
+				"          Update_Time,",
+				"          Update_Time_Db,",
+				"          Company_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

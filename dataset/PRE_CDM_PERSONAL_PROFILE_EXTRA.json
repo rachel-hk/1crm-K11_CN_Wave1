@@ -1,0 +1,252 @@
+{
+	"name": "PRE_CDM_PERSONAL_PROFILE_EXTRA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pre_Processing"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Record_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Personal_Customer_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VIP_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "First_Pay",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Last_Pay",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_K11",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "From_Know",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Main_Card",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Card_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "VIP_Card_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Up_Origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Operator_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Member_Kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Expire_Kpoint",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Clear_Kpoint",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Member_Spoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Expire_Spoint",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Clear_Spoint",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Spoint_Times",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Member_Balance",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sales_Total",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Sales_Times",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Member_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Update_Operator",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Upgrade_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_HK_Member",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "To_China_Times",
+				"type": "nvarchar"
+			},
+			{
+				"name": "To_China_Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name_On_Card",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Visit_K11_Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Company_Share_Info",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_References",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VIP_Club",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Join_Club_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "SMS_Contact",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Email_Contact",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Phone_Contact",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Post_Contact",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Allow_EDM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EDM_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Allow_Share_Info",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "PRE_CDM_PERSONAL_PROFILE_EXTRA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,99 @@
+{
+	"name": "SFMC_K11_MANUAL_TAG_copy1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "K11_MANUAL_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "K11ManualTag"
+				},
+				{
+					"dataset": {
+						"referenceName": "CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CDMCustomerMapping"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_K11_MANUAL_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          member_id as long,",
+				"          tid as long,",
+				"          group_name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> K11ManualTag",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CDMCustomerMapping",
+				"select1 derive(Tag_Name = 'Manual Tag',",
+				"          Tag_Type = toString(null())) ~> derivedColumn1",
+				"K11ManualTag, CDMCustomerMapping join(member_id == manual_tag_id,",
+				"     joinType:'right',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          member_id,",
+				"          tid,",
+				"          group_name,",
+				"          Customer_UID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

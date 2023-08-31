@@ -1,0 +1,150 @@
+{
+	"name": "SFMC_DIGIT_CLICK",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_CLICK",
+						"type": "DatasetReference"
+					},
+					"name": "DIGITCLICK"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_DIGIT_CLICK",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake",
+					"description": "Export data to TEMP_SFMC_REF_PRODUCT"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "AddUID"
+				},
+				{
+					"name": "SetNullto0"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Click_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          App_ID as string,",
+				"          App_Name as string,",
+				"          Session_ID as string,",
+				"          Visitor_ID as string,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Page_ID as string,",
+				"          Title_ID as string,",
+				"          Event_Log_ID as string,",
+				"          Event_ID as string,",
+				"          Create_Time as timestamp,",
+				"          View_Page as string,",
+				"          View_Page_Name as string,",
+				"          Area_ID as string,",
+				"          Place_Name as string,",
+				"          Button_Name as string,",
+				"          MiniProgram_Remark as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Channel_ID as integer,",
+				"          Visit_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> DIGITCLICK",
+				"DIGITCLICK aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Digit_Click',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"SetNullto0 derive(Click_UID = concat(Click_ID,toString(Visit_ID)),",
+				"          null_string = toString(null())) ~> AddUID",
+				"FilterLatest derive(Visit_ID = iif(isNull(Visit_ID)==true(),0,toInteger(Visit_ID))) ~> SetNullto0",
+				"DIGITCLICK filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterLatest",
+				"AddUID sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Click_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          App_ID,",
+				"          App_Name,",
+				"          Session_ID,",
+				"          Visitor_ID,",
+				"          User_ID = null_string,",
+				"          Member_ID = null_string,",
+				"          Page_ID,",
+				"          Title_ID,",
+				"          Event_Log_ID,",
+				"          Event_ID,",
+				"          Create_Time,",
+				"          View_Page,",
+				"          View_Page_Name,",
+				"          Area_ID,",
+				"          Place_Name,",
+				"          Button_Name,",
+				"          MiniProgram_Remark,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Channel_ID,",
+				"          Visit_ID,",
+				"          Click_UID",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

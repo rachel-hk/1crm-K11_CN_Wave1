@@ -1,0 +1,246 @@
+{
+	"name": "vw_Latest_tenantship",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "SITE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SITE_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SITE_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SITE_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SITE_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TENANTSHIP_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TENANT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CONTRACT_NO",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FLOOR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_CATEGORY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BRAND_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BRAND_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BRAND_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BRAND_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL1_CLASS_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL1_CLASS_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL1_CLASS_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL1_CLASS_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL2_CLASS_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL2_CLASS_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL2_CLASS_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEVEL2_CLASS_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CATEGORY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "COMPANY_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KPOS_STORE_CODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEASE_AREA",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CONTRACT_START",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CONTRACT_END",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OPENING_TIME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CLOSING_TIME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PARENT_TENANTSHIP_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OLD_CLASS_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OLD_CLASS_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OLD_CLASS_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OLD_CLASS_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STORE_CLASSIFY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STATUS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IS_CENTRAL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATED",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LOGO_URL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KPOS_INSTALLED_STATUS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KPOS_INSTALLED_TIME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TENANT_TAG_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TENANT_TAG_NAME_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TENANT_TAG_NAME_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TENANT_TAG_NAME_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LEASING_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_tenantship"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

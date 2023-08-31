@@ -1,0 +1,52 @@
+{
+	"name": "11_REF_EVENT_20230725",
+	"properties": {
+		"activities": [
+			{
+				"name": "PUB_REF_EVENT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_REF_EVENT_20230724",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_REF_EVENT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRO_REF_EVENT_20230724",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_REF_EVENT_20230724",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-24T16:16:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

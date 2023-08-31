@@ -1,0 +1,118 @@
+{
+	"name": "PRO_CDM_PERSONAL_PROFILE",
+	"properties": {
+		"activities": [
+			{
+				"name": "CDM_CUSTOMER_PROFILE",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 60,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "PRO_CDM_PERSONAL_PROFILE",
+						"type": "DataFlowReference",
+						"parameters": {
+							"PrimaryKey": "Customer_UID",
+							"Columns": "'Year_Income,Tel_No,Res_Zone,Res_Province,Res_Country,Res_City,Res_Address,Reg_Sub_Origin,Reg_Origin,Prefer_language,Phone_No,Phone_Code,Person_Zip,Person_Weibo,Person_Title,Person_Status,Person_Religion,Person_QQ,Person_Phone2,Person_Job,Person_Industry,Person_Hobby,Person_Gender,Person_Ethnic,Person_Email,Person_Company,Person_Birthday,Person_Address3,Person_Address2,Nick_Name,Name_En,Name_Cn,Month_Income,License_Plate,Level_ID,Issue_At,Is_Special_Level,Is_Marry,Is_Mail_Market,Fav_Prod,Fav_Item,Family_Monthly_Income,Expire_At,Edu_Level,Cycle_At,Company_Size,Birthday_Short,Area_ID,Is_Deleted'"
+						}
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "Copy data from temp",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CDM_CUSTOMER_PROFILE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('PRO_CDM_PERSONAL_PROFILE',formatDateTime(addhours(utcnow(),8),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBatchSize": 100000,
+						"maxConcurrentConnections": 16,
+						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"Customer_UID",
+								"Start_Date"
+							],
+							"interimSchemaName": ""
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"parallelCopies": 16,
+					"dataIntegrationUnits": 16,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Par_PRO_CDM_PERSONAL_PROFILE_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CDM_PERSONAL_PROFILE_ssir",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Processing"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T14:24:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

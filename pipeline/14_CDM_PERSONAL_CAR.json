@@ -1,0 +1,67 @@
+{
+	"name": "14_CDM_PERSONAL_CAR",
+	"properties": {
+		"activities": [
+			{
+				"name": "Temp_Raw_Com_Member_Car",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_Com_Member_Car",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRO_CDM_PERSONAL_CAR",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_Com_Member_Car",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_CDM_PERSONAL_CAR",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_CDM_PERSONAL_CAR",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_CDM_PERSONAL_CAR",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_PERSONAL_CAR",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T09:17:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

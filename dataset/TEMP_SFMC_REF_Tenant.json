@@ -1,0 +1,241 @@
+{
+	"name": "TEMP_SFMC_REF_Tenant",
+	"properties": {
+		"description": "\n",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('REF_Tenant',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.gz')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('REF_Tenant',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Tenantship_ID",
+				"type": "String"
+			},
+			{
+				"name": "Tenant_ID",
+				"type": "String"
+			},
+			{
+				"name": "Source_BU",
+				"type": "String"
+			},
+			{
+				"name": "Site_ID",
+				"type": "String"
+			},
+			{
+				"name": "Site_Code",
+				"type": "String"
+			},
+			{
+				"name": "Site_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "Site_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "Site_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "Contract_No",
+				"type": "String"
+			},
+			{
+				"name": "Store_ID",
+				"type": "String"
+			},
+			{
+				"name": "Store_Floor",
+				"type": "String"
+			},
+			{
+				"name": "Store_Cate",
+				"type": "String"
+			},
+			{
+				"name": "Brand_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "Brand_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "Brand_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "Brand_ID",
+				"type": "String"
+			},
+			{
+				"name": "LV1_Class_ID",
+				"type": "String"
+			},
+			{
+				"name": "LV1_Class_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "LV1_Class_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "LV1_Class_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "LV2_Class_ID",
+				"type": "String"
+			},
+			{
+				"name": "LV2_Class_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "LV2_Class_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "LV2_Class_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "Store_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "Store_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "Store_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "Com_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "Com_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "Com_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "Store_Code",
+				"type": "String"
+			},
+			{
+				"name": "Lease_Area",
+				"type": "String"
+			},
+			{
+				"name": "Contract_Start",
+				"type": "String"
+			},
+			{
+				"name": "Contract_End",
+				"type": "String"
+			},
+			{
+				"name": "Open_Time",
+				"type": "String"
+			},
+			{
+				"name": "Close_Time",
+				"type": "String"
+			},
+			{
+				"name": "Parent_Tenant_ID",
+				"type": "String"
+			},
+			{
+				"name": "Store_Code_Value",
+				"type": "String"
+			},
+			{
+				"name": "Cate_ID",
+				"type": "String"
+			},
+			{
+				"name": "Cate_Name",
+				"type": "String"
+			},
+			{
+				"name": "Old_Class_ID",
+				"type": "String"
+			},
+			{
+				"name": "Old_Class_Name_EN",
+				"type": "String"
+			},
+			{
+				"name": "Old_Class_Name_SC",
+				"type": "String"
+			},
+			{
+				"name": "Old_Class_Name_TC",
+				"type": "String"
+			},
+			{
+				"name": "Store_Classify",
+				"type": "String"
+			},
+			{
+				"name": "Kpos_Install",
+				"type": "String"
+			},
+			{
+				"name": "Tenant_Interest_Tag",
+				"type": "String"
+			},
+			{
+				"name": "Tenant_Status",
+				"type": "String"
+			},
+			{
+				"name": "Start_Date",
+				"type": "String"
+			},
+			{
+				"name": "End_Date",
+				"type": "String"
+			},
+			{
+				"name": "Is_Current,,,,",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

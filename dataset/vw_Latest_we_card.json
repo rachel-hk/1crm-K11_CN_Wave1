@@ -1,0 +1,290 @@
+{
+	"name": "vw_Latest_we_card",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "app_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "card_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "card_source",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_put",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_api",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "need_push_on_view",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "logo_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "code_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brand_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "color",
+				"type": "nvarchar"
+			},
+			{
+				"name": "notice",
+				"type": "nvarchar"
+			},
+			{
+				"name": "description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "total_quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "date_info",
+				"type": "nvarchar"
+			},
+			{
+				"name": "begin_timestamp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "end_timestamp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "end_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "use_custom_code",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bind_openid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "service_phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "location_id_list",
+				"type": "nvarchar"
+			},
+			{
+				"name": "use_all_locations",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "center_item",
+				"type": "nvarchar"
+			},
+			{
+				"name": "custom_item",
+				"type": "nvarchar"
+			},
+			{
+				"name": "get_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "get_limit_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "use_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "can_share",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "can_give_friend",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "use_condition",
+				"type": "nvarchar"
+			},
+			{
+				"name": "abstract",
+				"type": "nvarchar"
+			},
+			{
+				"name": "text_image_list",
+				"type": "nvarchar"
+			},
+			{
+				"name": "time_limit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "business_service",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_primary",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "use_all_app",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "use_all_goods",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "group_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "api_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "app_id_list",
+				"type": "nvarchar"
+			},
+			{
+				"name": "need_verify_member",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "use_refuse",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "can_provide",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_uid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_uid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_we_card"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

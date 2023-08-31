@@ -1,0 +1,166 @@
+{
+	"name": "temp_mon_visit_log",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm_tool"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "session_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "visitor_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "user_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "host_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "page_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "title_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "channel_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "share_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "share_channel_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "share_from_user_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "share_level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sort",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "duration",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_landing_page",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_exit_page",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "k_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "k_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "k_index",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "referrer_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_min",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_of_hour",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_of_day",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_week",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_month",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "createtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_mon_visit_log"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

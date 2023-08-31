@@ -1,0 +1,200 @@
+{
+	"name": "mem_account_temp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmManualTagMgmtProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag/member"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_type_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "member_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_status_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_code",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_point_balance",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_point_earned",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_point_used",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "account_point_expired",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "deduct_priority",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "open_date_utc",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "open_date_local",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "open_date_str",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "expired_date_utc",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "expired_date_local",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "expired_date_str",
+				"type": "varchar",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "register_store_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "register_employee_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "register_channel_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "active_flag",
+				"type": "int",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "create_by",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "create_date",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "modify_by",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "modify_date",
+				"type": "datetime",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "tenant_id",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "version",
+				"type": "bigint",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "decimal_account_point_balance",
+				"type": "decimal",
+				"precision": 25,
+				"scale": 6
+			},
+			{
+				"name": "decimal_account_point_earned",
+				"type": "decimal",
+				"precision": 25,
+				"scale": 6
+			},
+			{
+				"name": "decimal_account_point_used",
+				"type": "decimal",
+				"precision": 25,
+				"scale": 6
+			},
+			{
+				"name": "decimal_account_point_expired",
+				"type": "decimal",
+				"precision": 25,
+				"scale": 6
+			}
+		],
+		"typeProperties": {
+			"tableName": "mem_account_temp"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,141 @@
+{
+	"name": "vw_latest_foot_step_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "domain_info_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "parent_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "mp_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "browsing_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "platform_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "business_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "create_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "server_ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_foot_step"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

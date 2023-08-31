@@ -1,0 +1,101 @@
+{
+	"name": "TRIGGER_DIGIT_TABLE",
+	"properties": {
+		"activities": [
+			{
+				"name": "02A_TRIGGER_REF_APP",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "02A_TRIGGER_REF_APP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "02B_TRIGGER_REF_PAGE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "02B_TRIGGER_REF_PAGE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "02C_TRIGGER_REF_CHANNEL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "02C_TRIGGER_REF_CHANNEL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "24A_DIGIT_PAGE_BROWSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "02A_TRIGGER_REF_APP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "02B_TRIGGER_REF_PAGE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "02C_TRIGGER_REF_CHANNEL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "24A_DIGIT_PAGE_BROWSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "24B_DIGIT_CLICK",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "24A_DIGIT_PAGE_BROWSE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "24B_DIGIT_CLICK",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:45:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

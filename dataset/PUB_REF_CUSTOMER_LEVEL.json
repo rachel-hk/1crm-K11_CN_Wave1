@@ -1,0 +1,141 @@
+{
+	"name": "PUB_REF_CUSTOMER_LEVEL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Tier_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "System_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Source_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Card_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Card_BD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name_Fenze",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Valid_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Expire_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Upgrade_Rule",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Upgrade_Model",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Kpoint_Rate",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Spoint_Rate",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Tier_Discount",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Sync",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_CUSTOMER_LEVEL"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

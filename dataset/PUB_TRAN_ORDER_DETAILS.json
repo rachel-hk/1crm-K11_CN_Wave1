@@ -1,0 +1,422 @@
+{
+	"name": "PUB_TRAN_ORDER_DETAILS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Order_SID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Source_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "User_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Merchant_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Product_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Mp_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Store_Mp_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Item_Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Warehouse_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Store_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Settle_Method",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Settle_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Settle_No",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Item_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Pur_No",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Name_CN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Sale_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Product_Price_Original",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Price_Market",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Price_Sale",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Price_Point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Pur_Price",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Buy_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Product_Gross_Weight",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Parent_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Item_Before_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Third_Merchant_Product_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sale_Unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Place_Origin",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ext_Info",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Standard",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Price_Before_Final",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Comment_Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Series_Parent_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Brand_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Cate_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Whole_Cate_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Whole_Cate_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Relation_Mp_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Product_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Art_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Delivery_No",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Price_Final",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Setmeal_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Waiter_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Setmeal_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Support_Invoice",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Setmeal_No",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Product_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Gift_Card_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Live_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Send_Coupon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Available",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Version_No",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Create_Time_DB",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time_DB",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Company_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Out_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Inner_Supplier",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Supplier_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Supplier_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Is_Drop_Shipping",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Supplier_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Package_Fee",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Auto_Refund",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Refund_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Expiry_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Series_Product_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Service_Date_Time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "TRAN_ORDER_DETAILS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

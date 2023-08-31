@@ -1,0 +1,117 @@
+{
+	"name": "raw_com_event",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_EVENT",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "event_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_permanent",
+				"type": "INT32"
+			},
+			{
+				"name": "start_at",
+				"type": "INT32"
+			},
+			{
+				"name": "end_at",
+				"type": "INT32"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "can_reused",
+				"type": "INT32"
+			},
+			{
+				"name": "diff_event_reused",
+				"type": "INT32"
+			},
+			{
+				"name": "diff_event_reused_times",
+				"type": "INT64"
+			},
+			{
+				"name": "same_event_reused",
+				"type": "INT32"
+			},
+			{
+				"name": "same_event_reused_times",
+				"type": "INT64"
+			},
+			{
+				"name": "times_limit_cycle",
+				"type": "INT32"
+			},
+			{
+				"name": "times_limit",
+				"type": "INT32"
+			},
+			{
+				"name": "participation_amount_limit",
+				"type": "INT32"
+			},
+			{
+				"name": "participation_amount_min",
+				"type": "INT32"
+			},
+			{
+				"name": "participation_amount_max",
+				"type": "INT32"
+			},
+			{
+				"name": "total_quantity_limit",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

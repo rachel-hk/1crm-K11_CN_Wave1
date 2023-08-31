@@ -1,0 +1,20 @@
+{
+	"name": "MANUAL_TAG_MEM_ACCOUNT_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "MANUAL_TAG_MEM_ACCOUNT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

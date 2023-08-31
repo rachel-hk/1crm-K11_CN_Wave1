@@ -1,0 +1,95 @@
+{
+	"name": "PUB_DIGIT_QRCODE_SCAN_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Qrcode_Scan_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Open_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Qrcode_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Event_Key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Subscribe",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Data_From",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "DIGIT_QRCODE_SCAN"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

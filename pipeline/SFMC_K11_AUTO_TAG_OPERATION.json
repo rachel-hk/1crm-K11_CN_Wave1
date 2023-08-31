@@ -1,0 +1,1374 @@
+{
+	"name": "SFMC_K11_AUTO_TAG_OPERATION",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data to SFMC",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Data flow1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('K11_AUTO_TAG_OPEARTION',formatDateTime(addDays(convertTimeZone(utcNow(),'UTC','China Standard Time'),0),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.parquet",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureFileStorageWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Customer_UID",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "Customer_UID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Member_ID",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "Member_ID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Union_ID",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "Union_ID",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rec_SHK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rec_SHK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rec_GZK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rec_GZK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rec_WHHKK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rec_WHHKK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rec_WHGGK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rec_WHGGK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rec_TJK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rec_TJK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rec_SYK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rec_SYK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Freq_SHK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Freq_SHK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Freq_GZK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Freq_GZK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Freq_WHHKK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Freq_WHHKK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Freq_WHGGK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Freq_WHGGK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Freq_TJK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Freq_TJK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Freq_SYK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Freq_SYK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Monetary_SHK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Monetary_SHK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Monetary_GZK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Monetary_GZK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Monetary_WHHKK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Monetary_WHHKK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Monetary_WHGGK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Monetary_WHGGK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Monetary_TJK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Monetary_TJK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Monetary_SYK11",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Monetary_SYK11",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_RFM_Seg",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_RFM_Seg",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Active_Member",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Active_Member",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Non_Trans_Member",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Non_Trans_Member",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_CLC_Seg",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_CLC_Seg",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_White_Collar",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_White_Collar",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Weekday_Weekend_Shopper",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Weekday_Weekend_Shopper",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Rich_Female",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Rich_Female",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Click_View_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Click_View_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Click_View_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Click_View_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Click_View_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Click_View_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Click_View_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Click_View_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Store_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Store_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Channel_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Channel_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Channel_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Channel_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Channel_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Channel_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Channel_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Channel_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Commun_Channel_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Commun_Channel_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Commun_Channel_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Commun_Channel_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Commun_Channel_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Commun_Channel_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Commun_Channel_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Commun_Channel_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Online_Interact_Channel_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Online_Interact_Channel_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Online_Interact_Channel_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Online_Interact_Channel_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Online_Interact_Channel_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Online_Interact_Channel_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Online_Interact_Channel_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Online_Interact_Channel_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Click_View_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Click_View_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Click_View_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Click_View_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Click_View_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Click_View_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Click_View_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Click_View_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Product_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Product_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Click_View_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_SubTrade_Cate_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Freq_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Pur_Amount_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Click_View_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Click_View_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Click_View_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Click_View_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Click_View_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Click_View_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Click_View_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Click_View_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_1M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_3M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_6M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "UTF8"
+								},
+								"sink": {
+									"name": "K11_Pref_Trade_Cate_Browse_Duration_12M",
+									"type": "String",
+									"physicalType": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Update_Time",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Update_Time",
+									"type": "String",
+									"physicalType": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Par_K11_AUTO_TAG_OPERATION",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SHARE_SFTP_K11_AUTO_TAG_OPERATION",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "SFMC_AUTO_TAG_OPERATION",
+						"type": "DataFlowReference"
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-26T02:57:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

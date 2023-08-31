@@ -1,0 +1,118 @@
+{
+	"name": "raw_lottery_record_ssir",
+	"properties": {
+		"description": "@concat('[HERMES].[LOTTERY_RECORD]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_New_KGO/hermes"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "HERMES/LOTTERY_RECORD",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "hermes_id",
+				"type": "INT64"
+			},
+			{
+				"name": "lottery_awards_id",
+				"type": "INT64"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "user_mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_nickname",
+				"type": "UTF8"
+			},
+			{
+				"name": "receiver_mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "receiver_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "receiver_address",
+				"type": "BINARY"
+			},
+			{
+				"name": "use_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "use_status",
+				"type": "INT32"
+			},
+			{
+				"name": "is_deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "create_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "create_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "create_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "server_ip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "update_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "update_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "company_id",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

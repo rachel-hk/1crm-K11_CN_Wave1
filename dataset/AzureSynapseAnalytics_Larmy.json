@@ -1,0 +1,17 @@
+{
+	"name": "AzureSynapseAnalytics_Larmy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "COM_MEMBER_MAP_MD5"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

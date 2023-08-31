@@ -1,0 +1,151 @@
+{
+	"name": "temp_com_member_special_card_type",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "special_card_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_area_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "birthday",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "start_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "end_at",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "order_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_get_benefits",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_get_birthday_benefits",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "delay_birthday_benefits",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "disabled_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "disabled_remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_by",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_by",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deleted",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "delete_by",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_member_special_card_type"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

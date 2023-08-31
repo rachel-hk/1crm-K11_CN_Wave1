@@ -1,0 +1,157 @@
+{
+	"name": "temp_com_gift_record_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "exchange_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "hedging_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "event_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gift_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gift_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "card_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bar_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "participation_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "exchange_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "spoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operation_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_master",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "voucher",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "from_fz",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_gift_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

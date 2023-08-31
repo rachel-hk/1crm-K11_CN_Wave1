@@ -1,0 +1,97 @@
+{
+	"name": "PUB_CDM_PERSONAL_FAMILY_DETAILS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "With_Kid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Kid1_Gender",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Kid1_Birthday",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Kid2_Gender",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Kid2_Birthday",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Kid3_Gender",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Kid3_Birthday",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Kid4_Gender",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Kid4_Birthday",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "CDM_PERSONAL_FAMILY_DETAILS"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,113 @@
+{
+	"name": "raw_mon_app_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm_tool"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM_TOOL/MON_APP",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "account_id",
+				"type": "INT64"
+			},
+			{
+				"name": "app_id",
+				"type": "INT64"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			},
+			{
+				"name": "period",
+				"type": "INT32"
+			},
+			{
+				"name": "starttime",
+				"type": "INT64"
+			},
+			{
+				"name": "endtime",
+				"type": "INT32"
+			},
+			{
+				"name": "landing_page_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "budget",
+				"type": "INT32"
+			},
+			{
+				"name": "event_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "push_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "desc",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "trigger_switch",
+				"type": "INT32"
+			},
+			{
+				"name": "debug_switch",
+				"type": "INT32"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT64"
+			},
+			{
+				"name": "last_operator_id",
+				"type": "INT64"
+			},
+			{
+				"name": "createtime",
+				"type": "INT32"
+			},
+			{
+				"name": "updatetime",
+				"type": "INT32"
+			},
+			{
+				"name": "coupon_count",
+				"type": "INT32"
+			},
+			{
+				"name": "app_type",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

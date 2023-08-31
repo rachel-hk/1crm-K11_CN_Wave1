@@ -1,0 +1,128 @@
+{
+	"name": "raw_com_member_special_card",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_SPECIAL_CARD]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_SPECIAL_CARD",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "special_card_id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "birthday",
+				"type": "INT32"
+			},
+			{
+				"name": "area_id",
+				"type": "INT64"
+			},
+			{
+				"name": "card_area_id",
+				"type": "INT64"
+			},
+			{
+				"name": "start_at",
+				"type": "INT64"
+			},
+			{
+				"name": "end_at",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "order_id",
+				"type": "INT64"
+			},
+			{
+				"name": "level",
+				"type": "INT32"
+			},
+			{
+				"name": "card_type",
+				"type": "INT32"
+			},
+			{
+				"name": "is_get_benefits",
+				"type": "INT32"
+			},
+			{
+				"name": "is_get_birthday_benefits",
+				"type": "INT32"
+			},
+			{
+				"name": "delay_birthday_benefits",
+				"type": "INT32"
+			},
+			{
+				"name": "disabled_at",
+				"type": "INT64"
+			},
+			{
+				"name": "disabled_remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_id",
+				"type": "INT64"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "create_by",
+				"type": "INT64"
+			},
+			{
+				"name": "update_by",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT64"
+			},
+			{
+				"name": "delete_by",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

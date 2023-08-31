@@ -1,0 +1,114 @@
+{
+	"name": "PUB_TRAN_LOTTERY",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TRAN_LOTTERY",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromTRANLOTTERY"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_LOTTERY",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"description": "Export data to PUB_CDM_PERSONAL_PIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Campaign_ID as long,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Lottery_Awards_ID as long,",
+				"          Status as integer,",
+				"          User_ID as string,",
+				"          User_Mobile as string,",
+				"          Use_Order_Code as string,",
+				"          Use_Status as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Company_ID as long,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Lottery_Unique_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromTRANLOTTERY",
+				"IngestionfromTRANLOTTERY filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Lottery_Unique_ID as string,",
+				"          Campaign_ID as long,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Lottery_Awards_ID as long,",
+				"          Status as integer,",
+				"          User_ID as string,",
+				"          User_Mobile as string,",
+				"          Use_Order_Code as string,",
+				"          Use_Status as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Company_ID as long,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Give_Status as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['DELETE FROM TRAN_LOTTERY WHERE Start_Date = FORMAT(GetDate(), \\'yyyy-MM-dd\\');'],",
+				"     postSQLs:['WITH TEMP AS (\\nSELECT [Lottery_Unique_ID], ROW_NUMBER() OVER (PARTITION BY [Campaign_ID]\\n,[Customer_UID]\\n,[BU_Source]\\n,[Lottery_Awards_ID]\\n,[Status]\\n,[User_ID]\\n,[User_Mobile]\\n,[Use_Order_Code]\\n,[Use_Status]\\n,[Is_Deleted]\\n,[Create_Time]\\n,[Update_Time]\\n,[Company_ID] ORDER BY Start_Date DESC) AS SEQUENCE \\n FROM [dbo].[TRAN_LOTTERY])\\n\\nDelete from TRAN_LOTTERY where concat([Lottery_Unique_ID],start_date) in (select concat([Lottery_Unique_ID],start_date) from TEMP where SEQUENCE > 1);'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Campaign_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Lottery_Awards_ID,",
+				"          Status,",
+				"          User_ID,",
+				"          User_Mobile,",
+				"          Use_Order_Code,",
+				"          Use_Status,",
+				"          Is_Deleted,",
+				"          Create_Time,",
+				"          Update_Time,",
+				"          Company_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Lottery_Unique_ID",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

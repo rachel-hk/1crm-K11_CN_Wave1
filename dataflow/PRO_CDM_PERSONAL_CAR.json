@@ -1,0 +1,124 @@
+{
+	"name": "PRO_CDM_PERSONAL_CAR",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_member_car",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawComMemberSpecialCardType"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerMapping"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_CDM_PERSONAL_CAR",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				},
+				{
+					"name": "JoinCustomerUID"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          license_plate as string,",
+				"          update_at as long,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          create_at as long,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestRawComMemberSpecialCardType",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CustomerMapping",
+				"JoinCustomerUID derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1,",
+				"          BU_Source = 'K11 PRC',",
+				"          Update_At = toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestRawComMemberSpecialCardType filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"FilterLatest, CustomerMapping join(member_id == K11PRC_Member_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinCustomerUID",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Car_ID = id,",
+				"          Customer_UID,",
+				"          Member_ID = Hashed_Member_ID,",
+				"          BU_Source,",
+				"          License_Plate = license_plate,",
+				"          Update_At,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

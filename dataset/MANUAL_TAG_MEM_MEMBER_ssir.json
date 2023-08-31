@@ -1,0 +1,224 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_tier_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_status_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "full_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gender_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday_year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday_month",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday_day",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday",
+				"type": "date"
+			},
+			{
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "register_date_utc",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "register_date_local",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "register_date_str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "active_flag",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_by",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "tenant_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tier_effective_from_date_utc",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "tier_effective_from_date_local",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "tier_effective_from_date_str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tier_effective_to_date_utc",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "tier_effective_to_date_local",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "tier_effective_to_date_str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "policies_version",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "mobile_region_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "search_static_content",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ts",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "azure_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "k11_member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "special_card_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "area_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "province_dictionary_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city_dictionary_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "district_dictionary_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "country_dictionary_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "register_location_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "register_location_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "keep_official_accounts",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "MANUAL_TAG_MEM_MEMBER"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

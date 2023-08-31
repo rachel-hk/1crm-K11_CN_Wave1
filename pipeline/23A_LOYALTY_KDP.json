@@ -1,0 +1,87 @@
+{
+	"name": "23A_LOYALTY_KDP",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_LOYALTY_KDP",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_Com_Member_KP_Record",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_LOYALTY_KDP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_LOYALTY_KDP",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_LOYALTY_KDP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_LOYALTY_KDP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_Com_Member_KDP_Use_Record",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_Com_Member_KDP_Use_Record",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_Com_Member_KP_Record",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_Com_Member_KDP_Use_Record",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_Com_Member_KP_Record",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T07:02:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

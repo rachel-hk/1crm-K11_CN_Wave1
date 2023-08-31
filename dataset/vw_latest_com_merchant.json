@@ -1,0 +1,90 @@
+{
+	"name": "vw_latest_com_merchant",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "mchid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "merchant_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "area_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "mall_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_shangquan",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "serial_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "private_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "v3_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "update_at",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_com_merchant"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

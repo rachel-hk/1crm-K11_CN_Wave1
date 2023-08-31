@@ -1,0 +1,155 @@
+{
+	"name": "PRO_REF_QRCODE_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_we_qrcode",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFQRCODE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_QRCODE",
+						"type": "DatasetReference"
+					},
+					"name": "ExportDataToREFQRCODE"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          account_id as integer,",
+				"          app_id as string,",
+				"          ticket as string,",
+				"          ticket_hash as long,",
+				"          url as string,",
+				"          origin_url as string,",
+				"          logo_url as string,",
+				"          category as integer,",
+				"          type as integer,",
+				"          expire as integer,",
+				"          name as string,",
+				"          scene_id as long,",
+				"          scene_str as string,",
+				"          code_desc as string,",
+				"          delay_day as integer,",
+				"          effect_time as integer,",
+				"          trigger_type as integer,",
+				"          trigger_id as integer,",
+				"          trigger_rule_count as integer,",
+				"          trigger_status as integer,",
+				"          status as integer,",
+				"          data_from as integer,",
+				"          createtime as integer,",
+				"          updatetime as integer,",
+				"          operator_id as integer,",
+				"          group_id as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFQRCODE",
+				"FilterLatest select(mapColumn(",
+				"          Qrcode_ID = id,",
+				"          Account_ID = account_id,",
+				"          App_ID = app_id,",
+				"          Qrcode_Ticket = ticket,",
+				"          Ticket_Hash = ticket_hash,",
+				"          Code_Cate = category,",
+				"          Code_Type = type,",
+				"          Code_Expire = expire,",
+				"          Code_Name = name,",
+				"          Scene_ID = scene_id,",
+				"          Scene_Str = scene_str,",
+				"          Code_Desc = code_desc,",
+				"          Delay_Day = delay_day,",
+				"          Effect_Time = effect_time,",
+				"          Trigger_Type = trigger_type,",
+				"          Trigger_ID = trigger_id,",
+				"          Trigger_Rule_Count = trigger_rule_count,",
+				"          Trigger_Status = trigger_status,",
+				"          Code_Status = status,",
+				"          Data_From = data_from,",
+				"          Create_Time = createtime,",
+				"          Update_Time = updatetime,",
+				"          Group_ID = group_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Source_BU = 'K11 PRC',",
+				"          Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          Create_Time = toTimestamp((toInteger(toString(Create_Time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_Time = toTimestamp((toInteger(toString(Update_Time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Effect_Time = toTimestamp((toInteger(toString(Effect_Time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestREFQRCODE filter(toDate(Insert_Date)==addDays(currentDate(),-1)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Qrcode_ID,",
+				"          Source_BU,",
+				"          Account_ID,",
+				"          App_ID,",
+				"          Qrcode_Ticket,",
+				"          Ticket_Hash,",
+				"          Code_Cate,",
+				"          Code_Type,",
+				"          Code_Expire,",
+				"          Code_Name,",
+				"          Scene_ID,",
+				"          Scene_Str,",
+				"          Code_Desc,",
+				"          Delay_Day,",
+				"          Effect_Time,",
+				"          Trigger_Type,",
+				"          Trigger_ID,",
+				"          Trigger_Rule_Count,",
+				"          Trigger_Status,",
+				"          Code_Status,",
+				"          Data_From,",
+				"          Create_Time,",
+				"          Update_Time,",
+				"          Group_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> ExportDataToREFQRCODE"
+			]
+		}
+	}
+}

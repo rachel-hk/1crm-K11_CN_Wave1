@@ -1,0 +1,81 @@
+{
+	"name": "raw_mon_channel_log",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm_tool"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('[CRM_TOOL].[MON_CHANNEL_LOG]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+					"type": "Expression"
+				},
+				"folderPath": "CRM_TOOL/MON_CHANNEL_LOG",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "app_id",
+				"type": "INT64"
+			},
+			{
+				"name": "session_id",
+				"type": "INT64"
+			},
+			{
+				"name": "visitor_id",
+				"type": "INT64"
+			},
+			{
+				"name": "user_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "channel_id",
+				"type": "INT64"
+			},
+			{
+				"name": "channel_level",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_min",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_hour",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_day",
+				"type": "INT64"
+			},
+			{
+				"name": "time_of_week",
+				"type": "INT64"
+			},
+			{
+				"name": "time_of_month",
+				"type": "INT64"
+			},
+			{
+				"name": "createtime",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

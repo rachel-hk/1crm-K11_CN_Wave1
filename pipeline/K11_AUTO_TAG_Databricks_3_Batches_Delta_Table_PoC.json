@@ -1,0 +1,169 @@
+{
+	"name": "K11_AUTO_TAG_Databricks_3_Batches_Delta_Table_PoC",
+	"properties": {
+		"activities": [
+			{
+				"name": "K11_AUTO_TAG_Batch_1a",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Testing/Delta_Table_Notebook_PoC/(Clone) MASTER_Updated_Batch_1a"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Batch_2a",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Testing/Delta_Table_Notebook_PoC/(Clone) MASTER_Updated_Batch_2a"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Batch_3a",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Testing/Delta_Table_Notebook_PoC/(Clone) MASTER_Updated_Batch_3a"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Batch_1b",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Testing/Delta_Table_Notebook_PoC/(Clone) MASTER_Updated_Batch_1b"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Batch_2b",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Testing/Delta_Table_Notebook_PoC/(Clone) MASTER_Updated_Batch_2b"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_Batch_3b",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/Testing/Delta_Table_Notebook_PoC/(Clone) MASTER_Updated_Batch_3b"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SFMC_K11_AUTO_TAG_FACT_copy2",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_K11_AUTO_TAG_FACT_copy2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_K11_AUTO_TAG_FACT_copy1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_K11_AUTO_TAG_FACT_copy1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_K11_AUTO_TAG_FACT",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_K11_AUTO_TAG_FACT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-08-18T08:14:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

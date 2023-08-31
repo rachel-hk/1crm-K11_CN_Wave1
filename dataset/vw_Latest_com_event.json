@@ -1,0 +1,146 @@
+{
+	"name": "vw_Latest_com_event",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "event_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_permanent",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "start_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "end_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "can_reused",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "diff_event_reused",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "diff_event_reused_times",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "same_event_reused",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "same_event_reused_times",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "times_limit_cycle",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "times_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "participation_amount_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "participation_amount_min",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "participation_amount_max",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "total_quantity_limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_com_event"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

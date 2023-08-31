@@ -1,0 +1,121 @@
+{
+	"name": "SFMC_DIGIT_QRCODE_SCAN_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_QRCODE_SCAN",
+						"type": "DatasetReference"
+					},
+					"name": "DIGITQRCODESCAN"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_DIGIT_QRCODE_SCAN",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "NullString"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Qrcode_Scan_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Account_ID as integer,",
+				"          App_ID as string,",
+				"          Open_ID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          Qrcode_ID as integer,",
+				"          Event_Key as string,",
+				"          Is_Subscribe as integer,",
+				"          Data_From as integer,",
+				"          Create_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> DIGITQRCODESCAN",
+				"DIGITQRCODESCAN aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Member_QRCode_Scan',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"DIGITQRCODESCAN derive(null_string = toString(null())) ~> NullString",
+				"NullString sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Qrcode_Scan_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Account_ID,",
+				"          App_ID,",
+				"          Open_ID = null_string,",
+				"          Member_ID = null_string,",
+				"          Union_ID = null_string,",
+				"          Qrcode_ID,",
+				"          Event_Key,",
+				"          Is_Subscribe,",
+				"          Data_From,",
+				"          Create_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

@@ -1,0 +1,109 @@
+{
+	"name": "PUB_DIGIT_CHANNEL",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DIGIT_CHANNEL",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromDIGITCHANNEL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_CHANNEL",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Source_ID as long,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          App_ID as long,",
+				"          Session_ID as long,",
+				"          Visitor_ID as long,",
+				"          Member_ID as string,",
+				"          Channel_ID as long,",
+				"          Channel_Level as integer,",
+				"          Channel_Name as string,",
+				"          Rec_Status as integer,",
+				"          Create_Time as date,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          App_Name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromDIGITCHANNEL",
+				"IngestionfromDIGITCHANNEL filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Source_ID as long,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          App_ID as long,",
+				"          App_Name as string,",
+				"          Session_ID as long,",
+				"          Visitor_ID as long,",
+				"          Member_ID as string,",
+				"          Channel_ID as long,",
+				"          Channel_Level as integer,",
+				"          Channel_Name as string,",
+				"          Rec_Status as integer,",
+				"          Create_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['DELETE FROM DIGIT_CHANNEL WHERE Start_Date = FORMAT(GetDate(), \\'yyyy-MM-dd\\');'],",
+				"     postSQLs:['WITH TEMP AS (\\nSELECT [Source_ID], ROW_NUMBER() OVER (PARTITION BY [Customer_UID]\\n,[BU_Source]\\n,[App_ID]\\n,[App_Name]\\n,[Session_ID]\\n,[Visitor_ID]\\n,[Member_ID]\\n,[Channel_ID]\\n,[Channel_Level]\\n,[Channel_Name]\\n,[Rec_Status]\\n,[Create_Time] ORDER BY Start_Date DESC) AS SEQUENCE \\n FROM [dbo].[DIGIT_CHANNEL])\\n\\nDelete from DIGIT_CHANNEL where CONCAT(Source_ID,START_DATE) in (select CONCAT(Source_ID,START_DATE) from TEMP where SEQUENCE > 1);'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Source_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          App_ID,",
+				"          Session_ID,",
+				"          Visitor_ID,",
+				"          Member_ID,",
+				"          Channel_ID,",
+				"          Channel_Level,",
+				"          Channel_Name,",
+				"          Rec_Status,",
+				"          Create_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          App_Name",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

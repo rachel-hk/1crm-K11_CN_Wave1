@@ -1,0 +1,63 @@
+{
+	"name": "K11_AUTO_TAG_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Value",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Scope",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Updated_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "K11_AUTO_TAG"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

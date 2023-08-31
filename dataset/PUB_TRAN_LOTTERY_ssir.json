@@ -1,0 +1,108 @@
+{
+	"name": "PUB_TRAN_LOTTERY_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Lottery_Unique_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Campaign_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lottery_Awards_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "User_Mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Use_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Use_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Company_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Give_Status",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "TRAN_LOTTERY"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,152 @@
+{
+	"name": "PUB_REF_QRCODE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Qrcode_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Source_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Qrcode_Ticket",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ticket_Hash",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Code_Cate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Code_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Code_Expire",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Code_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Scene_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Scene_Str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Code_Desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Delay_Day",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Effect_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Trigger_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Trigger_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trigger_Rule_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trigger_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Code_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Data_From",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Group_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_QRCODE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

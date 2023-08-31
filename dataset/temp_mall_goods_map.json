@@ -1,0 +1,20 @@
+{
+	"name": "temp_mall_goods_map",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/KGO/Raw_mall"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_mall_goods_map"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

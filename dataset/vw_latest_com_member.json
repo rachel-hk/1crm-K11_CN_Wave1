@@ -1,0 +1,310 @@
+{
+	"name": "vw_latest_com_member",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "real_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nick_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "en_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "phone_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "head_img",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_special_level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "vip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vip_pass",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_marry",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "reg_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "expire_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "first_pay",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "last_pay",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "cycle_at",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "issue_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "zone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "province",
+				"type": "nvarchar"
+			},
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "addr",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sex",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "birthday",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "birthday_short",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechat_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "reg_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "reg_sub_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "up_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "up_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expire_kp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "clear_kp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "spoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expire_sp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "clear_sp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sp_times",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "balance",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sales_total",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "sales_times",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "eform_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_operator",
+				"type": "nvarchar"
+			},
+			{
+				"name": "upgrade_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_hk_member",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_com_member"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

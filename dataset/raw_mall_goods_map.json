@@ -1,0 +1,110 @@
+{
+	"name": "raw_mall_goods_map",
+	"properties": {
+		"description": "@concat('[MALL].[MALL_GOODS_MAP]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_KGO/mall"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MALL/MALL_GOODS_MAP",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "goods_id",
+				"type": "INT32"
+			},
+			{
+				"name": "quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "total_quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "id1",
+				"type": "INT32"
+			},
+			{
+				"name": "id2",
+				"type": "INT32"
+			},
+			{
+				"name": "id3",
+				"type": "INT32"
+			},
+			{
+				"name": "id4",
+				"type": "INT32"
+			},
+			{
+				"name": "id5",
+				"type": "INT32"
+			},
+			{
+				"name": "id6",
+				"type": "INT32"
+			},
+			{
+				"name": "id7",
+				"type": "INT32"
+			},
+			{
+				"name": "id8",
+				"type": "INT32"
+			},
+			{
+				"name": "id9",
+				"type": "INT32"
+			},
+			{
+				"name": "id10",
+				"type": "INT32"
+			},
+			{
+				"name": "sku",
+				"type": "UTF8"
+			},
+			{
+				"name": "price_type",
+				"type": "INT32"
+			},
+			{
+				"name": "unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

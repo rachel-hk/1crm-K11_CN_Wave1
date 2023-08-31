@@ -1,0 +1,113 @@
+{
+	"name": "PRO_REF_PROMOTION_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_mall_prom",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawMallProm"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_PROMOTION",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterActiveFlag"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          unique_id as string,",
+				"          area_id as integer,",
+				"          title as string,",
+				"          prom_type as integer,",
+				"          start_time as integer,",
+				"          end_time as integer,",
+				"          origin_price as decimal(38,18),",
+				"          prom_price as decimal(38,18),",
+				"          quantity as long,",
+				"          total_quantity as long,",
+				"          return_quantity as long,",
+				"          is_pause as integer,",
+				"          status as integer,",
+				"          is_show as integer,",
+				"          warming_time as integer,",
+				"          sort as integer,",
+				"          deleted as integer,",
+				"          create_at as integer,",
+				"          update_at as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestRawMallProm",
+				"FilterActiveFlag derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1,",
+				"          Source_BU = 'K11 PRC',",
+				"          Start_Time = toTimestamp((toInteger(toString(start_time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          End_Time = toTimestamp((toInteger(toString(end_time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          prom_warm_time = toTimestamp((toInteger(toString(warming_time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"FilterLatest filter(toInteger(byName('deleted')) ==0) ~> FilterActiveFlag",
+				"IngestRawMallProm filter(toDate(Insert_Date)==addDays(currentDate(),-1)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Prom_ID = id,",
+				"          Area_ID = area_id,",
+				"          Source_BU,",
+				"          Prom_Name = title,",
+				"          Prom_Type = prom_type,",
+				"          Start_Time = AddColumn@Start_Time,",
+				"          End_Time = AddColumn@End_Time,",
+				"          Is_Pause = is_pause,",
+				"          Prom_Status = status,",
+				"          Is_Show = is_show,",
+				"          Prom_Warm_Time = prom_warm_time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

@@ -1,0 +1,305 @@
+{
+	"name": "vw_Latest_mall_order",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "mer_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "mch_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "version",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "user_area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "user_level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "open_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "shipping_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pay_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "refund_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "profit_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "invoice_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "invoice_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pay_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pay_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "kpoint_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kdp_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "coupon_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "prom_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "real_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "discount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "shipping_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "confirm_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pay_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "get_point",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "prom_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_kpoint_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_spoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_kdp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "consignee",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_sn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "shipping_way",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pay_expired_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "confirm_expired_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "refund_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "channel_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "return_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "order_from",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_day",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_of_hour",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_mall_order"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,67 @@
+{
+	"name": "03_TRIGGER_REF_MERCHANT",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_REF_MERCHANT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_Com_Merchant",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_REF_MERCHANT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_REF_MERCHANT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_REF_MERCHANT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_REF_MERCHANT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_Com_Merchant",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_Com_Merchant",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T07:59:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,99 @@
+{
+	"name": "SFMC_ChatLabsOATag",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatlabsOATag_',formatDateTime(addDays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsid",
+				"type": "String"
+			},
+			{
+				"name": "openid",
+				"type": "String"
+			},
+			{
+				"name": "unionid",
+				"type": "String"
+			},
+			{
+				"name": "tag",
+				"type": "String"
+			},
+			{
+				"name": "tagcategory",
+				"type": "String"
+			},
+			{
+				"name": "score",
+				"type": "String"
+			},
+			{
+				"name": "clickcount",
+				"type": "String"
+			},
+			{
+				"name": "interactiontype",
+				"type": "String"
+			},
+			{
+				"name": "lastclickedtime",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "createdon",
+				"type": "String"
+			},
+			{
+				"name": "modifiedon",
+				"type": "String"
+			},
+			{
+				"name": "sfkey",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

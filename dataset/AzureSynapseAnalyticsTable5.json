@@ -1,0 +1,224 @@
+{
+	"name": "AzureSynapseAnalyticsTable5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "vip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "open_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "record_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_record_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createtime",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "bonus_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bonus_description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bonus_point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sales_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sales_amount_real",
+				"type": "nvarchar"
+			},
+			{
+				"name": "doc_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_name_sc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_name_tc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_name_en",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sb_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ship_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "event_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "unique_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "special_level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "special_level_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "payment_type_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "time_of_day",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_month",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "mall_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "returned",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "returned_origin_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "api_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kp_channel",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kp_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "discount_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gvamount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kp_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fz_channel",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_confirm",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_member_kp_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

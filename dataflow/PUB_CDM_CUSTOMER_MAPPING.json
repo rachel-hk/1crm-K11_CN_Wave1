@@ -1,0 +1,108 @@
+{
+	"name": "PUB_CDM_CUSTOMER_MAPPING",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "Mapping"
+				},
+				{
+					"dataset": {
+						"referenceName": "CDM_MANUAL_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "ManualTag"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToTempFile"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Join"
+				},
+				{
+					"name": "DropColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> Mapping",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> ManualTag",
+				"Mapping, ManualTag join(Mapping@Customer_UID == ManualTag@Customer_UID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> Join",
+				"Join select(mapColumn(",
+				"          Customer_UID = Mapping@Customer_UID,",
+				"          K11PRC_Member_ID,",
+				"          Union_ID,",
+				"          KDP_ID,",
+				"          CL_ID,",
+				"          KGO_ID,",
+				"          New_KGO_ID,",
+				"          manual_tag_id = ManualTag@manual_tag_id,",
+				"          Start_Date = Mapping@Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Hashed_Member_ID,",
+				"          Hashed_VIP_Code,",
+				"          manual_tag_id = ManualTag@manual_tag_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropColumn",
+				"DropColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SinkToTempFile"
+			]
+		}
+	}
+}

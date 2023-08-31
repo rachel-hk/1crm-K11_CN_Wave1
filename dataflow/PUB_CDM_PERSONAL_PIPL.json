@@ -1,0 +1,78 @@
+{
+	"name": "PUB_CDM_PERSONAL_PIPL",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_CDM_PERSONAL_PIPL",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromCDMPERSONALPIPL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_CDM_PERSONAL_PIPL",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"description": "Export data to PUB_CDM_PERSONAL_PIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          Policy_Ver as integer,",
+				"          Account_ID as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromCDMPERSONALPIPL",
+				"IngestionfromCDMPERSONALPIPL filter(Is_Current == '1' && toString(Is_Deleted) == '0') ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Policy_Ver,",
+				"          Account_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

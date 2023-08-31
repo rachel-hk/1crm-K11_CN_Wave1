@@ -1,0 +1,150 @@
+{
+	"name": "ChatLabsSMSActivityLogs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "chatlabsid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "uniqueid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "entity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sendstatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "senderrormessage",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deliverystatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deliveryerrormessage",
+				"type": "nvarchar"
+			},
+			{
+				"name": "senddatetime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deliverydatetime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ChatLabsaccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ChatLabsaccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "contactkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "contacttype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "modifiedon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "totalclicks",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "lastclick",
+				"type": "nvarchar"
+			},
+			{
+				"name": "smsaccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "smsaccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "journeyid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "journeyname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "version",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "interactionid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityinstanceid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sfkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "ChatLabsSMSActivityLogs"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

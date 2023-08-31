@@ -1,0 +1,144 @@
+{
+	"name": "Par_PRO_DIGIT_PAGE_BROWSE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('PRO_DIGIT_PAGE_BROWSE',formatDateTime(addhours(utcnow(),8),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Browse_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "UTF8"
+			},
+			{
+				"name": "BU_Source",
+				"type": "UTF8"
+			},
+			{
+				"name": "Session_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "Page_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "Title_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "App_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "Visitor_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "User_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Member_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Event_Log_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "Event_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Create_Time",
+				"type": "INT96"
+			},
+			{
+				"name": "View_Page",
+				"type": "INT64"
+			},
+			{
+				"name": "View_Page_Name",
+				"type": "INT64"
+			},
+			{
+				"name": "Area_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "App_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Product_SN",
+				"type": "UTF8"
+			},
+			{
+				"name": "Product_Channel",
+				"type": "INT64"
+			},
+			{
+				"name": "Land_Page",
+				"type": "INT64"
+			},
+			{
+				"name": "Is_Landing_Page",
+				"type": "INT32"
+			},
+			{
+				"name": "Land_Page_Time",
+				"type": "INT96"
+			},
+			{
+				"name": "Browse_Duration",
+				"type": "INT64"
+			},
+			{
+				"name": "Is_Exit_Page",
+				"type": "INT32"
+			},
+			{
+				"name": "Start_Date",
+				"type": "DATE"
+			},
+			{
+				"name": "End_Date",
+				"type": "DATE"
+			},
+			{
+				"name": "Is_Current",
+				"type": "INT32"
+			},
+			{
+				"name": "Channel_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Visit_ID",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

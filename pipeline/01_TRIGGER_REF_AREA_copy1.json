@@ -1,0 +1,46 @@
+{
+	"name": "01_TRIGGER_REF_AREA_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_REF_AREA",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_REF_AREA",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_REF_AREA",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_REF_AREA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_REF_AREA",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-25T12:38:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

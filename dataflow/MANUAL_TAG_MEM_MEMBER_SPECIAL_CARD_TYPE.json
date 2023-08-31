@@ -1,0 +1,92 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_SPECIAL_CARD_TYPE",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "special_card_mapping_version_20230810",
+						"type": "DatasetReference"
+					},
+					"name": "IngestSpecialCardType"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_SPECIAL_CARD_TYPE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToMemMemberSpecialCardType"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddCoulmn"
+				},
+				{
+					"name": "dedup"
+				},
+				{
+					"name": "DropCount"
+				},
+				{
+					"name": "DropColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          Special_Card_Type as integer,",
+				"          Card_Level as integer,",
+				"          Type_Name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestSpecialCardType",
+				"DropColumn derive(special_card_type_name = Type_Name,",
+				"          create_date = fromUTC(currentUTC(),'YYYY-MM-DD HH:mm')) ~> AddCoulmn",
+				"AddCoulmn aggregate(groupBy(id,",
+				"          special_card_type_name,",
+				"          create_date),",
+				"     count = count()) ~> dedup",
+				"dedup select(mapColumn(",
+				"          id,",
+				"          special_card_type_name,",
+				"          create_date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropCount",
+				"IngestSpecialCardType select(mapColumn(",
+				"          id,",
+				"          Type_Name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropColumn",
+				"DropCount sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          card_type as long,",
+				"          special_card_type_name as string,",
+				"          create_date as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToMemMemberSpecialCardType"
+			]
+		}
+	}
+}

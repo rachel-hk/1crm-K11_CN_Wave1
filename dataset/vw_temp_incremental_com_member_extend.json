@@ -1,0 +1,513 @@
+{
+	"name": "vw_temp_incremental_com_member_extend",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kids",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kids_age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fav_prod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hobby",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fav_item",
+				"type": "nvarchar"
+			},
+			{
+				"name": "month_income",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "year_income",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kid1_sex",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kid1_birthday",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kid2_sex",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kid2_birthday",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "from_know",
+				"type": "nvarchar"
+			},
+			{
+				"name": "addr2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "addr3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "phone2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "qq",
+				"type": "nvarchar"
+			},
+			{
+				"name": "weibo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "alipay",
+				"type": "nvarchar"
+			},
+			{
+				"name": "company",
+				"type": "nvarchar"
+			},
+			{
+				"name": "industry",
+				"type": "nvarchar"
+			},
+			{
+				"name": "job",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bank_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bank_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_mail_market",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "company_size",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_k11",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "customer_leader",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_vipid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_issuetillid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_groupid16",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_groupid18",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_lastmodby",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_lastmodtime",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_issuetime",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_newaccumpur",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_newttlpurcount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_ismainvip",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_vipcardtype",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_club",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_joinclubdate",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_infosource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_applicationid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_applicationdate",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_certificatetype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_passwordflag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_zone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_region",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_educationcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_smscontact",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_emailcontact",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_phonecontact",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_postcontact",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_lastupdowndate",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_lastexpirydate",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "xf_language",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_tochinatimes",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_tochinareason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_nameoncard",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_monthlyincome",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_companyname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_businesstitle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_occupation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_visitk11reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_allowsendpromomsg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_catofpromomsg",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_allowsharemyinfo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_compofsharemyinfo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_agegroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_references",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_childagegroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_terminalip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_requested",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_likeproductother",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_interestother",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_tradesources",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_shownameoncardtype",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_currentrewardbonus_cs",
+				"type": "nvarchar"
+			},
+			{
+				"name": "active",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "first_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "last_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "join_show",
+				"type": "nvarchar"
+			},
+			{
+				"name": "avg_expense",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trip_mode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fz_bonus_expire_at",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "fz_expire_at",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "xf_populationattribute",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_memberstatus",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "person",
+				"type": "nvarchar"
+			},
+			{
+				"name": "requested_source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "employeeno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_storecode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_employeeno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_requested_relationship",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_references_phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "push_classification",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_special_remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_sales_ticket",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_head_img",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_vipaccountno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "xf_kpoint_total",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "xf_personal_needs",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_temp_incremental_com_member_extend"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,171 @@
+{
+	"name": "SCHEDULED_PROD_TRIGGER_nibu",
+	"properties": {
+		"activities": [
+			{
+				"name": "K11_AUTO_TAG",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_SUMMARY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_SUMMARY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_RECORD_COUNT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "MANUAL_TAG_DATA_TRIGGER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "K11_AUTO_TAG_SUMMARY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MANUAL_TAG_DATA_TRIGGER",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MANUAL_TAG_DATA_TRIGGER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_FAMILY_DETAILS_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_FAMILY_DETAILS_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_PIPL_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_PIPL_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_PROFILE_EXTRA_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_PROFILE_EXTRA_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFTP_PROFILE_CUIDVerification",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFTP_PROFILE_CUIDVerification",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			},
+			"ch_insert_date": {
+				"type": "String",
+				"defaultValue": "XXXXXXXX"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-27T00:31:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

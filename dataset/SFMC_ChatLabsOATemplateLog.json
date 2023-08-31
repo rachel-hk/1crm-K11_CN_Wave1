@@ -1,0 +1,123 @@
+{
+	"name": "SFMC_ChatLabsOATemplateLog",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatlabsOATemplateLog_',formatDateTime(addDays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsid",
+				"type": "String"
+			},
+			{
+				"name": "openid",
+				"type": "String"
+			},
+			{
+				"name": "unionid",
+				"type": "String"
+			},
+			{
+				"name": "templateid",
+				"type": "String"
+			},
+			{
+				"name": "wechatstatuscode",
+				"type": "String"
+			},
+			{
+				"name": "wechatstatusmsg",
+				"type": "String"
+			},
+			{
+				"name": "journeyid",
+				"type": "String"
+			},
+			{
+				"name": "journeyname",
+				"type": "String"
+			},
+			{
+				"name": "version",
+				"type": "String"
+			},
+			{
+				"name": "activityid",
+				"type": "String"
+			},
+			{
+				"name": "activityname",
+				"type": "String"
+			},
+			{
+				"name": "contacttype",
+				"type": "String"
+			},
+			{
+				"name": "contactkey",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "createdon",
+				"type": "String"
+			},
+			{
+				"name": "sendon",
+				"type": "String"
+			},
+			{
+				"name": "sfkey",
+				"type": "String"
+			},
+			{
+				"name": "interactionid",
+				"type": "String"
+			},
+			{
+				"name": "activityinstanceid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

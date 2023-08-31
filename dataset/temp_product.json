@@ -1,0 +1,203 @@
+{
+	"name": "temp_product",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/New_KGO/Raw_product"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_product_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "parent_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "parent_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "source_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "channel_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "freight_template_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "operation_area_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "version_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "audit_message",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "data_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "price_level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "first_shelf_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "sub_type_of_product",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "type_of_product",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "can_sale",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "can_sale_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ref_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "category_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "brand_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "third_merchant_product_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pricing_method",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ext_field1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "can_trace",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_product"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,67 @@
+{
+	"name": "temp_crm_vip_encryptdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM_VIP_ENCRYPTDATA"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "vip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "addr",
+				"type": "nvarchar"
+			},
+			{
+				"name": "real_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nick_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "en_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_at",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_crm_vip_encryptdata"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

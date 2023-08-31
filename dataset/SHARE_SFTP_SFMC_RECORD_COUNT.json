@@ -1,0 +1,191 @@
+{
+	"name": "SHARE_SFTP_SFMC_RECORD_COUNT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtFileShare",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"fileName": {
+					"value": "@concat('BatchHeader_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd')",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Azure_Coupon_Record",
+				"type": "String"
+			},
+			{
+				"name": "Azure_CS_Return",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Customer_CarPark",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Customer_Tier_Upgrade",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Digit_Click",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Digit_NewKGO_Browse",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Digit_Page_Browse",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Digit_Share",
+				"type": "String"
+			},
+			{
+				"name": "Azure_K11_Customer_KDP",
+				"type": "String"
+			},
+			{
+				"name": "Azure_K11_Gift_Record",
+				"type": "String"
+			},
+			{
+				"name": "Azure_K11_Transaction",
+				"type": "String"
+			},
+			{
+				"name": "Azure_ManualTag",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Member_QRCode_Scan",
+				"type": "String"
+			},
+			{
+				"name": "Azure_NewKGO_Lottery",
+				"type": "String"
+			},
+			{
+				"name": "Azure_OldKGO_Shopping_Cart",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Online_Transaction_Details",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Personal_Family_Details",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Personal_PIPL",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Personal_Profile",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Personal_Profile_Extra",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Personal_Special_Card",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_App",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Area",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Channel",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Coupon",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Event",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Page",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Product",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Promotion",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_QRCode",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Site",
+				"type": "String"
+			},
+			{
+				"name": "Azure_Ref_Tenant",
+				"type": "String"
+			},
+			{
+				"name": "K11_Behavior_tag",
+				"type": "String"
+			},
+			{
+				"name": "K11_Fact_tag",
+				"type": "String"
+			},
+			{
+				"name": "K11_Operation_tag",
+				"type": "String"
+			},
+			{
+				"name": "Shareable_Behavior_Tag",
+				"type": "String"
+			},
+			{
+				"name": "Shareable_Fact_Tag",
+				"type": "String"
+			},
+			{
+				"name": "Shareable_Operation_Tag",
+				"type": "String"
+			},
+			{
+				"name": "RecordDate",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

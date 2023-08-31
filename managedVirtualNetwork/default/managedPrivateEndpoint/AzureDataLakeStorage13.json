@@ -1,0 +1,10 @@
+{
+	"name": "AzureDataLakeStorage13",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/eac1f749-a155-4fa1-ab16-e26d0a1e4c75/resourceGroups/Group-CDM-PROD/providers/Microsoft.Storage/storageAccounts/1crmgrouprawprod",
+		"groupId": "dfs",
+		"fqdns": [
+			"1crmgrouprawprod.dfs.core.chinacloudapi.cn"
+		]
+	}
+}

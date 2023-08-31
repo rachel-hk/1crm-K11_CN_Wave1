@@ -1,0 +1,16 @@
+{
+	"name": "GroupCRM",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=10.71.129.137;initial catalog=prc_crmplus_upload;user id=prc_crmplus_upload",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkMzYxNWI5YS01NGVmLTQ5MzItOGY4MC05Njg0MjYyNmE5ZmYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "1crm-k11-ir-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

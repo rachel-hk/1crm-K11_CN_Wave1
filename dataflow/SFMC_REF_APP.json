@@ -1,0 +1,111 @@
+{
+	"name": "SFMC_REF_APP",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_APP",
+						"type": "DatasetReference"
+					},
+					"name": "REFAPP"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_REF_App",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          App_Unique_ID as integer,",
+				"          Account_ID as long,",
+				"          App_ID as long,",
+				"          Area_ID as integer,",
+				"          App_Name as string,",
+				"          App_Period as integer,",
+				"          Start_Time as timestamp,",
+				"          End_Time as timestamp,",
+				"          Landing_Page_Url as string,",
+				"          App_Budget as integer,",
+				"          Event_Url as string,",
+				"          App_Desc as string,",
+				"          App_Status as integer,",
+				"          Trigger_Switch as integer,",
+				"          Debug_Switch as integer,",
+				"          App_Create_Time as timestamp,",
+				"          App_Update_Time as timestamp,",
+				"          Coupon_Count as integer,",
+				"          App_Type as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFAPP",
+				"REFAPP filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterLatestData",
+				"REFAPP aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Ref_App',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

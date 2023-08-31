@@ -1,0 +1,17 @@
+{
+	"name": "1crmTagMgmtFileShareSSIR",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureFileStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=1crmk11rawprod;EndpointSuffix=core.chinacloudapi.cn;",
+			"fileShare": "1crm-k11-prod",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhZjJmMTI1OC0zMWRhLTQyYzQtODBlZi04M2MxNGFlMmU1NzMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "1crm-k11-ir-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

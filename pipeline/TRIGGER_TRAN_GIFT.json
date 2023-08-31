@@ -1,0 +1,43 @@
+{
+	"name": "TRIGGER_TRAN_GIFT",
+	"properties": {
+		"activities": [
+			{
+				"name": "11_REF_EVENT",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "11_REF_EVENT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "21_TRAN_GIFT_RECORD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "11_REF_EVENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "21_TRAN_GIFT_RECORD",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:47:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

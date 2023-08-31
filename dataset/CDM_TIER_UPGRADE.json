@@ -1,0 +1,132 @@
+{
+	"name": "CDM_TIER_UPGRADE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Tier_Upgrade_Unique_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Open_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tier_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_ID_Old",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tier_Name_Old",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Upgrade_Origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_At",
+				"type": "date"
+			},
+			{
+				"name": "Update_At",
+				"type": "date"
+			},
+			{
+				"name": "Submit_At",
+				"type": "date"
+			},
+			{
+				"name": "Reach_At",
+				"type": "date"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "VIP_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VIP_Code_Old",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Upgrade_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "CDM_TIER_UPGRADE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

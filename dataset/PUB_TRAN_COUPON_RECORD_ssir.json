@@ -1,0 +1,205 @@
+{
+	"name": "PUB_TRAN_COUPON_RECORD_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Coupon_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Acquire_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Acquaire_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Consume_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Open_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Give",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Give_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Give_Open_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Consume_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Staff_Open_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Delete_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Consume_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Consume_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Consume_Store_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Consume_App_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Consume_Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Consume_Origin_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Give_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Location_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Exchange_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "TRAN_COUPON_RECORD"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

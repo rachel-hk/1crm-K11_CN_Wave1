@@ -1,0 +1,232 @@
+{
+	"name": "raw_mall_order_goods_map_ssir",
+	"properties": {
+		"description": "@concat('[MALL].[MALL_ORDER_GOODS_MAP]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_KGO/mall"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MALL/MALL_ORDER_GOODS_MAP",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "order_id",
+				"type": "INT32"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "mer_id",
+				"type": "INT32"
+			},
+			{
+				"name": "store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_id",
+				"type": "INT32"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_id",
+				"type": "INT64"
+			},
+			{
+				"name": "goods_map_id",
+				"type": "INT32"
+			},
+			{
+				"name": "goods_academy_id",
+				"type": "INT32"
+			},
+			{
+				"name": "goods_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_sn",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_icon_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_num",
+				"type": "INT64"
+			},
+			{
+				"name": "goods_type",
+				"type": "INT32"
+			},
+			{
+				"name": "goods_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "coupon_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "kpoint_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "kdp_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "prom_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "real_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "spec_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "spec_key_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_goods_price",
+				"type": "UTF8"
+			},
+			{
+				"name": "channel_id",
+				"type": "INT32"
+			},
+			{
+				"name": "pay_type",
+				"type": "INT64"
+			},
+			{
+				"name": "is_comment",
+				"type": "INT32"
+			},
+			{
+				"name": "prom_type",
+				"type": "INT32"
+			},
+			{
+				"name": "prom_id",
+				"type": "INT32"
+			},
+			{
+				"name": "gift_id",
+				"type": "INT64"
+			},
+			{
+				"name": "send_status",
+				"type": "INT32"
+			},
+			{
+				"name": "card_status",
+				"type": "INT32"
+			},
+			{
+				"name": "refund_id",
+				"type": "INT32"
+			},
+			{
+				"name": "delivery_id",
+				"type": "INT32"
+			},
+			{
+				"name": "profit_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "sku",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_gift",
+				"type": "INT32"
+			},
+			{
+				"name": "unvalid",
+				"type": "INT32"
+			},
+			{
+				"name": "is_member_price",
+				"type": "INT32"
+			},
+			{
+				"name": "invoice",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_kpoint",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_kpoint_type",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_spoint",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_kdp",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,83 @@
+{
+	"name": "TRIGGER_CDM_TABLE",
+	"properties": {
+		"activities": [
+			{
+				"name": "01_TRIGGER_REF_AREA",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "01_TRIGGER_REF_AREA",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "04_REF_CUSTOMER_LEVEL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "01_TRIGGER_REF_AREA",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "04_REF_CUSTOMER_LEVEL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12A_CDM_CUSTOMER_MAPPING",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "04_REF_CUSTOMER_LEVEL",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12A_CDM_CUSTOMER_MAPPING",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12B_CDM_PERSONAL_PROFILE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "12A_CDM_CUSTOMER_MAPPING",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12B_CDM_PERSONAL_PROFILE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T17:09:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

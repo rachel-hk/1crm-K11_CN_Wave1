@@ -1,0 +1,731 @@
+{
+	"name": "SHARE_SFTP_K11_AUTO_TAG_FACT_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtFileShareSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"fileName": {
+					"value": "@concat('K11_Fact_Auto_Tag_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd')",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "String"
+			},
+			{
+				"name": "Member_ID",
+				"type": "String"
+			},
+			{
+				"name": "Union_ID",
+				"type": "String"
+			},
+			{
+				"name": "Personal_Annual_Income",
+				"type": "String"
+			},
+			{
+				"name": "Family_Annual_Income",
+				"type": "String"
+			},
+			{
+				"name": "K11_Salesperson",
+				"type": "String"
+			},
+			{
+				"name": "K11_Atelier",
+				"type": "String"
+			},
+			{
+				"name": "Kids1_Age",
+				"type": "String"
+			},
+			{
+				"name": "Kids2_Age",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Name_Cash",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Name_Gift",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Name_Discount",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Type_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Type_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Type_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Type_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Type_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_Type_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_No_Cash",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_No_Gift",
+				"type": "String"
+			},
+			{
+				"name": "Avail_Coupons_No_Discount",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Cash_1M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Cash_3M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Cash_6M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Cash_12M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Gift_1M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Gift_3M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Gift_6M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Gift_12M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Discount_1M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Discount_3M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Discount_6M",
+				"type": "String"
+			},
+			{
+				"name": "Acquire_Sources_Coupons_Discount_12M",
+				"type": "String"
+			},
+			{
+				"name": "Last_Acquire_Date_Coupons_Cash",
+				"type": "String"
+			},
+			{
+				"name": "Last_Acquire_Date_Coupons_Gift",
+				"type": "String"
+			},
+			{
+				"name": "Last_Acquire_Date_Coupons_Discount",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Cash_1M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Cash_3M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Cash_6M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Cash_12M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Gift_1M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Gift_3M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Gift_6M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Gift_12M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Discount_1M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Discount_3M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Discount_6M",
+				"type": "String"
+			},
+			{
+				"name": "No_Coupon_Used_Discount_12M",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Coupons_Cash",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Coupons_Gift",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Coupons_Discount",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expiry_Date_Coupon_Cash",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expiry_Date_Coupon_Gift",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expiry_Date_Coupon_Discount",
+				"type": "String"
+			},
+			{
+				"name": "Coupons_No_Expired_Soonest_Coupon_Expiry_Date_Cash",
+				"type": "String"
+			},
+			{
+				"name": "Coupons_No_Expired_Soonest_Coupon_Expiry_Date_Gift",
+				"type": "String"
+			},
+			{
+				"name": "Coupons_No_Expired_Soonest_Coupon_Expiry_Date_Discount",
+				"type": "String"
+			},
+			{
+				"name": "Actv_Earned_Kdollar_1M",
+				"type": "String"
+			},
+			{
+				"name": "Actv_Earned_Kdollar_3M",
+				"type": "String"
+			},
+			{
+				"name": "Actv_Earned_Kdollar_6M",
+				"type": "String"
+			},
+			{
+				"name": "Actv_Earned_Kdollar_12M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_General_1M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_General_3M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_General_6M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_General_12M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Gold_1M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Gold_3M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Gold_6M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Gold_12M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Black_1M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Black_3M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Black_6M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_Black_12M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_ExpBlack_1M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_ExpBlack_3M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_ExpBlack_6M",
+				"type": "String"
+			},
+			{
+				"name": "Total_Acquired_Pts_ExpBlack_12M",
+				"type": "String"
+			},
+			{
+				"name": "Used_Pts_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Used_Pts_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Used_Pts_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Used_Pts_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Used_Pts_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Used_Pts_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Current_Pts_Avail_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Current_Pts_Avail_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Current_Pts_Avail_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Current_Pts_Avail_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Current_Pts_Avail_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Current_Pts_Avail_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SHK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SHK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SHK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SHK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_GZK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_GZK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_GZK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_GZK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHHKK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHHKK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHHKK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHHKK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHGGK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHGGK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHGGK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_WHGGK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_TJK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_TJK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_TJK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_TJK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SYK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SYK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SYK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Sce_Used_Pts_SYK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SHK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SHK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SHK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SHK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_GZK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_GZK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_GZK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_GZK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHHKK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHHKK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHHKK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHHKK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHGGK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHGGK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHGGK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_WHGGK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_TJK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_TJK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_TJK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_TJK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SYK11_1M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SYK11_3M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SYK11_6M",
+				"type": "String"
+			},
+			{
+				"name": "Highest_Pts_SYK11_12M",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Date_Pts_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Date_Pts_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Date_Pts_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Date_Pts_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Date_Pts_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Date_Pts_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Pts_Amount_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Pts_Amount_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Pts_Amount_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Pts_Amount_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Pts_Amount_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Soonest_Expired_Pts_Amount_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Aquired_Date_Pts_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Aquired_Date_Pts_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Aquired_Date_Pts_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Aquired_Date_Pts_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Aquired_Date_Pts_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Aquired_Date_Pts_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Pts_SHK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Pts_GZK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Pts_WHHKK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Pts_WHGGK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Pts_TJK11",
+				"type": "String"
+			},
+			{
+				"name": "Last_Used_Date_Pts_SYK11",
+				"type": "String"
+			},
+			{
+				"name": "Upgrade_Date_General",
+				"type": "String"
+			},
+			{
+				"name": "Upgrade_Date_Gold",
+				"type": "String"
+			},
+			{
+				"name": "Upgrade_Date_Black",
+				"type": "String"
+			},
+			{
+				"name": "Upgrade_Date_Exp_Black",
+				"type": "String"
+			},
+			{
+				"name": "Expire_Date_General",
+				"type": "String"
+			},
+			{
+				"name": "Expire_Date_Gold",
+				"type": "String"
+			},
+			{
+				"name": "Expire_Date_Black",
+				"type": "String"
+			},
+			{
+				"name": "Expire_Date_Exp_Black",
+				"type": "String"
+			},
+			{
+				"name": "Days_Remained_Expiry_General",
+				"type": "String"
+			},
+			{
+				"name": "Days_Remained_Expiry_Gold",
+				"type": "String"
+			},
+			{
+				"name": "Days_Remained_Expiry_Black",
+				"type": "String"
+			},
+			{
+				"name": "Days_Remained_Expiry_Exp_Black",
+				"type": "String"
+			},
+			{
+				"name": "Last_Parking_Time",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

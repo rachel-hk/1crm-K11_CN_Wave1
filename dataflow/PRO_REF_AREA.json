@@ -1,0 +1,137 @@
+{
+	"name": "PRO_REF_AREA",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_area",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFAREA"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "REF_AREA",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          name as string,",
+				"          reg_protocol_url as string,",
+				"          policy_version as string,",
+				"          alias_name as string,",
+				"          sp as decimal(38,18),",
+				"          kp as decimal(38,18),",
+				"          desc as string,",
+				"          site_id as integer,",
+				"          create_at as integer,",
+				"          update_at as integer,",
+				"          deleted as integer,",
+				"          fenze_name as string,",
+				"          area_group as integer,",
+				"          partner_code as string,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFAREA",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          name,",
+				"          reg_protocol_url,",
+				"          policy_version,",
+				"          alias_name,",
+				"          sp,",
+				"          kp,",
+				"          desc,",
+				"          site_id,",
+				"          create_at,",
+				"          update_at,",
+				"          deleted,",
+				"          fenze_name,",
+				"          area_group,",
+				"          partner_code",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_At = toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestREFAREA filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Area_ID as integer,",
+				"          Area_Name as string,",
+				"          Area_Alias as string,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Delete as integer,",
+				"          Area_Grp as integer,",
+				"          Partner_Code as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['TRUNCATE TABLE K11_PRO.REF_AREA'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Area_ID = id,",
+				"          Area_Name = name,",
+				"          Area_Alias = alias_name,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Delete = deleted,",
+				"          Area_Grp = area_group,",
+				"          Partner_Code = partner_code,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

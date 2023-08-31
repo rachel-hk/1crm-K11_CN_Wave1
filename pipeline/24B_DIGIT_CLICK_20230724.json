@@ -1,0 +1,74 @@
+{
+	"name": "24B_DIGIT_CLICK_20230724",
+	"properties": {
+		"activities": [
+			{
+				"name": "PUB_DIGIT_CLICK",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_DIGIT_CLICK_20230724",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_DIGIT_CLICK",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "PUB_DIGIT_CLICK",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "Dedup_DIGIT_CLICK"
+				},
+				"linkedServiceName": {
+					"referenceName": "1crmTagMgmtSynapseProd",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "PRO_DIGIT_CLICK_20230724",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_DIGIT_CLICK_20230724",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-24T10:21:50Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

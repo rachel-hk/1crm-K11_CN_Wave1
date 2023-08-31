@@ -1,0 +1,16 @@
+{
+	"name": "1crmManualTagMgmtProd",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureMySql",
+		"typeProperties": {
+			"connectionString": "server=1crm-k11-manual-tag-mysql-prod.mysql.database.chinacloudapi.cn;port=3306;database=loyalty_datahub_v1_20220721;uid=manualtag_mysqladmin;sslmode=1;usesystemtruststore=0",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5YTRkNjJmZC01NDdlLTQ0NDAtYmMyMC1mYzI5OWE5YmUyNjMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "1crm-k11-ir-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

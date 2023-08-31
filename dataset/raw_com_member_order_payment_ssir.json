@@ -1,0 +1,66 @@
+{
+	"name": "raw_com_member_order_payment_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_ORDER_PAYMENT]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_ORDER_PAYMENT",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "type",
+				"type": "UTF8"
+			},
+			{
+				"name": "type_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "kpoint",
+				"type": "INT32"
+			},
+			{
+				"name": "price",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_real",
+				"type": "INT32"
+			},
+			{
+				"name": "is_free",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

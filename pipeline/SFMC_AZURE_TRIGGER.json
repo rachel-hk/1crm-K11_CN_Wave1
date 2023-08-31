@@ -1,0 +1,383 @@
+{
+	"name": "SFMC_AZURE_TRIGGER",
+	"properties": {
+		"activities": [
+			{
+				"name": "ChatLabsIncomingSMSRecord",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "CL_ID_Mapping",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsIncomingSMSRecord",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsMPActivityLog",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsIncomingSMSRecord",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsMPActivityLog",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsOABindingManager",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsMPActivityLog",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsOABindingManager",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsOABroadcastLog",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsOABindingManager",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsOABroadcastLog",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAFollower",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsOABroadcastLog",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAFollower",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsOAFollowerUserLocation",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAFollower",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsOAFollowerUserLocation",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsOAResponseLog",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsOAFollowerUserLocation",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsOAResponseLog",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsOATag",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsOAResponseLog",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsOATag",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsOATemplateLog",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsOATag",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsOATemplateLog",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAUserResponseAudio",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsOATemplateLog",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAUserResponseAudio",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAUserResponseImage",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAUserResponseAudio",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAUserResponseImage",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAUserResponseMenuClick",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAUserResponseImage",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAUserResponseMenuClick",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAUserResponseQrScans",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAUserResponseMenuClick",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAUserResponseQrScans",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAUserResponseText",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAUserResponseQrScans",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAUserResponseText",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatlabsOAUserResponseVideo",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAUserResponseText",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatlabsOAUserResponseVideo",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsRequestLogs",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatlabsOAUserResponseVideo",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsRequestLogs",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsSMSActivityLogs",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsRequestLogs",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsSMSActivityLogs",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ChatLabsSMSOptOutsRecord",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "ChatLabsSMSActivityLogs",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ChatLabsSMSOptOutsRecord",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CL_ID_Mapping",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CL_ID_Mapping",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-30T01:29:32Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

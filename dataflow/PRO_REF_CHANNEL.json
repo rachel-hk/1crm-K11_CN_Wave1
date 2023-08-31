@@ -1,0 +1,102 @@
+{
+	"name": "PRO_REF_CHANNEL",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_mon_channel",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFCHANNEL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_CHANNEL",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          app_id as long,",
+				"          channel_key as string,",
+				"          channel_name as string,",
+				"          channel_level as integer,",
+				"          mini_path as string,",
+				"          status as integer,",
+				"          operator_id as long,",
+				"          createtime as integer,",
+				"          updatetime as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFCHANNEL",
+				"FilterLatest select(skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          BU_Source = 'K11 PRC',",
+				"          Create_Time = toTimestamp((toInteger(toString(createtime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_Time = toTimestamp((toInteger(toString(updatetime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestREFCHANNEL filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Channel_ID = id,",
+				"          App_ID = app_id,",
+				"          Channel_Key = channel_key,",
+				"          Channel_Name = channel_name,",
+				"          Channel_Level = channel_level,",
+				"          Mini_Path = mini_path,",
+				"          Channel_Status = status,",
+				"          Create_Time,",
+				"          Update_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          BU_Source",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

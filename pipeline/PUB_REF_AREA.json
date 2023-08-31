@@ -1,0 +1,179 @@
+{
+	"name": "PUB_REF_AREA",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Data from Processing to Published",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "TRUNCATE TABLE K11_PUB.REF_AREA",
+						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"Area_ID"
+							],
+							"interimSchemaName": ""
+						},
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Area_ID",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Area_ID",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Area_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Area_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Area_Alias",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Area_Alias",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Create_At",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Create_At",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Update_At",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Update_At",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Is_Delete",
+									"type": "Byte"
+								},
+								"sink": {
+									"name": "Is_Delete",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"name": "Area_Grp",
+									"type": "Byte"
+								},
+								"sink": {
+									"name": "Area_Grp",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"name": "Partner_Code",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Partner_Code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Start_Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Start_Date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "End_Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "End_Date",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Is_Current",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Is_Current",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "REF_AREA_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "PUB_REF_AREA_SSIR",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Published"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-03T02:24:52Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

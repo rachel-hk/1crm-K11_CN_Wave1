@@ -1,0 +1,145 @@
+{
+	"name": "DIGIT_SHARE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Share_Unique_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "App_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Session_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Visitor_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Page_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Page_Title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Share_Page_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Follow_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Follow_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Follow_Index",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Share_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "From_Share_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Share_Level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Share_From_User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Pv_From_Share",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Share_By_Other",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "DIGIT_SHARE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

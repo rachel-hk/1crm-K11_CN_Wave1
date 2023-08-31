@@ -1,0 +1,86 @@
+{
+	"name": "ChatlabsOAUserResponseMenuClick",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "chatlabsid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "uniqueid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "openid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "menuname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "submenuname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "countofclicks",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createdateandtime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unionid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "modifiedon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sfkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "ChatlabsOAUserResponseMenuClick"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

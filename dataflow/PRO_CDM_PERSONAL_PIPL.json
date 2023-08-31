@@ -1,0 +1,250 @@
+{
+	"name": "PRO_CDM_PERSONAL_PIPL",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PRE_CDM_PERSONAL_PIPL",
+						"type": "DatasetReference"
+					},
+					"name": "IngestPRECDMPERSONALFAMILYDETAILS"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_PERSONAL_PIPL",
+						"type": "DatasetReference"
+					},
+					"name": "ExistingCDMPERSONALFAMILYDETAILS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_CDM_PERSONAL_PIPL",
+						"type": "DatasetReference"
+					},
+					"name": "CDMPERSONALPIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddHashInput"
+				},
+				{
+					"name": "NewAndUpdated",
+					"description": "添加用于在源之间匹配数据的列"
+				},
+				{
+					"name": "AddKey",
+					"description": "通过步骤 1 从 1 开始添加新密钥 SGKey"
+				},
+				{
+					"name": "JoinWithMaxSurrogateKey",
+					"description": "“AddKey”和“GetMaxSurrogateKey”上的 左外 联接"
+				},
+				{
+					"name": "AddDimensionColumn"
+				},
+				{
+					"name": "DropUnwantedColsInput"
+				},
+				{
+					"name": "MarkAsInsert"
+				},
+				{
+					"name": "UnionAllData",
+					"description": "合并转换“MarkAsInsert, DropUnwantedColsInput”中的行"
+				},
+				{
+					"name": "FilterForActive"
+				},
+				{
+					"name": "AddHashExisting"
+				},
+				{
+					"name": "FilterForUpdated",
+					"description": "添加用于在源之间匹配数据的列"
+				},
+				{
+					"name": "GetMaxSurrogateKey",
+					"description": "通过“id_hash”生成列“MaxSurrogateKey”来聚合数据"
+				},
+				{
+					"name": "UpdateOcsolete"
+				},
+				{
+					"name": "MarkAsUpdate"
+				},
+				{
+					"name": "DropUnwantedColumn"
+				},
+				{
+					"name": "Dedup"
+				},
+				{
+					"name": "DorpCount"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     PrimaryKey as string (Customer_UID),",
+				"     Columns as string ('BU_Source,Policy_Ver,Account_ID,Create_At,Update_At,Is_Deleted')",
+				"}",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          Policy_Ver as integer,",
+				"          Account_ID as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestPRECDMPERSONALFAMILYDETAILS",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          Policy_Ver as integer,",
+				"          Account_ID as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> ExistingCDMPERSONALFAMILYDETAILS",
+				"IngestPRECDMPERSONALFAMILYDETAILS derive(id_hash = $PrimaryKey,",
+				"          column_hash = md5(byNames(split($Columns,',')))) ~> AddHashInput",
+				"AddHashInput, AddHashExisting exists(AddHashInput@id_hash == AddHashExisting@id_hash",
+				"     && AddHashInput@column_hash == AddHashExisting@column_hash,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> NewAndUpdated",
+				"NewAndUpdated keyGenerate(output(SGKey as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> AddKey",
+				"AddKey, GetMaxSurrogateKey join(AddHashInput@id_hash == AddHashInput@id_hash,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'right')~> JoinWithMaxSurrogateKey",
+				"JoinWithMaxSurrogateKey derive(Is_Current = 1,",
+				"          End_Date = toTimestamp(toString(null()))) ~> AddDimensionColumn",
+				"AddDimensionColumn select(mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Policy_Ver,",
+				"          Account_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          id_hash = AddHashInput@id_hash,",
+				"          column_hash,",
+				"          SGKey,",
+				"          id_hash = GetMaxSurrogateKey@id_hash,",
+				"          MaxSurrogateKey,",
+				"          Is_Current,",
+				"          End_Date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColsInput",
+				"DropUnwantedColsInput alterRow(insertIf(true())) ~> MarkAsInsert",
+				"MarkAsInsert, DropUnwantedColumn union(byName: true)~> UnionAllData",
+				"ExistingCDMPERSONALFAMILYDETAILS filter(toInteger(byName('Is_Current')) ==1) ~> FilterForActive",
+				"FilterForActive derive(id_hash = $PrimaryKey,",
+				"          column_hash = md5(byNames(split($Columns,',')))) ~> AddHashExisting",
+				"AddHashExisting, NewAndUpdated exists(AddHashExisting@id_hash == AddHashInput@id_hash,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> FilterForUpdated",
+				"AddHashExisting aggregate(groupBy(id_hash),",
+				"     MaxSurrogateKey = max(toInteger(byName('SGKey')))) ~> GetMaxSurrogateKey",
+				"FilterForUpdated derive(Is_Current = 0,",
+				"          End_Date = currentUTC()) ~> UpdateOcsolete",
+				"UpdateOcsolete alterRow(updateIf(true())) ~> MarkAsUpdate",
+				"MarkAsUpdate select(mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Policy_Ver,",
+				"          Account_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          id_hash,",
+				"          column_hash",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumn",
+				"UnionAllData aggregate(groupBy(Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Policy_Ver,",
+				"          Account_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Deleted,",
+				"          Is_Current),",
+				"     count = count()) ~> Dedup",
+				"Dedup select(mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Policy_Ver,",
+				"          Account_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Deleted,",
+				"          Is_Current",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DorpCount",
+				"DorpCount sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Policy_Ver,",
+				"          Account_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Deleted,",
+				"          Is_Current",
+				"     )) ~> CDMPERSONALPIPL"
+			]
+		}
+	}
+}

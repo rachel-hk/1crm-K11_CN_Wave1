@@ -1,0 +1,62 @@
+{
+	"name": "raw_mon_event_param_value_log_ssir",
+	"properties": {
+		"description": "@concat('[CRM_TOOL].[MON_EVENT_PARAM_VALUE_LOG]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm_tool"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM_TOOL/MON_EVENT_PARAM_VALUE_LOG",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "dim_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "app_id",
+				"type": "INT64"
+			},
+			{
+				"name": "event_id",
+				"type": "INT32"
+			},
+			{
+				"name": "param_id",
+				"type": "INT32"
+			},
+			{
+				"name": "value_id",
+				"type": "INT64"
+			},
+			{
+				"name": "value",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "createtime",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

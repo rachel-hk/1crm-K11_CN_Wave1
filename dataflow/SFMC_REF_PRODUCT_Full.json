@@ -1,0 +1,165 @@
+{
+	"name": "SFMC_REF_PRODUCT_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_PRODUCT",
+						"type": "DatasetReference"
+					},
+					"name": "REFPRODUCT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_REF_PRODUCT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake",
+					"description": "Export data to TEMP_SFMC_REF_PRODUCT"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "TruncateSpace"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Product_ID as string,",
+				"          Product_SerialCode as string,",
+				"          Source_BU as string,",
+				"          Product_Source as string,",
+				"          Merchant_ID as long,",
+				"          Merchant_Product_ID as long,",
+				"          Parent_Code as string,",
+				"          Parent_ID as long,",
+				"          CN_Name as string,",
+				"          EN_Name as string,",
+				"          Subtitle_Lan2 as string,",
+				"          Product_Subtitle as string,",
+				"          Source_Type as string,",
+				"          Product_Status as string,",
+				"          Channel_Code as string,",
+				"          Freight_Template_ID as long,",
+				"          Oper_Area_Code as string,",
+				"          Is_Available as integer,",
+				"          Company_ID as long,",
+				"          Audit_Message as string,",
+				"          Store_ID as string,",
+				"          Data_Type as string,",
+				"          Price_LV as string,",
+				"          First_Shelf_Time as timestamp,",
+				"          Sub_Type_Product as string,",
+				"          Type_Of_Product as string,",
+				"          Can_Sale as string,",
+				"          Can_Sale_Type as integer,",
+				"          Ref_ID as long,",
+				"          Brand_ID as long,",
+				"          Pricing_Method as integer,",
+				"          Return_Days as integer,",
+				"          Replace_Days as integer,",
+				"          Product_Remark as string,",
+				"          Product_Type as string,",
+				"          Guarantee_Days as integer,",
+				"          Sale_Calc_Unit_ID as long,",
+				"          Is_Inner_Supplier as integer,",
+				"          Use_Type as integer,",
+				"          Machining_Type as string,",
+				"          Combine_Type as string,",
+				"          Place_Origin_Name as string,",
+				"          Fast_Code as string,",
+				"          Mp_Model as long,",
+				"          Cate_Full_ID_Path as string,",
+				"          Is_Invoice as string,",
+				"          Is_Force_Invoice as string,",
+				"          Is_Vat_Invoice as string,",
+				"          Expiry_Date_Type as string,",
+				"          Expiry_Date_Value as integer,",
+				"          Expiry_Date_Unit as integer,",
+				"          Expiry_Date_Time as timestamp,",
+				"          Card_Value as decimal(18,0),",
+				"          Batch_Strategy_ID as long,",
+				"          Outbound_Strategy as integer,",
+				"          Pur_Limit_Type as integer,",
+				"          Pur_Limit_Interval_Type as integer,",
+				"          Pur_Limit_Interval as integer,",
+				"          Pur_Limit_Date_Start as timestamp,",
+				"          Pur_Limit_Date_End as timestamp,",
+				"          Pur_Limit_Per_User as integer,",
+				"          Auto_Refund as integer,",
+				"          Selling_Points as string,",
+				"          Is_Drop_Ship as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Trade_Cate as string,",
+				"          SubTrade_Cate as string,",
+				"          Brand_Style as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFPRODUCT",
+				"REFPRODUCT derive(Product_Remark = replace(regexReplace(regexReplace(Product_Remark, \"\\r\", \"\"),\"\\n\",\"\"),'\"',\"'\"),",
+				"          CN_Name = replace(replace(CN_Name,\"|\",\"\"),'\"',\"'\"),",
+				"          Product_UID = concat(Product_Source, toString(Product_ID))) ~> TruncateSpace",
+				"TruncateSpace aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Ref_Product',",
+				"          Insert_Date = currentUTC()) ~> AddColumns",
+				"TruncateSpace sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

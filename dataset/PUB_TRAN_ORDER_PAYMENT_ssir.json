@@ -1,0 +1,98 @@
+{
+	"name": "PUB_TRAN_ORDER_PAYMENT_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Payment_UID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Payment_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Type_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Payment_Kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Pay_Price",
+				"type": "decimal",
+				"precision": 30,
+				"scale": 4
+			},
+			{
+				"name": "Is_Real",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Free",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "TRAN_ORDER_PAYMENT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,262 @@
+{
+	"name": "raw_mall_order_ssir",
+	"properties": {
+		"description": "@concat('[MALL].[MALL_ORDER]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_KGO/mall"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MALL/MALL_ORDER",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "mer_id",
+				"type": "INT32"
+			},
+			{
+				"name": "mch_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "version",
+				"type": "INT32"
+			},
+			{
+				"name": "store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_id",
+				"type": "INT32"
+			},
+			{
+				"name": "user_area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "user_level",
+				"type": "INT32"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "open_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_status",
+				"type": "INT32"
+			},
+			{
+				"name": "shipping_status",
+				"type": "INT32"
+			},
+			{
+				"name": "pay_status",
+				"type": "INT32"
+			},
+			{
+				"name": "refund_status",
+				"type": "INT32"
+			},
+			{
+				"name": "card_status",
+				"type": "INT32"
+			},
+			{
+				"name": "profit_status",
+				"type": "INT32"
+			},
+			{
+				"name": "invoice_status",
+				"type": "INT32"
+			},
+			{
+				"name": "invoice_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "pay_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "pay_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "shipping_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "kpoint_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "kdp_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "coupon_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "prom_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "real_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "discount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "shipping_time",
+				"type": "INT32"
+			},
+			{
+				"name": "confirm_time",
+				"type": "INT32"
+			},
+			{
+				"name": "pay_time",
+				"type": "INT64"
+			},
+			{
+				"name": "get_point",
+				"type": "INT64"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "prom_id",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_kpoint",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_kpoint_type",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_spoint",
+				"type": "INT32"
+			},
+			{
+				"name": "cost_kdp",
+				"type": "INT32"
+			},
+			{
+				"name": "consignee",
+				"type": "UTF8"
+			},
+			{
+				"name": "mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_sn",
+				"type": "UTF8"
+			},
+			{
+				"name": "shipping_way",
+				"type": "INT32"
+			},
+			{
+				"name": "pay_expired_time",
+				"type": "INT64"
+			},
+			{
+				"name": "confirm_expired_time",
+				"type": "INT64"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "refund_id",
+				"type": "INT32"
+			},
+			{
+				"name": "channel_id",
+				"type": "INT32"
+			},
+			{
+				"name": "return_time",
+				"type": "INT32"
+			},
+			{
+				"name": "order_from",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "time_of_day",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_hour",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

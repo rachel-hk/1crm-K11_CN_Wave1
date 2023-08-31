@@ -1,0 +1,34 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_SPECIAL_CARD_TYPE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "card_type",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "special_card_type_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_date",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "MANUAL_TAG_MEM_MEMBER_SPECIAL_CARD_TYPE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

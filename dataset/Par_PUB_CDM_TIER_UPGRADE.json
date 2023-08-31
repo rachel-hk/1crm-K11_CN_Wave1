@@ -1,0 +1,128 @@
+{
+	"name": "Par_PUB_CDM_TIER_UPGRADE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('PUB_CDM_TIER_UPGRADE',formatDateTime(utcnow(),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Tier_Upgrade_Unique_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Area_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Member_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "BU_Source",
+				"type": "UTF8"
+			},
+			{
+				"name": "Account_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Open_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tier_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Tier_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tier_ID_Old",
+				"type": "INT32"
+			},
+			{
+				"name": "Tier_Name_Old",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tier_Remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "Upgrade_Origin",
+				"type": "INT32"
+			},
+			{
+				"name": "Create_At",
+				"type": "DATE"
+			},
+			{
+				"name": "Update_At",
+				"type": "DATE"
+			},
+			{
+				"name": "Submit_At",
+				"type": "DATE"
+			},
+			{
+				"name": "Reach_At",
+				"type": "DATE"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "VIP_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "VIP_Code_Old",
+				"type": "UTF8"
+			},
+			{
+				"name": "Store_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Upgrade_Type",
+				"type": "INT32"
+			},
+			{
+				"name": "Start_Date",
+				"type": "INT96"
+			},
+			{
+				"name": "End_Date",
+				"type": "INT96"
+			},
+			{
+				"name": "Is_Current",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

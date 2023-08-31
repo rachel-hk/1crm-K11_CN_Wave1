@@ -1,0 +1,250 @@
+{
+	"name": "PUB_REF_PRODUCT_CATEGORY_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Cate_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Buckle_Point",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Category_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_Desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Full_ID_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Full_Name_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Highlight",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Visible",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Leaves",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Product_Level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "List_Sort",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Merchant_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Cate_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Parent_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Third_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "First_Category_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Enable_Add_Att",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "High_Price",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Low_Price",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "High_Gross_Margin",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Low_Gross_Margin",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Tax_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Available",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Version_No",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_Userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Create_Username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Userip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Usermac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Create_Time_Db",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Update_Username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Update_Userip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Update_Usermac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time_Db",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Company_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Store_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Ref_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Full_Name_Path_Lan2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name_Lan2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_PRODUCT_CATEGORY"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

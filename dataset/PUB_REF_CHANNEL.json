@@ -1,0 +1,85 @@
+{
+	"name": "PUB_REF_CHANNEL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Channel_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_Key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_Level",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Mini_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_CHANNEL"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

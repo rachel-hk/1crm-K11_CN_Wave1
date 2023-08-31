@@ -1,0 +1,263 @@
+{
+	"name": "LOYALTY_KDP_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "KDP_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Partner_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KDP_Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Partner_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KP_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KDP_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cancel_KDP_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KP_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Frozen_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Used_Kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "KDP_Amount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Bonus_Point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Redeem_Cash",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "KDP_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "KDP_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KDP_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Try_Count",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Scan_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Expire_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Cancel_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Partner_Campaign_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Partner_Campaign_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Event_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tier_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Special_Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Pay_Type_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mall_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Returned",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Return_Origin_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Kpoint_Channel",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Kpoint_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Discount_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "GV_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "Sales_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Kpoint_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "FZ_Channel",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Confirm",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bonus_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Used_KDP",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "LOYALTY_KDP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

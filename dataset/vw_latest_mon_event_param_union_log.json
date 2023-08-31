@@ -1,0 +1,267 @@
+{
+	"name": "vw_latest_mon_event_param_union_log",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "session_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "visitor_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "user_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "page_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "title_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "event_log_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "event_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sort",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_of_min",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_of_hour",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "time_of_day",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_week",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "time_of_month",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "createtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "custom_field_1",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_2",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_3",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_4",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_5",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_6",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_7",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_8",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_9",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_10",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_11",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_12",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_13",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_14",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_15",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_16",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_17",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_18",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_19",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_20",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_21",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_22",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_23",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_24",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_25",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_26",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_27",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_28",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_29",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "custom_field_30",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_mon_event_param_union_log"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

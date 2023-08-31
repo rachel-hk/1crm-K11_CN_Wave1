@@ -1,0 +1,76 @@
+{
+	"name": "REF_AREA_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Area_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_Alias",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Delete",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Area_Grp",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Partner_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "REF_AREA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

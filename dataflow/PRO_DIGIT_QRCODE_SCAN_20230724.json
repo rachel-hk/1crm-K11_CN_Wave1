@@ -1,0 +1,164 @@
+{
+	"name": "PRO_DIGIT_QRCODE_SCAN_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_we_event_scan",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawWeEventScan"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMCUSTOMERMAPPING"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_DIGIT_QRCODE_SCAN",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "JoinCDMCUSTOMERMAPPING"
+				},
+				{
+					"name": "DropColumnFromWeEventScan"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          account_id as integer,",
+				"          app_id as string,",
+				"          open_id as string,",
+				"          member_id as string,",
+				"          union_id as string,",
+				"          qrcode_id as integer,",
+				"          event_key as string,",
+				"          is_subscribe as integer,",
+				"          time_of_min as integer,",
+				"          time_of_hour as integer,",
+				"          time_of_day as long,",
+				"          time_of_week as long,",
+				"          time_of_month as long,",
+				"          data_from as integer,",
+				"          createtime as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false,",
+				"     partitionBy('roundRobin', 5)) ~> IngestRawWeEventScan",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMCUSTOMERMAPPING",
+				"FilterLatest derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          BU_Source = 'K11 PRC',",
+				"          createtime = toTimestamp((toInteger(toString(createtime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"     partitionBy('roundRobin', 5)) ~> AddColumn",
+				"AddColumn, IngestCDMCUSTOMERMAPPING join(member_id == K11PRC_Member_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     partitionBy('roundRobin', 5),",
+				"     broadcast: 'auto')~> JoinCDMCUSTOMERMAPPING",
+				"JoinCDMCUSTOMERMAPPING select(mapColumn(",
+				"          Qrcode_Scan_ID = id,",
+				"          account_id,",
+				"          app_id,",
+				"          open_id,",
+				"          member_id = Hashed_Member_ID,",
+				"          union_id = IngestRawWeEventScan@union_id,",
+				"          qrcode_id,",
+				"          event_key,",
+				"          is_subscribe,",
+				"          data_from,",
+				"          createtime,",
+				"          Start_Date = AddColumn@Start_Date,",
+				"          End_Date = AddColumn@End_Date,",
+				"          Is_Current = AddColumn@Is_Current,",
+				"          BU_Source,",
+				"          Customer_UID",
+				"     ),",
+				"     partitionBy('roundRobin', 5),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropColumnFromWeEventScan",
+				"IngestRawWeEventScan filter(toDate(Insert_Date)==addDays(currentDate(),-1)) ~> FilterLatest",
+				"DropColumnFromWeEventScan sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Qrcode_Scan_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Account_ID = account_id,",
+				"          App_ID = app_id,",
+				"          Open_ID = open_id,",
+				"          Member_ID = member_id,",
+				"          Union_ID = union_id,",
+				"          Qrcode_ID = qrcode_id,",
+				"          Event_Key = event_key,",
+				"          Is_Subscribe = is_subscribe,",
+				"          Data_From = data_from,",
+				"          Create_Time = createtime,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     ),",
+				"     partitionBy('roundRobin', 5)) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

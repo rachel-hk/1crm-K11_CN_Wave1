@@ -1,0 +1,134 @@
+{
+	"name": "PUB_DIGIT_KGO_BROWSE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Browse_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Platform_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "User_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Domain_Info_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Parent_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Mp_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Merchant_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Store_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Browsing_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Business_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Available",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Create_Time_Db",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time_Db",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Company_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "DIGIT_KGO_BROWSE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

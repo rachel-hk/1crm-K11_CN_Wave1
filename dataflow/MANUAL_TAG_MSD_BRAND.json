@@ -1,0 +1,89 @@
+{
+	"name": "MANUAL_TAG_MSD_BRAND",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_STORE",
+						"type": "DatasetReference"
+					},
+					"name": "REFSTORE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_MANUAL_TAG_MSD_BRAND",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumn"
+				},
+				{
+					"name": "AddColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Store_ID as integer,",
+				"          Store_Code as string,",
+				"          Store_BU as string,",
+				"          SB_code as string,",
+				"          SB_name as string,",
+				"          Store_Name as string,",
+				"          Store_Intro as string,",
+				"          Mall_Code as string,",
+				"          Store_Status as integer,",
+				"          Store_Floor as string,",
+				"          Store_Unitcode as string,",
+				"          Store_Classify as string,",
+				"          SB1_Code as string,",
+				"          SB1_Name as string,",
+				"          SB2_Code as string,",
+				"          SB2_Name as string,",
+				"          Store_Cate as string,",
+				"          Is_Channel_No as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFSTORE",
+				"REFSTORE select(mapColumn(",
+				"          id = Store_ID,",
+				"          brand_code = Store_Code,",
+				"          brand_name = Store_Name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumn",
+				"DropUnwantedColumn derive(create_date = currentUTC(),",
+				"          modify_date = currentUTC(),",
+				"          create_by = 1,",
+				"          modify_by = 1,",
+				"          active_flag = 1,",
+				"          tenant_id = 1) ~> AddColumn",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

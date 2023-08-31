@@ -1,0 +1,94 @@
+{
+	"name": "06_MANUAL_TAG_MEM_MEMBER_TIER",
+	"properties": {
+		"description": "IngestCDMTIERUPGRADE@Start_Date == currentDate( ) || IngestCDMPERSONALPIPL@Start_Date == currentDate() || IngestCDMPERSONALPROFILE@Start_Date == currentDate( ) ||IngestCDMPERSONALPROFILEEXTRA@Start_Date == currentDate()",
+		"activities": [
+			{
+				"name": "Mem_Member_Tier",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Pre Mem_Member_Tier",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlDWSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "AzureMySqlSink",
+						"writeBatchSize": 10000,
+						"writeBatchTimeout": "00:00:30",
+						"preCopyScript": "truncate table loyalty_datahub_v1_20220721.mem_member_tier"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_TIER",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "mem_member_tier",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Pre Mem_Member_Tier",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_TIER",
+						"type": "DataFlowReference"
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"concurrency": 30,
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T19:03:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,67 @@
+{
+	"name": "23B_LOYALTY_KDP_DETAIL_TRANSACTION",
+	"properties": {
+		"activities": [
+			{
+				"name": "temp_com_kdp_bonus_history",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "temp_com_kdp_bonus_history",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRO_LOYALTY_KDP_DETAIL_TRAMSACTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "temp_com_kdp_bonus_history",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_LOYALTY_KDP_DETAIL_TRANSACTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_LOYALTY_KDP_DETAIL_TRANSACTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_LOYALTY_KDP_DETAIL_TRAMSACTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_LOYALTY_KDP_DETAIL_TRANSACTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T07:02:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

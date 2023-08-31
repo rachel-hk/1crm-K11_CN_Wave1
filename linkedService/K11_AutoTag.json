@@ -1,0 +1,17 @@
+{
+	"name": "K11_AutoTag",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-3089923987739694.2.databricks.azure.cn",
+			"existingClusterId": "0616-054510-21fskzzo",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIjFDUk0tSzExLUFERi1QUk9EXzJkNmE0ZmQ0LWUxZmQtNDY2NC04YWZjLTc2Zjk0ZjE5ODAxYSINCn0="
+		},
+		"connectVia": {
+			"referenceName": "1crm-IR-TagMgmt-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

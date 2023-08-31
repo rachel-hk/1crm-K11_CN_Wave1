@@ -1,0 +1,74 @@
+{
+	"name": "PUB_REF_PAGE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Page_Unique_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "App_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Page_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Page_Url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Title_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Page_Title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_PAGE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,266 @@
+{
+	"name": "raw_com_member_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "real_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "nick_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "en_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "phone",
+				"type": "UTF8"
+			},
+			{
+				"name": "phone_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "tel",
+				"type": "UTF8"
+			},
+			{
+				"name": "head_img",
+				"type": "UTF8"
+			},
+			{
+				"name": "level_id",
+				"type": "INT32"
+			},
+			{
+				"name": "is_special_level",
+				"type": "INT32"
+			},
+			{
+				"name": "vip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "vip_pass",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_marry",
+				"type": "INT32"
+			},
+			{
+				"name": "reg_at",
+				"type": "INT64"
+			},
+			{
+				"name": "expire_at",
+				"type": "INT64"
+			},
+			{
+				"name": "first_pay",
+				"type": "INT64"
+			},
+			{
+				"name": "last_pay",
+				"type": "INT64"
+			},
+			{
+				"name": "cycle_at",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "issue_at",
+				"type": "INT64"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "zone",
+				"type": "UTF8"
+			},
+			{
+				"name": "city",
+				"type": "UTF8"
+			},
+			{
+				"name": "province",
+				"type": "UTF8"
+			},
+			{
+				"name": "country",
+				"type": "UTF8"
+			},
+			{
+				"name": "addr",
+				"type": "UTF8"
+			},
+			{
+				"name": "zip",
+				"type": "UTF8"
+			},
+			{
+				"name": "sex",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday",
+				"type": "INT64"
+			},
+			{
+				"name": "birthday_short",
+				"type": "INT32"
+			},
+			{
+				"name": "age",
+				"type": "INT32"
+			},
+			{
+				"name": "email",
+				"type": "UTF8"
+			},
+			{
+				"name": "wechat_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "reg_origin",
+				"type": "INT32"
+			},
+			{
+				"name": "reg_sub_origin",
+				"type": "INT32"
+			},
+			{
+				"name": "up_origin",
+				"type": "INT32"
+			},
+			{
+				"name": "up_at",
+				"type": "INT64"
+			},
+			{
+				"name": "operator_type",
+				"type": "INT32"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT32"
+			},
+			{
+				"name": "operator_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "kpoint",
+				"type": "INT32"
+			},
+			{
+				"name": "expire_kp",
+				"type": "INT32"
+			},
+			{
+				"name": "clear_kp",
+				"type": "INT32"
+			},
+			{
+				"name": "spoint",
+				"type": "INT32"
+			},
+			{
+				"name": "expire_sp",
+				"type": "INT32"
+			},
+			{
+				"name": "clear_sp",
+				"type": "INT32"
+			},
+			{
+				"name": "sp_times",
+				"type": "INT32"
+			},
+			{
+				"name": "balance",
+				"type": "INT32"
+			},
+			{
+				"name": "sales_total",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "sales_times",
+				"type": "INT32"
+			},
+			{
+				"name": "eform_status",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "update_operator",
+				"type": "UTF8"
+			},
+			{
+				"name": "upgrade_type",
+				"type": "INT32"
+			},
+			{
+				"name": "is_hk_member",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

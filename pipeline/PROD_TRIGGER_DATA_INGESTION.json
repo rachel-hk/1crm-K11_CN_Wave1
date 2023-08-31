@@ -1,0 +1,280 @@
+{
+	"name": "PROD_TRIGGER_DATA_INGESTION",
+	"properties": {
+		"activities": [
+			{
+				"name": "TRIGGER_CDM_TABLE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_CDM_TABLE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_CDM_OTHER",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_CDM_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_CDM_OTHER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_TRAN_TABLE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_CDM_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_TRAN_TABLE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_CS_LOYALTY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_TRAN_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_CS_LOYALTY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_DIGIT_QRCODE_SCAN",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_CDM_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_DIGIT_QRCODE_SCAN",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_TRAN_COUPON",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_CDM_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_TRAN_COUPON",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_DIGIT_OTHER",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_DIGIT_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_DIGIT_OTHER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_DIGIT_TABLE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_TRAN_OTHER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_DIGIT_TABLE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_TRAN_GIFT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_CDM_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_TRAN_GIFT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "TRIGGER_TRAN_OTHER",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_CDM_TABLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TRIGGER_TRAN_OTHER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "28_DIGIT_SHOP_CART",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "TRIGGER_DIGIT_OTHER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "TRIGGER_TRAN_GIFT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "TRIGGER_TRAN_COUPON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "TRIGGER_DIGIT_QRCODE_SCAN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "TRIGGER_CS_LOYALTY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "TRIGGER_CDM_OTHER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "28_DIGIT_SHOP_CART",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "28_DIGIT_SHOP_CART",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Update_Time_Fix]"
+				},
+				"linkedServiceName": {
+					"referenceName": "1crmTagMgmtSynapseProd",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T17:07:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,63 @@
+{
+	"name": "CL_Temp_20230729",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Testing"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Value",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tag_Scope",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Updated_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CL_Temp_20230729"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

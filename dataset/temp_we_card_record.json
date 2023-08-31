@@ -1,0 +1,218 @@
+{
+	"name": "temp_we_card_record",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "app_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "card_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "outer_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "outer_str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consume_outer_str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "open_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_give",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "give_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "give_openid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consume_source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "staff_openid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "delete_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "consume_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "consume_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consume_store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consume_app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "consume_level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "consume_origin_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "give_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "location_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "start_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "end_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cpc_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cps_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cm_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "api_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "verify_staff_unionid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "exchange_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_we_card_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

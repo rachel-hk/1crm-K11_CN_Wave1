@@ -1,0 +1,141 @@
+{
+	"name": "SFMC_REF_COUPON_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_COUPON",
+						"type": "DatasetReference"
+					},
+					"name": "REFCOUPON"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_REF_Coupon",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake",
+					"description": "Export data to TEMP_SFMC_REF_PRODUCT"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "TruncateSpace"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Coupon_UID as integer,",
+				"          Coupon_ID as string,",
+				"          Source_BU as string,",
+				"          Account_ID as integer,",
+				"          App_ID as string,",
+				"          Coupon_Source as integer,",
+				"          Coupon_Type as string,",
+				"          Coupon_Status as string,",
+				"          Is_Put as integer,",
+				"          Push_View as integer,",
+				"          Code_Type as string,",
+				"          Brand_Name as string,",
+				"          Coupon_Title as string,",
+				"          Coupon_Color as string,",
+				"          Coupon_Notice as string,",
+				"          Coupon_Desc as string,",
+				"          Coupon_Quan as integer,",
+				"          Total_Quan as integer,",
+				"          Avail_Date as string,",
+				"          Begin_Time as timestamp,",
+				"          End_Time as timestamp,",
+				"          Final_End_Time as timestamp,",
+				"          Custom_Code as integer,",
+				"          Bind_Open_ID as integer,",
+				"          Location_ID_List as string,",
+				"          All_Location as integer,",
+				"          Get_Limit_Quan as integer,",
+				"          Get_Limit_Time as integer,",
+				"          Use_Limit_Quan as integer,",
+				"          Can_Share as string,",
+				"          Can_Give_Friend as string,",
+				"          Use_Con as string,",
+				"          Time_Limit as string,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Rej_Reason as string,",
+				"          Is_Deleted as integer,",
+				"          Is_Primary as integer,",
+				"          All_App as integer,",
+				"          All_Product as integer,",
+				"          Group_ID as integer,",
+				"          App_ID_List as string,",
+				"          Ver_Customer as integer,",
+				"          Use_Refuse as integer,",
+				"          Can_Provide as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFCOUPON",
+				"REFCOUPON derive(Coupon_Desc = replace(replace(regexReplace(regexReplace(Coupon_Desc, \"\\r\", \"\"),\"\\n\",\"\"), \"|\",\" \"),'\"',\"'\"),",
+				"          Coupon_Notice = replace(replace(regexReplace(regexReplace(Coupon_Notice, \"\\r\", \"\"),\"\\n\",\"\"), \"|\",\" \"),'\"',\"'\"),",
+				"          Coupon_Title = replace(replace(regexReplace(regexReplace(Coupon_Title, \"\\r\", \"\"),\"\\n\",\"\"), \"|\",\" \"),'\"',\"'\")) ~> TruncateSpace",
+				"REFCOUPON aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Ref_Coupon',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"TruncateSpace sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:[(concat('REF_Coupon_',toString(toDate(fromUTC(currentUTC(),'China Standard Time')),'yyyyMMdd'),'.csv.gz'))],",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

@@ -1,0 +1,121 @@
+{
+	"name": "raw_com_member_level",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_LEVEL",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "level_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "system_id",
+				"type": "INT32"
+			},
+			{
+				"name": "sort",
+				"type": "INT32"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "app_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "card_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "card_bd",
+				"type": "UTF8"
+			},
+			{
+				"name": "fenze_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			},
+			{
+				"name": "valid_type",
+				"type": "INT32"
+			},
+			{
+				"name": "start_at",
+				"type": "INT32"
+			},
+			{
+				"name": "expire_at",
+				"type": "INT32"
+			},
+			{
+				"name": "up_rule",
+				"type": "INT32"
+			},
+			{
+				"name": "up_model",
+				"type": "INT32"
+			},
+			{
+				"name": "trigger_id",
+				"type": "INT32"
+			},
+			{
+				"name": "kpoint_rate",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "spoint_rate",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "discount",
+				"type": "INT32"
+			},
+			{
+				"name": "is_sync",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

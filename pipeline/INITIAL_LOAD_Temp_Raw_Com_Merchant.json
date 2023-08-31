@@ -1,0 +1,86 @@
+{
+	"name": "INITIAL_LOAD_Temp_Raw_Com_Merchant",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MERCHANT]_',formatDateTime(adddays(utcnow(),pipeline().globalParameters.date_diff),'yyyyMMdd'),'.parquet')",
+		"activities": [
+			{
+				"name": "Copy Data To Raw",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"additionalColumns": [
+							{
+								"name": "File_Path",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "Insert_Date",
+								"value": {
+									"value": "@pipeline().TriggerTime",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "CRM/COM_MERCHANT",
+							"wildcardFileName": {
+								"value": "*.parquet",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "Delete from Raw_Temp.temp_com_merchant where FORMAT(CAST(Insert_Date as DATE), 'yyyyMMdd') = FORMAT(GETDATE(),'yyyyMMdd')",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "raw_com_merchant_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "temp_com_merchant_ssir",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Temp_Raw/crm"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-31T02:16:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

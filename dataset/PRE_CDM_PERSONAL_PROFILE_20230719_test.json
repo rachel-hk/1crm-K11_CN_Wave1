@@ -1,0 +1,264 @@
+{
+	"name": "PRE_CDM_PERSONAL_PROFILE_20230719_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Personal_Customer_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name_Cn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Nick_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Name_En",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Phone_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Phone_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tel_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Level_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Level_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Special_Level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Marry",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Expire_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Cycle_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Issue_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Person_Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Res_Zone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Res_City",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Res_Province",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Res_Country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Res_Address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Zip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Gender",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Person_Birthday",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Birthday_Short",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Fav_Prod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Hobby",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Fav_Item",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Month_Income",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Year_Income",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Family_Monthly_Income",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Person_Address2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Address3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Phone2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Email",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_QQ",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Weibo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Company",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Industry",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Job",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Mail_Market",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Company_Size",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Edu_Level",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Reg_Origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Reg_Sub_Origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "License_Plate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Prefer_language",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Person_Religion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Person_Ethnic",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "PRE_CDM_PERSONAL_PROFILE_20230719_test"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

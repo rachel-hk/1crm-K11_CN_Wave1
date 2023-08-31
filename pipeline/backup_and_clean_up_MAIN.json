@@ -1,0 +1,66 @@
+{
+	"name": "backup_and_clean_up_MAIN",
+	"properties": {
+		"activities": [
+			{
+				"name": "main_1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "backup_and_clean_up_main_1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "main_2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "main_1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "backup_and_clean_up_main_2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "main_3",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "main_2",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "backup_and_clean_up_main_3",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "BACKUP_AND_CLEAN_UP"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-17T15:53:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

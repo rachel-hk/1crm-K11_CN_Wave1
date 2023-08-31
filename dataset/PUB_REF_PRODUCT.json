@@ -1,0 +1,381 @@
+{
+	"name": "PUB_REF_PRODUCT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Product_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_SerialCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Source_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Merchant_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Merchant_Product_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Parent_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Parent_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CN_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EN_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Subtitle_Lan2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Subtitle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Source_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Freight_Template_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Oper_Area_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Available",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Company_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Audit_Message",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Data_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Price_LV",
+				"type": "nvarchar"
+			},
+			{
+				"name": "First_Shelf_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Sub_Type_Product",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Type_Of_Product",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Can_Sale",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Can_Sale_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Ref_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Brand_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Cate_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Pricing_Method",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total_Quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Return_Days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Replace_Days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Product_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Guarantee_Days",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sale_Calc_Unit_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Is_Inner_Supplier",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Use_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Machining_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Combine_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Place_Origin_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Fast_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Mp_Model",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Cate_Full_ID_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Invoice",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Force_Invoice",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Vat_Invoice",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Expiry_Date_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Expiry_Date_Value",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Expiry_Date_Unit",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Expiry_Date_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Card_Value",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Batch_Strategy_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Outbound_Strategy",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Pur_Limit_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Pur_Limit_Interval_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Pur_Limit_Interval",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Pur_Limit_Date_Start",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Pur_Limit_Date_End",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Pur_Limit_Per_User",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Auto_Refund",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Selling_Points",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Drop_Ship",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Trade_Cate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SubTrade_Cate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_Style",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_PRODUCT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,407 @@
+{
+	"name": "MEM_MEMBER_MERCHANT_CUSTOM",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "K11_AUTO_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "K11AUTOTAGProduct"
+				},
+				{
+					"dataset": {
+						"referenceName": "K11_AUTO_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "K11AUTOTAGStore"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_STORE",
+						"type": "DatasetReference"
+					},
+					"name": "REFSTORE"
+				},
+				{
+					"dataset": {
+						"referenceName": "K11_AUTO_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "REFSTOREforBrand"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerMapping"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_PRODUCT",
+						"type": "DatasetReference"
+					},
+					"name": "REFPRODUCT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_MEM_MEMBER_MERCHANT_CUSTOM",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToTemp"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterTagNameProduct"
+				},
+				{
+					"name": "SelectFirstItemProduct"
+				},
+				{
+					"name": "FilterTagNameStore"
+				},
+				{
+					"name": "SelectFirstItemStore"
+				},
+				{
+					"name": "JoinStoreCode"
+				},
+				{
+					"name": "DropUnwantedColumnStore"
+				},
+				{
+					"name": "DropUnwantedColumnProduct"
+				},
+				{
+					"name": "UnionTable"
+				},
+				{
+					"name": "ManualTagMapping"
+				},
+				{
+					"name": "DropUnwantColumn"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterBrand"
+				},
+				{
+					"name": "SelectFirstItem"
+				},
+				{
+					"name": "JoinBrand"
+				},
+				{
+					"name": "DropUnwantedColumnBrand"
+				},
+				{
+					"name": "UnionBrand"
+				},
+				{
+					"name": "ChangeDataType"
+				},
+				{
+					"name": "ToStringBrand"
+				},
+				{
+					"name": "JoinProduct"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ID as string,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          BU_Source as string,",
+				"          Tag_Name as string,",
+				"          Tag_Value as string,",
+				"          Tag_Type as string,",
+				"          Tag_Scope as string,",
+				"          Updated_Date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> K11AUTOTAGProduct",
+				"source(output(",
+				"          ID as string,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          BU_Source as string,",
+				"          Tag_Name as string,",
+				"          Tag_Value as string,",
+				"          Tag_Type as string,",
+				"          Tag_Scope as string,",
+				"          Updated_Date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> K11AUTOTAGStore",
+				"source(output(",
+				"          Store_ID as integer,",
+				"          Store_Code as string,",
+				"          Store_BU as string,",
+				"          SB_code as string,",
+				"          SB_name as string,",
+				"          Store_Name as string,",
+				"          Store_Intro as string,",
+				"          Mall_Code as string,",
+				"          Store_Status as integer,",
+				"          Store_Floor as string,",
+				"          Store_Unitcode as string,",
+				"          Store_Classify as string,",
+				"          SB1_Code as string,",
+				"          SB1_Name as string,",
+				"          SB2_Code as string,",
+				"          SB2_Name as string,",
+				"          Store_Cate as string,",
+				"          Is_Channel_No as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFSTORE",
+				"source(output(",
+				"          ID as string,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          BU_Source as string,",
+				"          Tag_Name as string,",
+				"          Tag_Value as string,",
+				"          Tag_Type as string,",
+				"          Tag_Scope as string,",
+				"          Updated_Date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFSTOREforBrand",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CustomerMapping",
+				"source(output(",
+				"          Product_ID as string,",
+				"          Product_SerialCode as string,",
+				"          Source_BU as string,",
+				"          Product_Source as string,",
+				"          Merchant_ID as long,",
+				"          Merchant_Product_ID as long,",
+				"          Parent_Code as string,",
+				"          Parent_ID as long,",
+				"          CN_Name as string,",
+				"          EN_Name as string,",
+				"          Subtitle_Lan2 as string,",
+				"          Product_Subtitle as string,",
+				"          Source_Type as string,",
+				"          Product_Status as string,",
+				"          Channel_Code as string,",
+				"          Freight_Template_ID as long,",
+				"          Oper_Area_Code as string,",
+				"          Is_Available as integer,",
+				"          Company_ID as long,",
+				"          Audit_Message as string,",
+				"          Store_ID as string,",
+				"          Data_Type as string,",
+				"          Price_LV as string,",
+				"          First_Shelf_Time as timestamp,",
+				"          Sub_Type_Product as string,",
+				"          Type_Of_Product as string,",
+				"          Can_Sale as string,",
+				"          Can_Sale_Type as integer,",
+				"          Ref_ID as long,",
+				"          Brand_ID as string,",
+				"          Cate_ID as long,",
+				"          Cate_Name as string,",
+				"          Cate_Remark as string,",
+				"          Pricing_Method as integer,",
+				"          Quantity as integer,",
+				"          Total_Quantity as integer,",
+				"          Return_Days as integer,",
+				"          Replace_Days as integer,",
+				"          Product_Remark as string,",
+				"          Product_Type as string,",
+				"          Guarantee_Days as integer,",
+				"          Sale_Calc_Unit_ID as long,",
+				"          Is_Inner_Supplier as integer,",
+				"          Use_Type as integer,",
+				"          Machining_Type as string,",
+				"          Combine_Type as string,",
+				"          Place_Origin_Name as string,",
+				"          Fast_Code as string,",
+				"          Mp_Model as long,",
+				"          Cate_Full_ID_Path as string,",
+				"          Is_Invoice as string,",
+				"          Is_Force_Invoice as string,",
+				"          Is_Vat_Invoice as string,",
+				"          Expiry_Date_Type as string,",
+				"          Expiry_Date_Value as integer,",
+				"          Expiry_Date_Unit as integer,",
+				"          Expiry_Date_Time as timestamp,",
+				"          Card_Value as decimal(18,0),",
+				"          Batch_Strategy_ID as long,",
+				"          Outbound_Strategy as integer,",
+				"          Pur_Limit_Type as integer,",
+				"          Pur_Limit_Interval_Type as integer,",
+				"          Pur_Limit_Interval as integer,",
+				"          Pur_Limit_Date_Start as timestamp,",
+				"          Pur_Limit_Date_End as timestamp,",
+				"          Pur_Limit_Per_User as integer,",
+				"          Auto_Refund as integer,",
+				"          Selling_Points as string,",
+				"          Is_Drop_Ship as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Trade_Cate as string,",
+				"          SubTrade_Cate as string,",
+				"          Brand_Style as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFPRODUCT",
+				"K11AUTOTAGProduct filter(Tag_Name =='OPER_PREF_PRODUCT.K11_Pref_Product_Pur_Freq_1M') ~> FilterTagNameProduct",
+				"JoinProduct derive(code = 'preferred_products',",
+				"          value = Product_ID,",
+				"          name = split(Tag_Value,',')[1]) ~> SelectFirstItemProduct",
+				"K11AUTOTAGStore filter(Tag_Name =='OPER_PREF_TRADE_CATE.K11_Pref_Store_Pur_Freq_1M') ~> FilterTagNameStore",
+				"FilterTagNameStore derive(code = 'preferred_store',",
+				"          value = split(Tag_Value,',')[1]) ~> SelectFirstItemStore",
+				"SelectFirstItemStore, REFSTORE join(value == Store_Name,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinStoreCode",
+				"ChangeDataType select(mapColumn(",
+				"          Customer_UID,",
+				"          code,",
+				"          value = Store_ID,",
+				"          Member_ID,",
+				"          name = Tag_Value",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumnStore",
+				"SelectFirstItemProduct select(mapColumn(",
+				"          Customer_UID,",
+				"          code,",
+				"          value,",
+				"          name,",
+				"          Member_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumnProduct",
+				"DropUnwantedColumnProduct, DropUnwantedColumnStore union(byName: true)~> UnionTable",
+				"UnionBrand, CustomerMapping join(UnionBrand@Customer_UID == CustomerMapping@Customer_UID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> ManualTagMapping",
+				"ManualTagMapping select(mapColumn(",
+				"          manual_tag_id,",
+				"          code,",
+				"          value,",
+				"          name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantColumn",
+				"DropUnwantColumn derive(create_date = currentUTC(),",
+				"          modify_date = currentUTC(),",
+				"          create_by = 1,",
+				"          modify_by = 1,",
+				"          active_flag = 1,",
+				"          tenant_id = 1,",
+				"          value = value) ~> AddColumn",
+				"REFSTOREforBrand filter(Tag_Name =='OPER_PREF_TRADE_CATE.K11_Pref_Store_Pur_Freq_1M') ~> FilterBrand",
+				"FilterBrand derive(code = 'preferred_brand',",
+				"          value = split(Tag_Value,',')[1],",
+				"          name = '') ~> SelectFirstItem",
+				"SelectFirstItem, REFSTORE join(value == Store_Name,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinBrand",
+				"ToStringBrand select(mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID,",
+				"          code,",
+				"          value = Store_ID,",
+				"          name = Tag_Value",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumnBrand",
+				"UnionTable, DropUnwantedColumnBrand union(byName: true)~> UnionBrand",
+				"JoinStoreCode derive(Store_ID = toString(Store_ID)) ~> ChangeDataType",
+				"JoinBrand derive(Store_ID = toString(Store_ID)) ~> ToStringBrand",
+				"FilterTagNameProduct, REFPRODUCT join(split(Tag_Value,',')[1] == CN_Name,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinProduct",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          member_id = manual_tag_id,",
+				"          code,",
+				"          value,",
+				"          name,",
+				"          create_date,",
+				"          modify_date,",
+				"          create_by,",
+				"          modify_by,",
+				"          active_flag,",
+				"          tenant_id",
+				"     )) ~> SinkToTemp"
+			]
+		}
+	}
+}

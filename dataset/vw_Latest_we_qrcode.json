@@ -1,0 +1,161 @@
+{
+	"name": "vw_Latest_we_qrcode",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "app_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ticket",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ticket_hash",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "logo_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expire",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "scene_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "scene_str",
+				"type": "nvarchar"
+			},
+			{
+				"name": "code_desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "delay_day",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "effect_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trigger_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trigger_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trigger_rule_count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trigger_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "data_from",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "updatetime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "group_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_we_qrcode"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

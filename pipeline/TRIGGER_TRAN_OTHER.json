@@ -1,0 +1,43 @@
+{
+	"name": "TRIGGER_TRAN_OTHER",
+	"properties": {
+		"activities": [
+			{
+				"name": "18_TRAN_LOTTERY",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "18_TRAN_LOTTERY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "19_TRAN_CAR_PARK",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "18_TRAN_LOTTERY",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "19_TRAN_CAR_PARK",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:48:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

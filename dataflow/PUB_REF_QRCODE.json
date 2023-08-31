@@ -1,0 +1,109 @@
+{
+	"name": "PUB_REF_QRCODE",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "REF_QRCODE",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromREFSTORE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_REF_QRCODE",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Qrcode_ID as integer,",
+				"          Source_BU as string,",
+				"          Account_ID as integer,",
+				"          App_ID as string,",
+				"          Qrcode_Ticket as string,",
+				"          Ticket_Hash as string,",
+				"          Code_Cate as string,",
+				"          Code_Type as integer,",
+				"          Code_Expire as integer,",
+				"          Code_Name as string,",
+				"          Scene_ID as long,",
+				"          Scene_Str as string,",
+				"          Code_Desc as string,",
+				"          Delay_Day as integer,",
+				"          Effect_Time as timestamp,",
+				"          Trigger_Type as integer,",
+				"          Trigger_ID as integer,",
+				"          Trigger_Rule_Count as integer,",
+				"          Trigger_Status as integer,",
+				"          Code_Status as integer,",
+				"          Data_From as integer,",
+				"          Create_Time as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Group_ID as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromREFSTORE",
+				"IngestionfromREFSTORE filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Qrcode_ID,",
+				"          Source_BU,",
+				"          Account_ID,",
+				"          App_ID,",
+				"          Qrcode_Ticket,",
+				"          Ticket_Hash,",
+				"          Code_Cate,",
+				"          Code_Type,",
+				"          Code_Expire,",
+				"          Code_Name,",
+				"          Scene_ID,",
+				"          Scene_Str,",
+				"          Code_Desc,",
+				"          Delay_Day,",
+				"          Effect_Time,",
+				"          Trigger_Type,",
+				"          Trigger_ID,",
+				"          Trigger_Rule_Count,",
+				"          Trigger_Status,",
+				"          Code_Status,",
+				"          Data_From,",
+				"          Create_Time,",
+				"          Update_Time,",
+				"          Group_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

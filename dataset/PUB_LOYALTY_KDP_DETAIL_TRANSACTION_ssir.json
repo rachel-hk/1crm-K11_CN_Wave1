@@ -1,0 +1,111 @@
+{
+	"name": "PUB_LOYALTY_KDP_DETAIL_TRANSACTION_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "KDP_Bonus_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Kdp_Point_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Burn_Kdp_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Kdp_Member_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Burn_Partner_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Burn_Partner_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Point_Source_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Earn_Partner_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Earn_Partner_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Burn_Point_Delta",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Burn_Transaction_At",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Burn_Created_At",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "LOYALTY_KDP_DETAIL_TRANSACTION"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

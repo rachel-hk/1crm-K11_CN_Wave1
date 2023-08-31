@@ -1,0 +1,95 @@
+{
+	"name": "raw_com_member_sales_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_SALES",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "vip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "kpoint",
+				"type": "INT32"
+			},
+			{
+				"name": "frozen_kpoint",
+				"type": "INT64"
+			},
+			{
+				"name": "sales_times",
+				"type": "INT32"
+			},
+			{
+				"name": "sales_money",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "level_id",
+				"type": "INT32"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "gold_at",
+				"type": "INT64"
+			},
+			{
+				"name": "gold_type",
+				"type": "INT32"
+			},
+			{
+				"name": "expire_at",
+				"type": "INT64"
+			},
+			{
+				"name": "expire_bonus",
+				"type": "INT32"
+			},
+			{
+				"name": "is_hk_member",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

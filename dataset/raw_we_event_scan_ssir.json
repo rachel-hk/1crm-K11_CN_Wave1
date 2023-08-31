@@ -1,0 +1,90 @@
+{
+	"name": "raw_we_event_scan_ssir",
+	"properties": {
+		"description": "@concat('[CRM_LOG].[WE_EVENT_SCAN]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm_log"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM_LOG/WE_EVENT_SCAN",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "app_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "open_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "qrcode_id",
+				"type": "INT32"
+			},
+			{
+				"name": "event_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_subscribe",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_min",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_hour",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_day",
+				"type": "INT64"
+			},
+			{
+				"name": "time_of_week",
+				"type": "INT64"
+			},
+			{
+				"name": "time_of_month",
+				"type": "INT64"
+			},
+			{
+				"name": "data_from",
+				"type": "INT32"
+			},
+			{
+				"name": "createtime",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

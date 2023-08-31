@@ -1,0 +1,75 @@
+{
+	"name": "SFMC_ChatLabsRequestLogs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatlabsRequestsLog_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "accountsid",
+				"type": "String"
+			},
+			{
+				"name": "accountname",
+				"type": "String"
+			},
+			{
+				"name": "activityinstanceid",
+				"type": "String"
+			},
+			{
+				"name": "activityname",
+				"type": "String"
+			},
+			{
+				"name": "journeyname",
+				"type": "String"
+			},
+			{
+				"name": "typeofactivity",
+				"type": "String"
+			},
+			{
+				"name": "version",
+				"type": "String"
+			},
+			{
+				"name": "senttime",
+				"type": "String"
+			},
+			{
+				"name": "contactkey",
+				"type": "String"
+			},
+			{
+				"name": "createdon",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,145 @@
+{
+	"name": "vw_latest_com_member_level_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "level_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "system_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sort",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "app_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "card_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "card_bd",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fenze_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "valid_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "start_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expire_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "up_rule",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "up_model",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trigger_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "kpoint_rate",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "spoint_rate",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "discount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_sync",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_com_member_level"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,25 @@
+{
+	"name": "1crm-k11-adf-prod",
+	"properties": {
+		"globalParameters": {
+			"date_diff": {
+				"type": "int",
+				"value": 0
+			},
+			"Start_Date": {
+				"type": "string",
+				"value": "20230803"
+			},
+			"Rerun": {
+				"type": "bool",
+				"value": false
+			}
+		}
+	},
+	"location": "chinanorth3",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "00b89901-0fbd-4519-93ac-43a26ef2e138",
+		"tenantId": "4d4a27ca-3f88-4543-b791-d9550224c4ec"
+	}
+}

@@ -1,0 +1,154 @@
+{
+	"name": "temp_com_member_kdp_use_record",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "partner_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kdp_member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "partner_serial_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kdp_serial_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cancel_kdp_serial_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kp_unique_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "frozen_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kp",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "kdp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cash",
+				"type": "nvarchar"
+			},
+			{
+				"name": "qrcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "api_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "try_count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "scan_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "start_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "expire_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "cancel_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_return",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "partner_campaign_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "partner_campaign_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_member_kdp_use_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

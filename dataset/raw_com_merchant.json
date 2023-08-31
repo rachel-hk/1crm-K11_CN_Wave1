@@ -1,0 +1,77 @@
+{
+	"name": "raw_com_merchant",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MERCHANT",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "mchid",
+				"type": "UTF8"
+			},
+			{
+				"name": "merchant_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "area_id",
+				"type": "INT64"
+			},
+			{
+				"name": "mall_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_shangquan",
+				"type": "INT32"
+			},
+			{
+				"name": "serial_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "private_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "v3_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "update_at",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

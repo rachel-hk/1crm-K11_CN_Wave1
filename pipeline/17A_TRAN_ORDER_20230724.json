@@ -1,0 +1,52 @@
+{
+	"name": "17A_TRAN_ORDER_20230724",
+	"properties": {
+		"activities": [
+			{
+				"name": "PUB_TRAN_ORDER",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_TRAN_ORDER_20230724",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_TRAN_ORDER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRO_TRAN_ORDER_20230724",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_TRAN_ORDER_20230724",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"variables": {
+			"Start_Date": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-24T18:31:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

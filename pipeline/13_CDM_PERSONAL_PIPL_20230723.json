@@ -1,0 +1,67 @@
+{
+	"name": "13_CDM_PERSONAL_PIPL_20230723",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_CDM_PERSONAL_PIPL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRE_PRO_CDM_PERSONAL_PIPL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_CDM_PERSONAL_PIPL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_CDM_PERSONAL_PIPL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_CDM_PERSONAL_PIPL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_PERSONAL_PIPL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRE_PRO_CDM_PERSONAL_PIPL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRE_PRO_CDM_PERSONAL_PIPL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-23T16:24:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

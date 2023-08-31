@@ -1,0 +1,12 @@
+{
+	"name": "1crm-k11-ir-prod",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/eac1f749-a155-4fa1-ab16-e26d0a1e4c75/resourcegroups/data-platform/providers/Microsoft.DataFactory/factories/NWD-Data-IngestionFramework/integrationruntimes/AzureSelfHostedIR",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}

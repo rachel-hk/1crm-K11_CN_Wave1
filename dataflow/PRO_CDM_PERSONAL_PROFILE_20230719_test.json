@@ -1,0 +1,130 @@
+{
+	"name": "PRO_CDM_PERSONAL_PROFILE_20230719_test",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "temp_com_member",
+						"type": "DatasetReference"
+					},
+					"name": "IngestPRECDMPERSONALPROFILE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Test_Temp_1",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddDimensionColumn"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          area_id as integer,",
+				"          real_name as string,",
+				"          nick_name as string,",
+				"          en_name as string,",
+				"          phone as string,",
+				"          phone_code as string,",
+				"          tel as string,",
+				"          head_img as string,",
+				"          level_id as integer,",
+				"          is_special_level as integer,",
+				"          vip_code as string,",
+				"          vip_pass as string,",
+				"          union_id as string,",
+				"          is_marry as integer,",
+				"          reg_at as long,",
+				"          expire_at as long,",
+				"          first_pay as long,",
+				"          last_pay as long,",
+				"          cycle_at as decimal(38,18),",
+				"          issue_at as long,",
+				"          status as integer,",
+				"          zone as string,",
+				"          city as string,",
+				"          province as string,",
+				"          country as string,",
+				"          addr as string,",
+				"          zip as string,",
+				"          sex as integer,",
+				"          birthday as long,",
+				"          birthday_short as integer,",
+				"          age as integer,",
+				"          email as string,",
+				"          wechat_id as string,",
+				"          reg_origin as integer,",
+				"          reg_sub_origin as integer,",
+				"          up_origin as integer,",
+				"          up_at as integer,",
+				"          operator_type as integer,",
+				"          operator_id as integer,",
+				"          operator_name as string,",
+				"          kpoint as integer,",
+				"          expire_kp as integer,",
+				"          clear_kp as integer,",
+				"          spoint as integer,",
+				"          expire_sp as integer,",
+				"          clear_sp as integer,",
+				"          sp_times as integer,",
+				"          balance as integer,",
+				"          sales_total as decimal(38,18),",
+				"          sales_times as integer,",
+				"          eform_status as integer,",
+				"          create_at as long,",
+				"          update_at as long,",
+				"          deleted as integer,",
+				"          update_operator as string,",
+				"          upgrade_type as integer,",
+				"          is_hk_member as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestPRECDMPERSONALPROFILE",
+				"select1 derive(Test_Unix_Conversion = toTimestamp((toInteger(toString(first_pay))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddDimensionColumn",
+				"filter1 select(mapColumn(",
+				"          first_pay",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"IngestPRECDMPERSONALPROFILE filter(member_id == '0599006164461101') ~> filter1",
+				"AddDimensionColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Browse_ID as string,",
+				"          Visit_ID as string",
+				"     ),",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> sink4"
+			]
+		}
+	}
+}

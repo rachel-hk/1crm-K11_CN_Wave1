@@ -1,0 +1,130 @@
+{
+	"name": "temp_mon_app_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm_tool"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "account_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "period",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "starttime",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "endtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "landing_page_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "budget",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "event_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "trigger_switch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "debug_switch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "last_operator_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "createtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "updatetime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "coupon_count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "app_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_mon_app"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

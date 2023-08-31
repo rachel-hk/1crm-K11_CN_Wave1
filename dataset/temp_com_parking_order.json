@@ -1,0 +1,110 @@
+{
+	"name": "temp_com_parking_order",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "license_plate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "car_member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "pay_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "member_level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "total_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "order_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "coupon_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "enter_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "leave_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_parking_order"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

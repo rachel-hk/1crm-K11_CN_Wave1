@@ -1,0 +1,186 @@
+{
+	"name": "Par_PUB_TRAN_COUPON_RECORD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('PUB_TRAN_COUPON_RECORD',formatDateTime(utcnow(),'yyyyMMdd'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Coupon_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Coupon_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "BU_Source",
+				"type": "UTF8"
+			},
+			{
+				"name": "Account_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "App_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Coupon_Type",
+				"type": "UTF8"
+			},
+			{
+				"name": "Acquire_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Acquaire_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Consume_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Open_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Union_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Customer_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tier_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Is_Give",
+				"type": "INT32"
+			},
+			{
+				"name": "Give_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Give_Open_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Consume_Source",
+				"type": "UTF8"
+			},
+			{
+				"name": "Staff_Open_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Delete_At",
+				"type": "INT96"
+			},
+			{
+				"name": "Consume_At",
+				"type": "INT96"
+			},
+			{
+				"name": "Consume_Amount",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Consume_Store_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Consume_App_ID",
+				"type": "INT64"
+			},
+			{
+				"name": "Consume_Tier_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "Consume_Origin_Order_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Give_At",
+				"type": "INT96"
+			},
+			{
+				"name": "Location_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Coupon_Status",
+				"type": "INT32"
+			},
+			{
+				"name": "Start_At",
+				"type": "INT96"
+			},
+			{
+				"name": "End_At",
+				"type": "INT96"
+			},
+			{
+				"name": "Create_At",
+				"type": "INT96"
+			},
+			{
+				"name": "Update_At",
+				"type": "INT96"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "Exchange_No",
+				"type": "UTF8"
+			},
+			{
+				"name": "Start_Date",
+				"type": "INT96"
+			},
+			{
+				"name": "End_Date",
+				"type": "INT96"
+			},
+			{
+				"name": "Is_Current",
+				"type": "UTF8"
+			},
+			{
+				"name": "Coupon_UID",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

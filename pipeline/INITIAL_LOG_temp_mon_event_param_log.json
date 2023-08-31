@@ -1,0 +1,87 @@
+{
+	"name": "INITIAL_LOG_temp_mon_event_param_log",
+	"properties": {
+		"description": "@concat('[CRM_TOOL].[MON_EVENT_PARAM_LOG]_',formatDateTime(adddays(utcnow(),pipeline().globalParameters.date_diff),'yyyyMMdd'),'.parquet')",
+		"activities": [
+			{
+				"name": "Copy data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"additionalColumns": [
+							{
+								"name": "File_Path",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "Insert_Date",
+								"value": {
+									"value": "@pipeline().TriggerTime",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "CRM_TOOL/MON_EVENT_PARAM_LOG",
+							"wildcardFileName": {
+								"value": "*.parquet",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"preCopyScript": "Delete from Raw_Temp.temp_mon_event__aram_log where FORMAT(CAST(Insert_Date as DATE), 'yyyyMMdd') = FORMAT(GETDATE(),'yyyyMMdd')",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "raw_mon_event_param_log_ssir",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "temp_mon_event_param_log_ssir",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "Temp_Raw/crm_tool"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-31T02:50:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

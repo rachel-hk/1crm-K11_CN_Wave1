@@ -1,0 +1,128 @@
+{
+	"name": "SFMC_ChatLabsOABroadcastLog",
+	"properties": {
+		"description": "@concat('ChatLabsOABroadcastLog_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.csv')",
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('ChatlabsOABroadcastLog_',formatDateTime(addDays(utcnow(),0),'yyyyMMdd'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": "/Export"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "uniqueid",
+				"type": "String"
+			},
+			{
+				"name": "broadcastid",
+				"type": "String"
+			},
+			{
+				"name": "broadcastarticleid",
+				"type": "String"
+			},
+			{
+				"name": "broadcastarticletype",
+				"type": "String"
+			},
+			{
+				"name": "successcount",
+				"type": "String"
+			},
+			{
+				"name": "failedcount",
+				"type": "String"
+			},
+			{
+				"name": "totalcount",
+				"type": "String"
+			},
+			{
+				"name": "failedreason",
+				"type": "String"
+			},
+			{
+				"name": "journeyid",
+				"type": "String"
+			},
+			{
+				"name": "journeyname",
+				"type": "String"
+			},
+			{
+				"name": "version",
+				"type": "String"
+			},
+			{
+				"name": "activityid",
+				"type": "String"
+			},
+			{
+				"name": "activityname",
+				"type": "String"
+			},
+			{
+				"name": "contacttype",
+				"type": "String"
+			},
+			{
+				"name": "contactkey",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "String"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "String"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "String"
+			},
+			{
+				"name": "createdon",
+				"type": "String"
+			},
+			{
+				"name": "sendon",
+				"type": "String"
+			},
+			{
+				"name": "sfkey",
+				"type": "String"
+			},
+			{
+				"name": "interactionid",
+				"type": "String"
+			},
+			{
+				"name": "activityinstanceid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

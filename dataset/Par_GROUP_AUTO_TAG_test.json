@@ -1,0 +1,320 @@
+{
+	"name": "Par_GROUP_AUTO_TAG_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat('GROUP_AUTO_TAG','test')",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Member_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Union_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Art_Design",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Beauty",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Dining",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Dressing",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Fashion",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Health_Wellness",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Investment",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Jewelry",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Property",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Shopping",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Sports",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Travel",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Watches",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_INTEREST.Interest_Wine",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_OCCUPATION.Com_District",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_OCCUPATION.Member_Occupation",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Age_Range",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Birth_Month",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Chinese_Tourist",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Edu_level",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Gender",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Res_City",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Res_District",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Res_Province",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Res_Region",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_DEMO_PERSONAL.Whether_driver",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_SOCIAL_FAMILY.Marriage_Status",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_BASIC_SOCIAL_FAMILY.Number_of_Kids",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Member_Tier_K11",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_Artus",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_BabyKingdom",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_Dpark",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_FTLife",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_FreeDuty",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_GTA",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_HKTicketing",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_Humansa",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_Humansa_Noah",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_KLUB_11_HK",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_KLUB_11_PRC",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_NWC",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_NWCL",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_NWDS",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Date_PassageN",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_CONSENT.Reg_Source_NWC",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.MAtelier_Customer",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_Artists_club",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_Artus",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_BabyKingdom",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_CTF_Edu_Group",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_Dmind",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_Dpark",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_FTLife",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_FreeDuty",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_GTA",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_HKTicketing",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_KLUB_11_HK",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_KLUB_11_PRC",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_NWC",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_NWCL",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_NWDS",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_PassageN",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.Member_Prog",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_REGIST_PROG.No_Member_Prog_Joined",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_TIER.Member_Tier_NWC",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_MEMBER_TIER.Member_Tier_NWCL",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_PROP_RES_ASSET.No_Res_Prop",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_PROP_RES_ASSET.Purchase_Type_Prop1",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_PROP_VEHICLE.Whether_Carpark_User",
+				"type": "UTF8"
+			},
+			{
+				"name": "FACT_PROP_VEHICLE.Whether_Has_Car",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,37 @@
+{
+	"name": "05_MANUAL_MEM_MEMBER_SPECIAL_MAPPING_testing_20230810",
+	"properties": {
+		"activities": [
+			{
+				"name": "MEM_MEMBER_SPECIAL_MAPPING",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_SPECIAL_MAPPING_testing_20230810",
+						"type": "DataFlowReference"
+					},
+					"integrationRuntime": {
+						"referenceName": "1crm-IR-TagMgmt-prod",
+						"type": "IntegrationRuntimeReference"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-10T06:04:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

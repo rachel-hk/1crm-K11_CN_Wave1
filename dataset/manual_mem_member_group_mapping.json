@@ -1,0 +1,20 @@
+{
+	"name": "manual_mem_member_group_mapping",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "mem_member_group_mapping"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

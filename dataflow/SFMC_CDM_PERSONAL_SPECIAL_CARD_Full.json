@@ -1,0 +1,149 @@
+{
+	"name": "SFMC_CDM_PERSONAL_SPECIAL_CARD_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_PERSONAL_SPECIAL_CARD",
+						"type": "DatasetReference"
+					},
+					"name": "CDMPERSONALSPECIALCARD"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_CDM_PERSONAL_SPECIAL_CARD",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "ChangeNull"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Special_Card_UID as integer,",
+				"          Special_Card_Type as integer,",
+				"          BU_Source as string,",
+				"          Area_ID as integer,",
+				"          Card_Area_ID as integer,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          Start_At as timestamp,",
+				"          End_At as timestamp,",
+				"          Order_ID as integer,",
+				"          Card_Level as integer,",
+				"          Card_Type as integer,",
+				"          Is_Get_Benefits as integer,",
+				"          Is_Get_Birthday_Benefits as integer,",
+				"          Delay_Birthday_Benefits as integer,",
+				"          Disabled_At as timestamp,",
+				"          Disabled_Remark as string,",
+				"          Card_Remark as string,",
+				"          Origin_ID as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Create_By as integer,",
+				"          Update_By as integer,",
+				"          Is_Deleted as integer,",
+				"          Delete_By as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CDMPERSONALSPECIALCARD",
+				"CDMPERSONALSPECIALCARD aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Personal_Special_Card',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"CDMPERSONALSPECIALCARD derive(null_string = toString(null()),",
+				"          Disabled_Remark = replace(regexReplace(regexReplace(Disabled_Remark, \"\\r\", \"\"),\"\\n\",\"\"), \"|\",\" \"),",
+				"          Card_Remark = replace(regexReplace(regexReplace(Card_Remark, \"\\r\", \"\"),\"\\n\",\"\"), \"|\",\" \")) ~> ChangeNull",
+				"ChangeNull sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Special_Card_UID,",
+				"          Special_Card_Type,",
+				"          BU_Source,",
+				"          Area_ID,",
+				"          Card_Area_ID,",
+				"          Customer_UID,",
+				"          Member_ID = null_string,",
+				"          Union_ID = null_string,",
+				"          Start_At,",
+				"          End_At,",
+				"          Order_ID,",
+				"          Card_Level,",
+				"          Card_Type,",
+				"          Is_Get_Benefits,",
+				"          Is_Get_Birthday_Benefits,",
+				"          Delay_Birthday_Benefits,",
+				"          Disabled_At,",
+				"          Disabled_Remark,",
+				"          Card_Remark,",
+				"          Origin_ID,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Create_By,",
+				"          Update_By,",
+				"          Is_Deleted,",
+				"          Delete_By,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

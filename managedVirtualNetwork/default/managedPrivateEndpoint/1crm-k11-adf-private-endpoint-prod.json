@@ -1,0 +1,10 @@
+{
+	"name": "1crm-k11-adf-private-endpoint-prod",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/eac1f749-a155-4fa1-ab16-e26d0a1e4c75/resourceGroups/K11-CDM-PROD/providers/Microsoft.Storage/storageAccounts/1crmk11rawprod",
+		"groupId": "dfs",
+		"fqdns": [
+			"1crmk11rawprod.dfs.core.chinacloudapi.cn"
+		]
+	}
+}

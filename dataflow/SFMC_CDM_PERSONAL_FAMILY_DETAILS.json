@@ -1,0 +1,167 @@
+{
+	"name": "SFMC_CDM_PERSONAL_FAMILY_DETAILS",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "DatasetReference"
+					},
+					"name": "CDMPERSONALPROFILEEXTRA"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_PERSONAL_PROFILE",
+						"type": "DatasetReference"
+					},
+					"name": "CDMPERSONALPROFILE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "filterSH"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          With_Kid as string,",
+				"          Kid1_Gender as integer,",
+				"          Kid1_Birthday as timestamp,",
+				"          Kid2_Gender as integer,",
+				"          Kid2_Birthday as timestamp,",
+				"          Kid3_Gender as integer,",
+				"          Kid3_Birthday as timestamp,",
+				"          Kid4_Gender as integer,",
+				"          Kid4_Birthday as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CDMPERSONALPROFILEEXTRA",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          Personal_Customer_ID as string,",
+				"          Area_ID as integer,",
+				"          BU_Source as string,",
+				"          Name_Cn as string,",
+				"          Nick_Name as string,",
+				"          Name_En as string,",
+				"          Person_Title as string,",
+				"          Phone_No as string,",
+				"          Phone_Code as string,",
+				"          Tel_No as string,",
+				"          Level_ID as integer,",
+				"          Level_Name as string,",
+				"          Is_Special_Level as integer,",
+				"          Union_ID as string,",
+				"          Is_Marry as integer,",
+				"          Expire_At as timestamp,",
+				"          Cycle_At as timestamp,",
+				"          Issue_At as timestamp,",
+				"          Person_Status as integer,",
+				"          Res_Zone as string,",
+				"          Res_City as string,",
+				"          Res_Province as string,",
+				"          Res_Country as string,",
+				"          Res_Address as string,",
+				"          Person_Zip as string,",
+				"          Person_Gender as integer,",
+				"          Person_Birthday as timestamp,",
+				"          Birthday_Short as timestamp,",
+				"          Fav_Prod as string,",
+				"          Person_Hobby as string,",
+				"          Fav_Item as string,",
+				"          Month_Income as integer,",
+				"          Year_Income as integer,",
+				"          Family_Monthly_Income as integer,",
+				"          Person_Address2 as string,",
+				"          Person_Address3 as string,",
+				"          Person_Phone2 as string,",
+				"          Person_Email as string,",
+				"          Person_QQ as string,",
+				"          Person_Weibo as string,",
+				"          Person_Company as string,",
+				"          Person_Industry as string,",
+				"          Person_Job as string,",
+				"          Is_Mail_Market as string,",
+				"          Company_Size as integer,",
+				"          Edu_Level as string,",
+				"          Reg_Origin as integer,",
+				"          Reg_Sub_Origin as integer,",
+				"          License_Plate as string,",
+				"          Prefer_language as long,",
+				"          Person_Religion as string,",
+				"          Person_Ethnic as string,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CDMPERSONALPROFILE",
+				"RecordCount derive(Name = 'Azure_Personal_Family_Details',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"filterSH aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"CDMPERSONALPROFILEEXTRA, CDMPERSONALPROFILE join(CDMPERSONALPROFILEEXTRA@Customer_UID == CDMPERSONALPROFILE@Customer_UID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 filter(Area_ID == 13 || Area_ID == 2) ~> filterSH",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

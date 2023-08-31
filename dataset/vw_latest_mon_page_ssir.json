@@ -1,0 +1,67 @@
+{
+	"name": "vw_latest_mon_page_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "page_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "page",
+				"type": "nvarchar"
+			},
+			{
+				"name": "title_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_mon_page"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,195 @@
+{
+	"name": "TRIGGER_TRAN_TABLE",
+	"properties": {
+		"activities": [
+			{
+				"name": "03_TRIGGER_REF_MERCHANT",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "03_TRIGGER_REF_MERCHANT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "05_REF_STORE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "03_TRIGGER_REF_MERCHANT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "05_REF_STORE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "09_REF_PROMOTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "05_REF_STORE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "09_REF_PROMOTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "10_REF_TENANT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "05_REF_STORE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "10_REF_TENANT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "17A_TRAN_ORDER",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "10_REF_TENANT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "09_REF_PROMOTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "06B_REF_PRODUCT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "17A_TRAN_ORDER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "17B_TRAN_ORDER_DETAIL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "17A_TRAN_ORDER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "17B_TRAN_ORDER_DETAIL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "17C_TRAN_ORDER_PAYMENT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "17A_TRAN_ORDER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "17C_TRAN_ORDER_PAYMENT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "06A_REF_PRODUCT_CATEGORY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "05_REF_STORE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "06A_REF_PRODUCT_CATEGORY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "06B_REF_PRODUCT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "06A_REF_PRODUCT_CATEGORY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "06B_REF_PRODUCT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T06:11:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

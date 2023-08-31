@@ -1,0 +1,157 @@
+{
+	"name": "PUB_TRAN_GIFT_RECORD_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Gift_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Customer_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Exchange_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Gift_Cate",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Event_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Gift_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Gift_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Gift_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Parti_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Gift_Quan",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Exchange_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Gift_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Is_Master",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Gift_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Gift_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "From_Fz",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "TRAN_GIFT_RECORD"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

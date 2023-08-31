@@ -1,0 +1,280 @@
+{
+	"name": "temp_mall_goods_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/KGO/Raw_mall"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_sn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "guide",
+				"type": "nvarchar"
+			},
+			{
+				"name": "guide_weight",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "guide_color",
+				"type": "nvarchar"
+			},
+			{
+				"name": "intro",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mer_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brand_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cash_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_cash_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cate_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "effect_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "on_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "off_time",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "buy_limit_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "buy_limit",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_shipping",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "shipping_express",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "shipping_store",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "return_time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "services",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_on_sale",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "whole_is_on_sale",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_recommend",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wx_share",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sort_by",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "min_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "max_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "total_quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "purchase",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "spec_num",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "sales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pviews",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tag_kp_cash",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tag_kp_multiple",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_cart",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_special",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_profitsharing",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "invoice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_search",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "unique_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_by",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_by",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_mall_goods"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

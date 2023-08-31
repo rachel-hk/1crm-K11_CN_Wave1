@@ -1,0 +1,67 @@
+{
+	"name": "16_CDM_TIER_UPGRADE",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_CDM_TIER_UPGRADE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_Com_Member_Level_Record",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_CDM_TIER_UPGRADE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_CDM_TIER_UPGRADE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_CDM_TIER_UPGRADE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_TIER_UPGRADE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_Com_Member_Level_Record",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_Com_Member_Level_Record",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T06:55:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,30 @@
+{
+	"name": "K11_AUTO_TAG_Databricks",
+	"properties": {
+		"activities": [
+			{
+				"name": "K11 Auto Tag",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/MASTER_Updated"
+				},
+				"linkedServiceName": {
+					"referenceName": "K11_AutoTag",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-26T12:20:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

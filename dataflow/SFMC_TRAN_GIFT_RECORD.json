@@ -1,0 +1,149 @@
+{
+	"name": "SFMC_TRAN_GIFT_RECORD",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_GIFT_RECORD",
+						"type": "DatasetReference"
+					},
+					"name": "TRANGIFTRECORD"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_TRAN_GIFT_RECORD",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "nullstring"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Gift_ID as integer,",
+				"          Customer_UID as string,",
+				"          Account_ID as integer,",
+				"          Customer_ID as string,",
+				"          BU_Source as string,",
+				"          Tier_ID as integer,",
+				"          Exchange_No as string,",
+				"          Gift_Cate as integer,",
+				"          Event_Code as string,",
+				"          Event_Name as string,",
+				"          Gift_Type as integer,",
+				"          Gift_Code as string,",
+				"          Gift_Name as string,",
+				"          Coupon_ID as string,",
+				"          Parti_Amount as decimal(18,0),",
+				"          Gift_Quan as integer,",
+				"          Exchange_Time as timestamp,",
+				"          Gift_Amount as decimal(18,0),",
+				"          Is_Master as integer,",
+				"          Gift_Status as integer,",
+				"          Gift_Remark as string,",
+				"          From_Fz as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> TRANGIFTRECORD",
+				"TRANGIFTRECORD filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterLatestData",
+				"TRANGIFTRECORD aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_K11_Gift_Record',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"FilterLatestData derive(null_string = toString(null())) ~> nullstring",
+				"nullstring sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Gift_ID,",
+				"          Customer_UID,",
+				"          Account_ID,",
+				"          Customer_ID = null_string,",
+				"          BU_Source,",
+				"          Tier_ID,",
+				"          Exchange_No,",
+				"          Gift_Cate,",
+				"          Event_Code,",
+				"          Event_Name,",
+				"          Gift_Type,",
+				"          Gift_Code,",
+				"          Gift_Name,",
+				"          Coupon_ID,",
+				"          Parti_Amount,",
+				"          Gift_Quan,",
+				"          Exchange_Time,",
+				"          Gift_Amount,",
+				"          Is_Master,",
+				"          Gift_Status,",
+				"          Gift_Remark,",
+				"          From_Fz,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

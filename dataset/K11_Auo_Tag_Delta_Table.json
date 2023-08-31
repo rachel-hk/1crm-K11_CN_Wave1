@@ -1,0 +1,61 @@
+{
+	"name": "K11_Auo_Tag_Delta_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "K11AutoTagDeltaLake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Temp"
+		},
+		"annotations": [],
+		"type": "AzureDatabricksDeltaLakeDataset",
+		"typeProperties": {
+			"database": "default",
+			"table": "k11_auto_tag_temp_table"
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "string"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "string"
+			},
+			{
+				"name": "Member_ID",
+				"type": "string"
+			},
+			{
+				"name": "Union_ID",
+				"type": "string"
+			},
+			{
+				"name": "BU_Source",
+				"type": "string"
+			},
+			{
+				"name": "Tag_Name",
+				"type": "string"
+			},
+			{
+				"name": "Tag_Value",
+				"type": "string"
+			},
+			{
+				"name": "Tag_Type",
+				"type": "string"
+			},
+			{
+				"name": "Tag_Scope",
+				"type": "string"
+			},
+			{
+				"name": "Updated_Date",
+				"type": "timestamp"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

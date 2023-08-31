@@ -1,0 +1,123 @@
+{
+	"name": "SFMC_DIGIT",
+	"properties": {
+		"activities": [
+			{
+				"name": "SFMC_DIGIT_SHOP_CART",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT_SHOP_CART",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT_SHARE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_DIGIT_SHOP_CART",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT_SHARE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT_QRCODE_SCAN",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_DIGIT_SHARE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT_QRCODE_SCAN",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT_PAGE_BROWSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_DIGIT_QRCODE_SCAN",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT_PAGE_BROWSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT_KGO_BROWSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_DIGIT_PAGE_BROWSE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT_KGO_BROWSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_DIGIT_CLICK",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_DIGIT_KGO_BROWSE",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_DIGIT_CLICK",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-14T08:25:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

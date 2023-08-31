@@ -1,0 +1,166 @@
+{
+	"name": "CDM_PERSONAL_SPECIAL_CARD_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Special_Card_UID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Special_Card_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Card_Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Order_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Card_Level",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Card_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Get_Benefits",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Get_Birthday_Benefits",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Delay_Birthday_Benefits",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Disabled_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Disabled_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Card_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Origin_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Create_By",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Update_By",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Delete_By",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "CDM_PERSONAL_SPECIAL_CARD"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

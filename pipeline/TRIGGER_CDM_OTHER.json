@@ -1,0 +1,123 @@
+{
+	"name": "TRIGGER_CDM_OTHER",
+	"properties": {
+		"activities": [
+			{
+				"name": "12C_CDM_PERSONAL_PROFILE_EXTRA",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "13_CDM_PERSONAL_PIPL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12C_CDM_PERSONAL_PROFILE_EXTRA",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12D_CDM_PERSONAL_FAMILY_DETAILS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "12C_CDM_PERSONAL_PROFILE_EXTRA",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12D_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "13_CDM_PERSONAL_PIPL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "13_CDM_PERSONAL_PIPL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "14_CDM_PERSONAL_CAR",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "13_CDM_PERSONAL_PIPL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "14_CDM_PERSONAL_CAR",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "15_CDM_PERSONAL_SPECIAL_CARD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "13_CDM_PERSONAL_PIPL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "15_CDM_PERSONAL_SPECIAL_CARD",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "16_CDM_TIER_UPGRADE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "15_CDM_PERSONAL_SPECIAL_CARD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "16_CDM_TIER_UPGRADE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-16T13:44:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

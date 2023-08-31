@@ -1,0 +1,292 @@
+{
+	"name": "CS_RETURN",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Return_SID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Parent_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Merchant_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Return_Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Refund_Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Actual_Return_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Apply_Return_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Actual_Return_Send_Point",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Return_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Service_User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Service_Desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Service_Return_Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Apply_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Return_Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Refund_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Refund_Confirm_User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Refund_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Audit_Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Freight_Pay",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Is_Available",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Company_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Audit_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "AfterSales_Service_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Return_Reason_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Return_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Pick_Up",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Return_Freight",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Distributor_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Apply_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Comp_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Product_Return_Type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Take_Product_Area_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Out_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Out_Return_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Inspect_Result",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Merchant_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Sys_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Equip_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Send_Back_Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Complete_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Deadline_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "User_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Exchange_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Create_Time_DB",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time_DB",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "CS_RETURN"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,25 @@
+{
+	"name": "CUSTOMER_TAG_UPDATE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "CUSTOMER_TAG_UPDATE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,297 @@
+{
+	"name": "MANUAL_TAG_DATA_TRIGGER",
+	"properties": {
+		"activities": [
+			{
+				"name": "01_MANUAL_TAG_MEM_MEMBER",
+				"description": "Member Profile",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "01_MANUAL_TAG_MEM_MEMBER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "02_MANUAL_MEM_ACCOUNT",
+				"description": "Member bonus point account",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "01_MANUAL_TAG_MEM_MEMBER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "02_MANUAL_MEM_ACCOUNT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "03_MANUAL_MEM_MEMBER_OPTION",
+				"description": "Communication option",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "02_MANUAL_MEM_ACCOUNT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "03_MANUAL_MEM_MEMBER_OPTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "04_MANUAL_MEM_MEMBER_SPECIAL_CARD_TYPE",
+				"description": "Special card mapping",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "03_MANUAL_MEM_MEMBER_OPTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "04_MANUAL_MEM_MEMBER_SPECIAL_CARD_TYPE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "05_MANUAL_MEM_MEMBER_SPECIAL_MAPPING",
+				"description": "Special card (CDM_PERSONAL_SPECIAL_CARD)",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "04_MANUAL_MEM_MEMBER_SPECIAL_CARD_TYPE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "05_MANUAL_MEM_MEMBER_SPECIAL_MAPPING",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "06_MANUAL_TAG_MEM_MEMBER_TIER",
+				"description": "REF_CUSTOMER_LEVEL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "05_MANUAL_MEM_MEMBER_SPECIAL_MAPPING",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "06_MANUAL_TAG_MEM_MEMBER_TIER",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "07_MANUAL_MSD_PRODUCT",
+				"description": "Product reference table",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "06_MANUAL_TAG_MEM_MEMBER_TIER",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "07_MANUAL_MSD_PRODUCT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "08_MANUAL_MSD_PRODUCT_CATEGORY",
+				"description": "Product category reference table",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "07_MANUAL_MSD_PRODUCT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "08_MANUAL_MSD_PRODUCT_CATEGORY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "09_MANUAL_MSD_STORE",
+				"description": "Store reference table",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "08_MANUAL_MSD_PRODUCT_CATEGORY",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "09_MANUAL_MSD_STORE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "10_MANUAL_TAG_MSD_BRAND",
+				"description": "Brand reference table",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "09_MANUAL_MSD_STORE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "10_MANUAL_TAG_MSD_BRAND",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12_MANUAL_TRN_TRANSACTION_DETAIL",
+				"description": "Transaction details",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "11_MANUAL_TRN_MEMBER_TRANSACTION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12_MANUAL_TRN_TRANSACTION_DETAIL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "13_MANUAL_PTS_POINT_OPERATION",
+				"description": "Bonus point transaction",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "12_MANUAL_TRN_TRANSACTION_DETAIL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "13_MANUAL_PTS_POINT_OPERATION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "14_MEM_MEMBER_MERCHANT_CUSTOM",
+				"description": "Member preference on store, brand and product",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "13_MANUAL_PTS_POINT_OPERATION",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "14_MEM_MEMBER_MERCHANT_CUSTOM",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "11_MANUAL_TRN_MEMBER_TRANSACTION",
+				"description": "Member transaction table",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "10_MANUAL_TAG_MSD_BRAND",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "11_MANUAL_TRN_MEMBER_TRANSACTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-07-16T03:17:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

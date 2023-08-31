@@ -1,0 +1,73 @@
+{
+	"name": "ChatLabsRequestLogs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "activityinstanceid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "accountsid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "accountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "typeofactivity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "journeyname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "activityname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "version",
+				"type": "nvarchar"
+			},
+			{
+				"name": "senttime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "contactkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "uniqueid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "ChatLabsRequestLogs"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

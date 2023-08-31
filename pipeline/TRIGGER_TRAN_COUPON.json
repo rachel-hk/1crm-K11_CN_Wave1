@@ -1,0 +1,43 @@
+{
+	"name": "TRIGGER_TRAN_COUPON",
+	"properties": {
+		"activities": [
+			{
+				"name": "07_REF_COUPON",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "07_REF_COUPON",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "20_TRAN_COUPON_RECORD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "07_REF_COUPON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "20_TRAN_COUPON_RECORD",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:47:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

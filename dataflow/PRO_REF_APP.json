@@ -1,0 +1,150 @@
+{
+	"name": "PRO_REF_APP",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_mon_app",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFAPP"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_APP",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          account_id as long,",
+				"          app_id as long,",
+				"          area_id as integer,",
+				"          name as string,",
+				"          period as integer,",
+				"          starttime as long,",
+				"          endtime as integer,",
+				"          landing_page_url as string,",
+				"          budget as integer,",
+				"          event_url as string,",
+				"          desc as string,",
+				"          status as integer,",
+				"          trigger_switch as integer,",
+				"          debug_switch as integer,",
+				"          operator_id as long,",
+				"          last_operator_id as long,",
+				"          createtime as integer,",
+				"          updatetime as integer,",
+				"          coupon_count as integer,",
+				"          app_type as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFAPP",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          account_id,",
+				"          app_id,",
+				"          area_id,",
+				"          name,",
+				"          period,",
+				"          starttime,",
+				"          endtime,",
+				"          landing_page_url,",
+				"          budget,",
+				"          event_url,",
+				"          desc,",
+				"          status,",
+				"          trigger_switch,",
+				"          debug_switch,",
+				"          operator_id,",
+				"          last_operator_id,",
+				"          createtime,",
+				"          updatetime,",
+				"          coupon_count,",
+				"          app_type,",
+				"          File_Path,",
+				"          Insert_Date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          BU_Source = 'K11 PRC',",
+				"          Start_Time = toTimestamp((toInteger(toString(starttime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          End_Time = toTimestamp((toInteger(toString(endtime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          App_Create_Time = toTimestamp((toInteger(toString(createtime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          App_Update_Time = toTimestamp((toInteger(toString(updatetime))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestREFAPP filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          App_Unique_ID = id,",
+				"          Account_ID = account_id,",
+				"          App_ID = app_id,",
+				"          Area_ID = area_id,",
+				"          App_Name = name,",
+				"          App_Period = period,",
+				"          Start_Time,",
+				"          End_Time,",
+				"          Landing_Page_Url = landing_page_url,",
+				"          App_Budget = budget,",
+				"          Event_Url = event_url,",
+				"          App_Desc = desc,",
+				"          App_Status = status,",
+				"          Trigger_Switch = trigger_switch,",
+				"          Debug_Switch = debug_switch,",
+				"          App_Create_Time,",
+				"          App_Update_Time,",
+				"          Coupon_Count = coupon_count,",
+				"          App_Type = app_type,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          BU_Source",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

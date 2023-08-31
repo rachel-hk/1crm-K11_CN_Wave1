@@ -1,0 +1,212 @@
+{
+	"name": "PRE_TRAN_ORDER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pre_Processing"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Special_Tier_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Provider_Key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Trans_Channel",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Special_Level_Time",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Order_Channel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Origin_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Origin_Parent_Order_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Wechat_Pay_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Origin_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Not_Discount_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Sales_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Real_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Kpoint_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "GV_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Bonus_Point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Bonus_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Order_At",
+				"type": "date"
+			},
+			{
+				"name": "Order_Source",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Order_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Cancel_At",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Order_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Return_Amount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Return_Bonus_Point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Central_Store_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Online_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KPos_Input",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Order_Prom_Discount",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Order_Delivery_Fee",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Pay_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Used_Kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Prom_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Prom_Name",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PRE_TRAN_ORDER"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

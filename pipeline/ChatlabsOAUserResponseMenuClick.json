@@ -1,0 +1,278 @@
+{
+	"name": "ChatlabsOAUserResponseMenuClick",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "File_Name",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "Insert_Date",
+								"value": {
+									"value": "@pipeline().TriggerTime",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "masked_openid",
+								"value": "\"\""
+							},
+							{
+								"name": "masked_unionid",
+								"value": "\"\""
+							}
+						],
+						"storeSettings": {
+							"type": "SftpReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false,
+							"disableChunking": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"writeBehavior": "Insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "chatlabsid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "chatlabsid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "uniqueid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "uniqueid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "masked_openid",
+									"type": "String"
+								},
+								"sink": {
+									"name": "openid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "menuname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "menuname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "submenuname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "submenuname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "countofclicks",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "countofclicks",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "createdateandtime",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "createdateandtime",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "wechataccountid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "wechataccountid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "wechataccountname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "wechataccountname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chatlabsaccountid",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "chatlabsaccountid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "chatlabsaccountname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "chatlabsaccountname",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "masked_unionid",
+									"type": "String"
+								},
+								"sink": {
+									"name": "unionid",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "modifiedon",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "modifiedon",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "sfkey",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sfkey",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "File_Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "File_Name",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Insert_Date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Insert_Date",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SFMC_ChatlabsOAUserResponseMenuClick",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ChatlabsOAUserResponseMenuClick",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "ChatLabs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T04:09:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

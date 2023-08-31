@@ -1,0 +1,235 @@
+{
+	"name": "REF_TENANT_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Tenantship_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tenant_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Source_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Site_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Site_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Site_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Site_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Site_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Contract_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Floor",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Cate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV1_Class_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV1_Class_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV1_Class_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV1_Class_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV2_Class_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV2_Class_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV2_Class_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LV2_Class_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Com_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Com_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Com_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Lease_Area",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 4
+			},
+			{
+				"name": "Contract_Start",
+				"type": "date"
+			},
+			{
+				"name": "Contract_End",
+				"type": "date"
+			},
+			{
+				"name": "Open_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Close_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Parent_Tenant_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Code_Value",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cate_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Old_Class_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Old_Class_Name_EN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Old_Class_Name_SC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Old_Class_Name_TC",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Store_Classify",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Kpos_Install",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tenant_Interest_Tag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tenant_Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "REF_TENANT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

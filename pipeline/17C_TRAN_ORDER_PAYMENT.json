@@ -1,0 +1,67 @@
+{
+	"name": "17C_TRAN_ORDER_PAYMENT",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_TRAN_ORDER_PAYMENT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_Com_Member_Order_Payment",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_TRAN_ORDER_PAYMENT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_TRAN_ORDER_PAYMENT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_TRAN_ORDER_PAYMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_TRAN_ORDER_PAYMENT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_Com_Member_Order_Payment",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_Com_Member_Order_Payment",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T06:55:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

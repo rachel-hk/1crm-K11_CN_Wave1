@@ -1,0 +1,140 @@
+{
+	"name": "SFMC_CDM_TIER_UPGRADE_Full",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_TIER_UPGRADE",
+						"type": "DatasetReference"
+					},
+					"name": "CDMTIERUPGRADE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_CDM_TIER_UPGRADE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "AddNull"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Tier_Upgrade_Unique_ID as string,",
+				"          Customer_UID as string,",
+				"          Area_ID as integer,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          Account_ID as integer,",
+				"          Open_ID as string,",
+				"          Tier_ID as integer,",
+				"          Tier_Name as string,",
+				"          Tier_ID_Old as integer,",
+				"          Tier_Name_Old as string,",
+				"          Tier_Remark as string,",
+				"          Upgrade_Origin as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Submit_At as timestamp,",
+				"          Reach_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          VIP_Code as string,",
+				"          VIP_Code_Old as string,",
+				"          Store_Code as string,",
+				"          Upgrade_Type as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CDMTIERUPGRADE",
+				"CDMTIERUPGRADE aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Customer_Tier_Upgrade',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"CDMTIERUPGRADE derive(null_string = toString(null()),",
+				"          Tier_Remark = replace(regexReplace(regexReplace(Tier_Remark, \"\\r\", \"\"),\"\\n\",\"\"), \"|\",\" \")) ~> AddNull",
+				"AddNull sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Tier_Upgrade_Unique_ID,",
+				"          Customer_UID,",
+				"          Area_ID,",
+				"          Member_ID = null_string,",
+				"          BU_Source,",
+				"          Account_ID,",
+				"          Open_ID,",
+				"          Tier_ID,",
+				"          Tier_Name,",
+				"          Tier_ID_Old,",
+				"          Tier_Name_Old,",
+				"          Tier_Remark,",
+				"          Upgrade_Origin,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Submit_At,",
+				"          Reach_At,",
+				"          Is_Deleted,",
+				"          VIP_Code = null_string,",
+				"          VIP_Code_Old = null_string,",
+				"          Store_Code,",
+				"          Upgrade_Type,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+	"name": "up_origin_mapping_version_20230809",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "upgrade_origin",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "upgrade_origin_name",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "up_origin_mapping_version_20230809"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

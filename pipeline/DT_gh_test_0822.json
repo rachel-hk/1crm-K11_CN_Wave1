@@ -1,0 +1,23 @@
+{
+	"name": "DT_gh_test_0822",
+	"properties": {
+		"activities": [
+			{
+				"name": "K11_AUTO_TAG_Databricks_3_Batches",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_Databricks_3_Batches_useDT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-08-22T09:39:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

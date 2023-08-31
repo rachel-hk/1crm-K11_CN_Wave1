@@ -1,0 +1,116 @@
+{
+	"name": "MANUAL_TAG_MSD_PRODUCT_CATEGORY",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_PRODUCT_CATEGORY",
+						"type": "DatasetReference"
+					},
+					"name": "REFPRODUCTCATEGORY"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_MANUAL_TAG_MSD_PRODUCT_CATEGORY",
+						"type": "DatasetReference"
+					},
+					"name": "Sink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropColumn"
+				},
+				{
+					"name": "AddColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Cate_ID as long,",
+				"          Buckle_Point as decimal(18,0),",
+				"          Category_Code as string,",
+				"          Cate_Code as string,",
+				"          Cate_Desc as string,",
+				"          Full_ID_Path as string,",
+				"          Full_Name_Path as string,",
+				"          Is_Highlight as integer,",
+				"          Is_Visible as integer,",
+				"          Is_Leaves as integer,",
+				"          Product_Level as integer,",
+				"          List_Sort as integer,",
+				"          Merchant_ID as long,",
+				"          Cate_Name as string,",
+				"          Parent_ID as long,",
+				"          Third_Code as string,",
+				"          Cate_Type as integer,",
+				"          First_Category_Id as long,",
+				"          Enable_Add_Att as integer,",
+				"          High_Price as decimal(18,0),",
+				"          Low_Price as decimal(18,0),",
+				"          High_Gross_Margin as decimal(18,0),",
+				"          Low_Gross_Margin as decimal(18,0),",
+				"          Tax_Code as string,",
+				"          Is_Available as integer,",
+				"          Is_Deleted as long,",
+				"          Version_No as integer,",
+				"          Create_Userid as long,",
+				"          Create_Username as string,",
+				"          Create_Userip as string,",
+				"          Create_Usermac as string,",
+				"          Create_Time as timestamp,",
+				"          Create_Time_Db as timestamp,",
+				"          Update_Userid as long,",
+				"          Update_Username as string,",
+				"          Update_Userip as string,",
+				"          Update_Usermac as string,",
+				"          Update_Time as timestamp,",
+				"          Update_Time_Db as timestamp,",
+				"          Company_ID as long,",
+				"          Store_ID as long,",
+				"          Ref_ID as long,",
+				"          Full_Name_Path_Lan2 as string,",
+				"          Name_Lan2 as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> REFPRODUCTCATEGORY",
+				"REFPRODUCTCATEGORY select(mapColumn(",
+				"          id = Cate_ID,",
+				"          product_category_code = Category_Code,",
+				"          product_category_desc = Cate_Desc,",
+				"          product_category_name = Cate_Name",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropColumn",
+				"DropColumn derive(active_flag = 1,",
+				"          create_by = 1,",
+				"          create_date = currentDate(),",
+				"          modify_by = 1,",
+				"          modify_date = currentDate(),",
+				"          tenant_id = 1) ~> AddColumn",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> Sink"
+			]
+		}
+	}
+}

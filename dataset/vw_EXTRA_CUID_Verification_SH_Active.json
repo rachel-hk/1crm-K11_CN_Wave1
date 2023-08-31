@@ -1,0 +1,25 @@
+{
+	"name": "vw_EXTRA_CUID_Verification_SH_Active",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_EXTRA_CUID_Verification_SH_Active"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,75 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_UP_Origin_20230801",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "K11PRC_Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Union_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KDP_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CL_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KGO_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "New_KGO_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "manual_tag_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Hashed_Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Hashed_VIP_Code",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "MANUAL_TAG_MEM_MEMBER_UP_Origin_20230801"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,143 @@
+{
+	"name": "SFMC_TRAN_CAR_PARK",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_CAR_PARK",
+						"type": "DatasetReference"
+					},
+					"name": "TRANCARPARK"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_TRAN_CAR_PARK",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterActive"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "DateTIme"
+				},
+				{
+					"name": "ChangeNull"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Order_No as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Area_ID as integer,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          License_Plate as string,",
+				"          Pay_Time as timestamp,",
+				"          Customer_Tier as integer,",
+				"          Total_Amount as decimal(18,0),",
+				"          Order_Amount as decimal(18,0),",
+				"          Coupon_Type as string,",
+				"          Enter_Time as timestamp,",
+				"          Leave_Time as timestamp,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> TRANCARPARK",
+				"TRANCARPARK filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterActive",
+				"TRANCARPARK aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Customer_CarPark',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"TRANCARPARK derive(Pay_Time = Pay_Time+hours(8),",
+				"          Enter_Time = Enter_Time+hours(8),",
+				"          Leave_Time = Leave_Time+hours(8),",
+				"          Create_At = Create_At+hours(8),",
+				"          Update_At = Update_At+hours(8),",
+				"          Start_Date = Start_Date+hours(8)) ~> DateTIme",
+				"FilterActive derive(null_string = toString(null())) ~> ChangeNull",
+				"ChangeNull sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Order_No,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Area_ID,",
+				"          Member_ID,",
+				"          Union_ID = null_string,",
+				"          License_Plate = null_string,",
+				"          Pay_Time,",
+				"          Customer_Tier,",
+				"          Total_Amount,",
+				"          Order_Amount,",
+				"          Coupon_Type,",
+				"          Enter_Time,",
+				"          Leave_Time,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

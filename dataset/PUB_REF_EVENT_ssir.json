@@ -1,0 +1,151 @@
+{
+	"name": "PUB_REF_EVENT_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Unique_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_No",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_Remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Perm",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Event_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Can_Reused",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Diff_Event_Reused",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Diff_Event_Reused_Times",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Same_Event_Reused",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Same_Event_Reused_Times",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Times_Limit_Cycle",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Times_Limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Participation_Amount_Limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Participation_Amount_Min",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Participation_Amount_Max",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total_Quantity_Limit",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Create_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_At",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "REF_EVENT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

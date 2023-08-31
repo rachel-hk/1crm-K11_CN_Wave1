@@ -1,0 +1,108 @@
+{
+	"name": "SFMC_RECORD_COUNT_20230717",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "RecordCount"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_BATCH_HEADER",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoSFMC"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatest"
+				},
+				{
+					"name": "pivot1"
+				},
+				{
+					"name": "InsertDateToDate"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> RecordCount",
+				"InsertDateToDate filter(Record_Date==addDays(currentDate(),0)) ~> FilterLatest",
+				"FilterLatest pivot(groupBy(Record_Date),",
+				"     pivotBy(Name),",
+				"     {} = max(Record_Count),",
+				"     columnNaming: '$N$V',",
+				"     lateral: false) ~> pivot1",
+				"RecordCount derive(Record_Date = toDate(Insert_Date)) ~> InsertDateToDate",
+				"pivot1 derive(Zero_Count = 0) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Record_Date as string,",
+				"          Azure_CS_Return as string,",
+				"          Azure_Coupon_Record as string,",
+				"          Azure_Customer_Tier_Upgrade as string,",
+				"          Azure_Digit_Click as string,",
+				"          Azure_Digit_NewKGO_Browse as string,",
+				"          Azure_Digit_Page_Browse as string,",
+				"          Azure_Digit_Share as string,",
+				"          Azure_K11_Customer_KDP as string,",
+				"          Azure_K11_Gift_Record as string,",
+				"          Azure_K11_Transaction as string,",
+				"          Azure_Member_QRCode_Scan as string,",
+				"          Azure_NewKGO_Lottery as string,",
+				"          Azure_OldKGO_Shopping_Cart as string,",
+				"          Azure_Online_Transaction_Details as string,",
+				"          Azure_Personal_Family_Details as string,",
+				"          Azure_Personal_PIPL as string,",
+				"          Azure_Personal_Profile as string,",
+				"          Azure_Personal_Profile_Extra as string,",
+				"          Azure_Personal_Special_Card as string,",
+				"          Azure_Ref_App as string,",
+				"          Azure_Ref_Area as string,",
+				"          Azure_Ref_Channel as string,",
+				"          Azure_Ref_Coupon as string,",
+				"          Azure_Ref_Event as string,",
+				"          Azure_Ref_Page as string,",
+				"          Azure_Ref_Product as string,",
+				"          Azure_Ref_Promotion as string,",
+				"          Azure_Ref_QRCode as string,",
+				"          Azure_Ref_Tenant as string,",
+				"          K11_Fact_tag as string,",
+				"          K11_Operation_tag as string,",
+				"          Azure_Customer_CarPark as string,",
+				"          Zero_Count as string",
+				"     ),",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> SinktoSFMC"
+			]
+		}
+	}
+}

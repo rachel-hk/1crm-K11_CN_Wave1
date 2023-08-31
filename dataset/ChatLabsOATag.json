@@ -1,0 +1,97 @@
+{
+	"name": "ChatLabsOATag",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "chatlabsid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "uniqueid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "openid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tagcategory",
+				"type": "nvarchar"
+			},
+			{
+				"name": "score",
+				"type": "nvarchar"
+			},
+			{
+				"name": "clickcount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "interactiontype",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lastclickedtime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chatlabsaccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "chatlabsaccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unionid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "modifiedon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sfkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "ChatLabsOATag"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,98 @@
+{
+	"name": "DIGIT_CHANNEL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Source_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "App_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Session_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Visitor_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Channel_Level",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Channel_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Rec_Status",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "DIGIT_CHANNEL"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

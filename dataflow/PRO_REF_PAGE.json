@@ -1,0 +1,104 @@
+{
+	"name": "PRO_REF_PAGE",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_mon_page",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFPAGE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_PAGE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          app_id as long,",
+				"          page_id as long,",
+				"          page as string,",
+				"          title_id as long,",
+				"          title as string,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFPAGE",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          app_id,",
+				"          page_id,",
+				"          page,",
+				"          title_id,",
+				"          title,",
+				"          deleted",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          BU_Source = 'K11 PRC') ~> AddColumn",
+				"IngestREFPAGE filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Page_Unique_ID = id,",
+				"          App_ID = app_id,",
+				"          Page_ID = page_id,",
+				"          Page_Url = page,",
+				"          Title_ID = title_id,",
+				"          Page_Title = title,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          BU_Source",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

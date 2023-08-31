@@ -1,0 +1,133 @@
+{
+	"name": "raw_we_qrcode_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/WE_QRCODE",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "app_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "ticket",
+				"type": "UTF8"
+			},
+			{
+				"name": "ticket_hash",
+				"type": "INT64"
+			},
+			{
+				"name": "url",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "logo_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "category",
+				"type": "INT32"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "expire",
+				"type": "INT32"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			},
+			{
+				"name": "scene_id",
+				"type": "INT64"
+			},
+			{
+				"name": "scene_str",
+				"type": "UTF8"
+			},
+			{
+				"name": "code_desc",
+				"type": "UTF8"
+			},
+			{
+				"name": "delay_day",
+				"type": "INT32"
+			},
+			{
+				"name": "effect_time",
+				"type": "INT32"
+			},
+			{
+				"name": "trigger_type",
+				"type": "INT32"
+			},
+			{
+				"name": "trigger_id",
+				"type": "INT32"
+			},
+			{
+				"name": "trigger_rule_count",
+				"type": "INT32"
+			},
+			{
+				"name": "trigger_status",
+				"type": "INT32"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "data_from",
+				"type": "INT32"
+			},
+			{
+				"name": "createtime",
+				"type": "INT32"
+			},
+			{
+				"name": "updatetime",
+				"type": "INT32"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT32"
+			},
+			{
+				"name": "group_id",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

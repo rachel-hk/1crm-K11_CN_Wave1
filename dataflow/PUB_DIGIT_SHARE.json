@@ -1,0 +1,139 @@
+{
+	"name": "PUB_DIGIT_SHARE",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DIGIT_SHARE",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromDIGITSHARE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_SHARE",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Share_Unique_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          App_ID as long,",
+				"          App_Name as string,",
+				"          Session_ID as long,",
+				"          Visitor_ID as long,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Channel_ID as long,",
+				"          Page_ID as long,",
+				"          Page_Title as string,",
+				"          Share_Page_ID as long,",
+				"          Follow_ID as integer,",
+				"          Follow_Type as integer,",
+				"          Follow_Index as integer,",
+				"          Share_ID as long,",
+				"          From_Share_ID as long,",
+				"          Share_Level as integer,",
+				"          Share_From_User_ID as string,",
+				"          Pv_From_Share as integer,",
+				"          Share_By_Other as integer,",
+				"          Create_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromDIGITSHARE",
+				"IngestionfromDIGITSHARE filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Share_Unique_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          App_ID as long,",
+				"          App_Name as string,",
+				"          Session_ID as long,",
+				"          Visitor_ID as long,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Channel_ID as long,",
+				"          Page_ID as long,",
+				"          Page_Title as string,",
+				"          Share_Page_ID as long,",
+				"          Follow_ID as integer,",
+				"          Follow_Type as integer,",
+				"          Follow_Index as integer,",
+				"          Share_ID as long,",
+				"          From_Share_ID as long,",
+				"          Share_Level as integer,",
+				"          Share_From_User_ID as string,",
+				"          Pv_From_Share as integer,",
+				"          Share_By_Other as integer,",
+				"          Create_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['DELETE FROM DIGIT_SHARE WHERE Start_Date = FORMAT(GetDate(), \\'yyyy-MM-dd\\');'],",
+				"     postSQLs:['WITH TEMP AS (\\nSELECT [Share_Unique_ID], ROW_NUMBER() OVER (PARTITION BY [Customer_UID]\\n,[BU_Source]\\n,[App_ID]\\n,[App_Name]\\n,[Session_ID]\\n,[Visitor_ID]\\n,[User_ID]\\n,[Member_ID]\\n,[Channel_ID]\\n,[Page_ID]\\n,[Page_Title]\\n,[Share_Page_ID]\\n,[Follow_ID]\\n,[Follow_Type]\\n,[Follow_Index]\\n,[Share_ID]\\n,[From_Share_ID]\\n,[Share_Level]\\n,[Share_From_User_ID]\\n,[Pv_From_Share]\\n,[Share_By_Other]\\n,[Create_Time] ORDER BY Start_Date DESC) AS SEQUENCE \\n FROM [dbo].[DIGIT_SHARE])\\n\\nDelete from DIGIT_SHARE where CONCAT(Share_Unique_ID,START_DATE) in (select CONCAT(Share_Unique_ID,START_DATE) from TEMP where SEQUENCE > 1);'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Share_Unique_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          App_ID,",
+				"          App_Name,",
+				"          Session_ID,",
+				"          Visitor_ID,",
+				"          User_ID,",
+				"          Member_ID,",
+				"          Channel_ID,",
+				"          Page_ID,",
+				"          Page_Title,",
+				"          Share_Page_ID,",
+				"          Follow_ID,",
+				"          Follow_Type,",
+				"          Follow_Index,",
+				"          Share_ID,",
+				"          From_Share_ID,",
+				"          Share_Level,",
+				"          Share_From_User_ID,",
+				"          Pv_From_Share,",
+				"          Share_By_Other,",
+				"          Create_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

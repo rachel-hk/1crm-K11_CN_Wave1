@@ -1,0 +1,20 @@
+{
+	"name": "manual_mem_tag",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "mem_tag"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,138 @@
+{
+	"name": "raw_com_member_kdp_use_record_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_KDP_USE_RECORD]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_KDP_USE_RECORD",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT32"
+			},
+			{
+				"name": "partner_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "kdp_member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "partner_serial_number",
+				"type": "UTF8"
+			},
+			{
+				"name": "kdp_serial_number",
+				"type": "UTF8"
+			},
+			{
+				"name": "cancel_kdp_serial_number",
+				"type": "UTF8"
+			},
+			{
+				"name": "kp_unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "frozen_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "kp",
+				"type": "INT64"
+			},
+			{
+				"name": "kdp",
+				"type": "INT32"
+			},
+			{
+				"name": "cash",
+				"type": "UTF8"
+			},
+			{
+				"name": "qrcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "api_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "try_count",
+				"type": "INT32"
+			},
+			{
+				"name": "scan_at",
+				"type": "INT64"
+			},
+			{
+				"name": "start_at",
+				"type": "INT64"
+			},
+			{
+				"name": "expire_at",
+				"type": "INT64"
+			},
+			{
+				"name": "cancel_at",
+				"type": "INT64"
+			},
+			{
+				"name": "is_return",
+				"type": "INT32"
+			},
+			{
+				"name": "partner_campaign_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "partner_campaign_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

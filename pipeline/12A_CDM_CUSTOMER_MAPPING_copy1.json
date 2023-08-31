@@ -1,0 +1,47 @@
+{
+	"name": "12A_CDM_CUSTOMER_MAPPING_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_CDM_CUSTOMER_MAPPING",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_CDM_CUSTOMER_MAPPING",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_CDM_CUSTOMER_MAPPING",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_CDM_CUSTOMER_MAPPING",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-23T17:05:49Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

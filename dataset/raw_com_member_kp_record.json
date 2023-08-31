@@ -1,0 +1,202 @@
+{
+	"name": "raw_com_member_kp_record",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_KP_RECORD]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_KP_RECORD",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "vip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "open_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "record_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_record_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "createtime",
+				"type": "INT64"
+			},
+			{
+				"name": "bonus_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "bonus_description",
+				"type": "UTF8"
+			},
+			{
+				"name": "bonus_point",
+				"type": "INT32"
+			},
+			{
+				"name": "sales_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "sales_amount_real",
+				"type": "UTF8"
+			},
+			{
+				"name": "doc_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_name_sc",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_name_tc",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_name_en",
+				"type": "UTF8"
+			},
+			{
+				"name": "sb_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "ship_id",
+				"type": "INT32"
+			},
+			{
+				"name": "event_id",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "level_id",
+				"type": "INT32"
+			},
+			{
+				"name": "special_level_id",
+				"type": "INT32"
+			},
+			{
+				"name": "special_level_time",
+				"type": "INT64"
+			},
+			{
+				"name": "payment_type_id",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_day",
+				"type": "INT64"
+			},
+			{
+				"name": "time_of_month",
+				"type": "INT64"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "mall_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "returned",
+				"type": "INT32"
+			},
+			{
+				"name": "returned_origin_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "api_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "kp_channel",
+				"type": "INT32"
+			},
+			{
+				"name": "kp_type",
+				"type": "INT32"
+			},
+			{
+				"name": "discount_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "gvamount",
+				"type": "UTF8"
+			},
+			{
+				"name": "kp_status",
+				"type": "INT32"
+			},
+			{
+				"name": "fz_channel",
+				"type": "INT32"
+			},
+			{
+				"name": "is_tmp",
+				"type": "INT32"
+			},
+			{
+				"name": "is_confirm",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

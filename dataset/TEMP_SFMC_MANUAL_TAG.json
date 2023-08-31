@@ -1,0 +1,36 @@
+{
+	"name": "TEMP_SFMC_MANUAL_TAG",
+	"properties": {
+		"description": "\n",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('MANUAL_TAG',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.gz')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('K11_MANUAL_TAG',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd_HH'))",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

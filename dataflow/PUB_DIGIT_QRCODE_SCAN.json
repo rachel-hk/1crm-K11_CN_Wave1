@@ -1,0 +1,87 @@
+{
+	"name": "PUB_DIGIT_QRCODE_SCAN",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DIGIT_QRCODE_SCAN",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromDIGITQRCODESCAN"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_DIGIT_QRCODE_SCAN",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Qrcode_Scan_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Account_ID as integer,",
+				"          App_ID as string,",
+				"          Open_ID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          Qrcode_ID as integer,",
+				"          Event_Key as string,",
+				"          Is_Subscribe as integer,",
+				"          Data_From as integer,",
+				"          Create_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromDIGITQRCODESCAN",
+				"IngestionfromDIGITQRCODESCAN filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Qrcode_Scan_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Account_ID,",
+				"          App_ID,",
+				"          Open_ID,",
+				"          Member_ID,",
+				"          Union_ID,",
+				"          Qrcode_ID,",
+				"          Event_Key,",
+				"          Is_Subscribe,",
+				"          Data_From,",
+				"          Create_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

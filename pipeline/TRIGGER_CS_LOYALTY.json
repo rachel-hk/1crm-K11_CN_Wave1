@@ -1,0 +1,63 @@
+{
+	"name": "TRIGGER_CS_LOYALTY",
+	"properties": {
+		"activities": [
+			{
+				"name": "22_CS_RETURN",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "22_CS_RETURN",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "23A_LOYALTY_KDP",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "22_CS_RETURN",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "23A_LOYALTY_KDP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "23B_LOYALTY_KDP_DETAIL_TRANSACTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "23A_LOYALTY_KDP",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "23B_LOYALTY_KDP_DETAIL_TRANSACTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-15T02:43:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

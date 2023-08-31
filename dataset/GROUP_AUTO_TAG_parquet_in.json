@@ -1,0 +1,53 @@
+{
+	"name": "GROUP_AUTO_TAG_parquet_in",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd_group",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pub"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "GROUP_SHAREABLE_TAG_noDate",
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Member_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tag_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tag_Value",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tag_Type",
+				"type": "UTF8"
+			},
+			{
+				"name": "Tag_Category",
+				"type": "UTF8"
+			},
+			{
+				"name": "Updated_Date",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

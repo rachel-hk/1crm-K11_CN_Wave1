@@ -1,0 +1,27 @@
+{
+	"name": "SFTP_DIGIT_PAGE_BROWSE_2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SFTPSFMC2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@concat('DIGIT_PAGE_BROWSE_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'_TEST','.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": "/import"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "temp_com_member_sales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_member_sales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

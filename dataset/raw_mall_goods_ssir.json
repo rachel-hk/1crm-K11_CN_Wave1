@@ -1,0 +1,238 @@
+{
+	"name": "raw_mall_goods_ssir",
+	"properties": {
+		"description": "@concat('[MALL].[MALL_GOODS]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_KGO/mall"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MALL/MALL_GOODS",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "title",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_sn",
+				"type": "UTF8"
+			},
+			{
+				"name": "guide",
+				"type": "UTF8"
+			},
+			{
+				"name": "guide_weight",
+				"type": "INT32"
+			},
+			{
+				"name": "guide_color",
+				"type": "UTF8"
+			},
+			{
+				"name": "intro",
+				"type": "UTF8"
+			},
+			{
+				"name": "mer_id",
+				"type": "INT32"
+			},
+			{
+				"name": "store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "brand_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "cash_type",
+				"type": "INT32"
+			},
+			{
+				"name": "member_cash_type",
+				"type": "INT32"
+			},
+			{
+				"name": "card_type",
+				"type": "INT32"
+			},
+			{
+				"name": "cate_id",
+				"type": "INT32"
+			},
+			{
+				"name": "effect_type",
+				"type": "INT32"
+			},
+			{
+				"name": "on_time",
+				"type": "INT64"
+			},
+			{
+				"name": "off_time",
+				"type": "INT64"
+			},
+			{
+				"name": "buy_limit_type",
+				"type": "INT32"
+			},
+			{
+				"name": "buy_limit",
+				"type": "INT64"
+			},
+			{
+				"name": "is_shipping",
+				"type": "INT32"
+			},
+			{
+				"name": "shipping_express",
+				"type": "INT32"
+			},
+			{
+				"name": "shipping_store",
+				"type": "INT32"
+			},
+			{
+				"name": "return_time",
+				"type": "INT32"
+			},
+			{
+				"name": "services",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_on_sale",
+				"type": "INT32"
+			},
+			{
+				"name": "whole_is_on_sale",
+				"type": "INT32"
+			},
+			{
+				"name": "is_recommend",
+				"type": "INT32"
+			},
+			{
+				"name": "wx_share",
+				"type": "INT32"
+			},
+			{
+				"name": "sort_by",
+				"type": "INT32"
+			},
+			{
+				"name": "min_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "max_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "total_quantity",
+				"type": "INT32"
+			},
+			{
+				"name": "purchase",
+				"type": "INT32"
+			},
+			{
+				"name": "spec_num",
+				"type": "INT32"
+			},
+			{
+				"name": "sales",
+				"type": "INT32"
+			},
+			{
+				"name": "pviews",
+				"type": "INT32"
+			},
+			{
+				"name": "tag_kp_cash",
+				"type": "INT32"
+			},
+			{
+				"name": "tag_kp_multiple",
+				"type": "INT32"
+			},
+			{
+				"name": "is_cart",
+				"type": "INT32"
+			},
+			{
+				"name": "is_special",
+				"type": "INT32"
+			},
+			{
+				"name": "is_profitsharing",
+				"type": "INT32"
+			},
+			{
+				"name": "invoice",
+				"type": "INT32"
+			},
+			{
+				"name": "is_search",
+				"type": "INT32"
+			},
+			{
+				"name": "unique_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "create_by",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_by",
+				"type": "UTF8"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

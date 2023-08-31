@@ -1,0 +1,171 @@
+{
+	"name": "SFMC_TRAN_ORDER_DETAILS_copy1",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_ORDER_DETAILS",
+						"type": "DatasetReference"
+					},
+					"name": "TRANORDERDETAILS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_TRAN_ORDER_DETAILS",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "AddUID"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Order_SID as long,",
+				"          Order_Code as string,",
+				"          Customer_UID as string,",
+				"          Source_Type as string,",
+				"          BU_Source as string,",
+				"          User_ID as long,",
+				"          Merchant_ID as long,",
+				"          Product_ID as long,",
+				"          Mp_ID as long,",
+				"          Store_Mp_ID as long,",
+				"          Item_Status as string,",
+				"          Warehouse_Type as integer,",
+				"          Store_ID as string,",
+				"          Settle_Method as integer,",
+				"          Settle_Status as integer,",
+				"          Settle_No as decimal(18,0),",
+				"          Product_Item_Amount as decimal(18,0),",
+				"          Product_Pur_No as decimal(18,0),",
+				"          Product_Name_CN as string,",
+				"          Product_Sale_Type as integer,",
+				"          Product_Price_Original as decimal(18,0),",
+				"          Product_Price_Market as decimal(18,0),",
+				"          Product_Price_Sale as decimal(18,0),",
+				"          Product_Price_Point as integer,",
+				"          Pur_Price as decimal(18,0),",
+				"          Buy_Type as integer,",
+				"          Product_Gross_Weight as decimal(18,0),",
+				"          Parent_Order_Code as string,",
+				"          Product_Item_Before_Amount as decimal(18,0),",
+				"          Product_Code as string,",
+				"          Third_Merchant_Product_Code as string,",
+				"          Product_Unit as string,",
+				"          Sale_Unit as string,",
+				"          Place_Origin as string,",
+				"          Ext_Info as string,",
+				"          Product_Standard as string,",
+				"          Product_Material as string,",
+				"          Product_Price_Before_Final as decimal(18,0),",
+				"          Comment_Status as integer,",
+				"          Series_Parent_ID as long,",
+				"          Brand_ID as long,",
+				"          Brand_Name as string,",
+				"          Cate_ID as long,",
+				"          Cate_Name as string,",
+				"          Whole_Cate_ID as string,",
+				"          Whole_Cate_Name as string,",
+				"          Relation_Mp_ID as long,",
+				"          Product_Type as integer,",
+				"          Art_No as string,",
+				"          Delivery_No as decimal(18,0),",
+				"          Product_Price_Final as decimal(18,0),",
+				"          Setmeal_Code as string,",
+				"          Waiter_Code as string,",
+				"          Setmeal_Name as string,",
+				"          Support_Invoice as integer,",
+				"          Setmeal_No as integer,",
+				"          Product_Remark as string,",
+				"          Gift_Card_Code as string,",
+				"          Live_ID as long,",
+				"          Send_Coupon as string,",
+				"          Is_Available as integer,",
+				"          Is_Deleted as integer,",
+				"          Version_No as integer,",
+				"          Create_Time as timestamp,",
+				"          Create_Time_DB as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Update_Time_DB as timestamp,",
+				"          Company_ID as long,",
+				"          Out_Order_Code as string,",
+				"          Is_Inner_Supplier as integer,",
+				"          Supplier_Name as string,",
+				"          Supplier_ID as long,",
+				"          Is_Drop_Shipping as integer,",
+				"          Supplier_Code as string,",
+				"          Package_Fee as decimal(18,0),",
+				"          Auto_Refund as integer,",
+				"          Refund_ID as integer,",
+				"          Expiry_Time as timestamp,",
+				"          Series_Product_Code as string,",
+				"          Service_Date_Time as string,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> TRANORDERDETAILS",
+				"AddUID aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'TEMP_TRAN_ORDER_DETAILS',",
+				"          Insert_Date = currentUTC()) ~> AddColumns",
+				"TRANORDERDETAILS derive(Order_UID = concat(Source_Type,toString(Order_SID))) ~> AddUID",
+				"AddUID sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

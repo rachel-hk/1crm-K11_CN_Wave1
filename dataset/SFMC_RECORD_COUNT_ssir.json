@@ -1,0 +1,33 @@
+{
+	"name": "SFMC_RECORD_COUNT_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Record_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Insert_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "SFMC_RECORD_COUNT"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

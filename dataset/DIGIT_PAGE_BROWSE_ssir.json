@@ -1,0 +1,149 @@
+{
+	"name": "DIGIT_PAGE_BROWSE_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Browse_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Session_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Page_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Title_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Visitor_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "User_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Member_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_Log_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Event_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "View_Page",
+				"type": "nvarchar"
+			},
+			{
+				"name": "View_Page_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Area_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_SN",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Product_Channel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Land_Page",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Land_Page_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Browse_Duration",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Exit_Page",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Landing_Page",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Channel_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Visit_ID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "DIGIT_PAGE_BROWSE"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

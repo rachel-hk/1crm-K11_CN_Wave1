@@ -1,0 +1,145 @@
+{
+	"name": "temp_com_member_level_record",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "account_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "open_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "level_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "old_level_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "old_level_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operator_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "operator_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "reg_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "reg_sub_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "up_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "backup_create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "submit_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "reach_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "vip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "old_vip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "upgrade_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_member_level_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

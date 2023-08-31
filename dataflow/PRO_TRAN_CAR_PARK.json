@@ -1,0 +1,177 @@
+{
+	"name": "PRO_TRAN_CAR_PARK",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_parking_order",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawComParkingOrder"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMCUSTOMERMAPPING"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_TRAN_CAR_PARK",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "JoinToGetCustomerUID"
+				},
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          area_id as integer,",
+				"          member_id as string,",
+				"          union_id as string,",
+				"          license_plate as string,",
+				"          car_member_id as string,",
+				"          order_no as string,",
+				"          pay_time as long,",
+				"          member_level as integer,",
+				"          total_amount as decimal(38,18),",
+				"          order_amount as decimal(38,18),",
+				"          coupon_type as string,",
+				"          enter_time as long,",
+				"          leave_time as long,",
+				"          create_at as long,",
+				"          update_at as long,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestRawComParkingOrder",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMCUSTOMERMAPPING",
+				"FilterLatest, IngestCDMCUSTOMERMAPPING join(member_id == K11PRC_Member_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinToGetCustomerUID",
+				"JoinToGetCustomerUID select(mapColumn(",
+				"          id,",
+				"          area_id,",
+				"          member_id = Hashed_Member_ID,",
+				"          union_id = IngestRawComParkingOrder@union_id,",
+				"          license_plate,",
+				"          car_member_id,",
+				"          order_no,",
+				"          pay_time,",
+				"          member_level,",
+				"          total_amount,",
+				"          order_amount,",
+				"          coupon_type,",
+				"          enter_time,",
+				"          leave_time,",
+				"          create_at,",
+				"          update_at,",
+				"          deleted,",
+				"          Customer_UID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          BU_Source = 'K11 PRC',",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1,",
+				"          Pay_Time = toTimestamp((toInteger(toString(pay_time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Enter_Time = toTimestamp((toInteger(toString(enter_time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Leave_Time = toTimestamp((toInteger(toString(leave_time))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_At = toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestRawComParkingOrder filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_fileSystem: 'k11-auto-tag-temp',",
+				"     assertFailure_folderPath: 'temp_dir',",
+				"     mapColumn(",
+				"          Order_No = order_no,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Area_ID = area_id,",
+				"          Member_ID = member_id,",
+				"          Union_ID = union_id,",
+				"          License_Plate = license_plate,",
+				"          Pay_Time = AddColumn@Pay_Time,",
+				"          Customer_Tier = member_level,",
+				"          Total_Amount = total_amount,",
+				"          Order_Amount = order_amount,",
+				"          Coupon_Type = coupon_type,",
+				"          Enter_Time = AddColumn@Enter_Time,",
+				"          Leave_Time = AddColumn@Leave_Time,",
+				"          Create_At = AddColumn@Create_At,",
+				"          Update_At = AddColumn@Update_At,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

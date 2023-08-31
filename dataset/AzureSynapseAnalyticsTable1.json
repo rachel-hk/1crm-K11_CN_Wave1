@@ -1,0 +1,37 @@
+{
+	"name": "AzureSynapseAnalyticsTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "active_flag",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "real_active_flag",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "active_flag_update_list_20230727"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

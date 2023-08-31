@@ -1,0 +1,163 @@
+{
+	"name": "PRO_DIGIT_SHOP_CART",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_Latest_mall_shopping_cart",
+						"type": "DatasetReference"
+					},
+					"name": "IngestShoppingCart"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMCUSTOMERMAPPING"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_DIGIT_SHOP_CART",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDIGITSHOPCART",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "JoinMapping"
+				},
+				{
+					"name": "DropUnwantColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          user_id as string,",
+				"          goods_id as integer,",
+				"          goods_map_id as integer,",
+				"          goods_area_id as integer,",
+				"          order_id as integer,",
+				"          number as integer,",
+				"          time_of_day as integer,",
+				"          status as integer,",
+				"          price_id as integer,",
+				"          create_at as long,",
+				"          update_at as long,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestShoppingCart",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMCUSTOMERMAPPING",
+				"DropUnwantColumn derive(BU_Source = 'K11 PRC',",
+				"          Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1,",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_At = toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          time_day = toDate(concat(left(toString(time_of_day),4),'-',right(left(toString(time_of_day),6),2),'-',right(toString(time_of_day),2)))) ~> AddColumn",
+				"IngestShoppingCart, IngestCDMCUSTOMERMAPPING join(user_id == KGO_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinMapping",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          user_id,",
+				"          goods_id,",
+				"          goods_map_id,",
+				"          goods_area_id,",
+				"          order_id,",
+				"          number,",
+				"          time_of_day,",
+				"          status,",
+				"          price_id,",
+				"          create_at,",
+				"          update_at,",
+				"          deleted,",
+				"          Customer_UID,",
+				"          Hashed_Member_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantColumn",
+				"JoinMapping filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Shop_Cart_ID = id,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Order_ID = order_id,",
+				"          Member_ID = user_id,",
+				"          Product_ID = goods_id,",
+				"          Product_Map_ID = goods_map_id,",
+				"          Product_Area_ID = goods_area_id,",
+				"          Product_No = number,",
+				"          Time_Day = time_day,",
+				"          Cart_Status = status,",
+				"          Price_ID = price_id,",
+				"          Create_At = AddColumn@Create_At,",
+				"          Update_At = AddColumn@Update_At,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDIGITSHOPCART"
+			]
+		}
+	}
+}

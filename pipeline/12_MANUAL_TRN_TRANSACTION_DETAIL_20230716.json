@@ -1,0 +1,37 @@
+{
+	"name": "12_MANUAL_TRN_TRANSACTION_DETAIL_20230716",
+	"properties": {
+		"activities": [
+			{
+				"name": "MANUAL_TAG_TRN_TRANSACTION_DETAIL_20230716",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "MANUAL_TAG_TRN_TRANSACTION_DETAIL_20230716",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-16T11:01:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

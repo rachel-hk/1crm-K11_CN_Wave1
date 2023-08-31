@@ -1,0 +1,240 @@
+{
+	"name": "raw_tenantship",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/RM"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "RM/tenantship",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "SITE_ID",
+				"type": "String"
+			},
+			{
+				"name": "SITE_CODE",
+				"type": "String"
+			},
+			{
+				"name": "SITE_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "SITE_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "SITE_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "TENANTSHIP_ID",
+				"type": "String"
+			},
+			{
+				"name": "TENANT_ID",
+				"type": "String"
+			},
+			{
+				"name": "CONTRACT_NO",
+				"type": "String"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "String"
+			},
+			{
+				"name": "STORE_CODE",
+				"type": "String"
+			},
+			{
+				"name": "FLOOR",
+				"type": "String"
+			},
+			{
+				"name": "STORE_CATEGORY",
+				"type": "String"
+			},
+			{
+				"name": "BRAND_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "BRAND_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "BRAND_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "BRAND_ID",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL1_CLASS_ID",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL1_CLASS_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL1_CLASS_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL1_CLASS_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL2_CLASS_ID",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL2_CLASS_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL2_CLASS_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "LEVEL2_CLASS_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "CATEGORY_ID",
+				"type": "String"
+			},
+			{
+				"name": "CATEGORY_NAME",
+				"type": "String"
+			},
+			{
+				"name": "STORE_NAME",
+				"type": "String"
+			},
+			{
+				"name": "COMPANY_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "COMPANY_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "COMPANY_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "KPOS_STORE_CODE",
+				"type": "String"
+			},
+			{
+				"name": "LEASE_AREA",
+				"type": "String"
+			},
+			{
+				"name": "CONTRACT_START",
+				"type": "String"
+			},
+			{
+				"name": "CONTRACT_END",
+				"type": "String"
+			},
+			{
+				"name": "OPENING_TIME",
+				"type": "String"
+			},
+			{
+				"name": "CLOSING_TIME",
+				"type": "String"
+			},
+			{
+				"name": "PARENT_TENANTSHIP_ID",
+				"type": "String"
+			},
+			{
+				"name": "OLD_CLASS_ID",
+				"type": "String"
+			},
+			{
+				"name": "OLD_CLASS_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "OLD_CLASS_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "OLD_CLASS_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "STORE_CLASSIFY",
+				"type": "String"
+			},
+			{
+				"name": "STATUS",
+				"type": "String"
+			},
+			{
+				"name": "IS_CENTRAL",
+				"type": "String"
+			},
+			{
+				"name": "CREATED",
+				"type": "String"
+			},
+			{
+				"name": "LOGO_URL",
+				"type": "String"
+			},
+			{
+				"name": "KPOS_INSTALLED_STATUS",
+				"type": "String"
+			},
+			{
+				"name": "KPOS_INSTALLED_TIME",
+				"type": "String"
+			},
+			{
+				"name": "TENANT_TAG_ID",
+				"type": "String"
+			},
+			{
+				"name": "TENANT_TAG_NAME_EN",
+				"type": "String"
+			},
+			{
+				"name": "TENANT_TAG_NAME_SC",
+				"type": "String"
+			},
+			{
+				"name": "TENANT_TAG_NAME_TC",
+				"type": "String"
+			},
+			{
+				"name": "LEASING_ID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

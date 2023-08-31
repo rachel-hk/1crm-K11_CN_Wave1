@@ -1,0 +1,19 @@
+{
+	"name": "pts_point_operation_temp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmManualTagMgmtProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag/pts"
+		},
+		"annotations": [],
+		"type": "AzureMySqlTable",
+		"schema": [],
+		"typeProperties": {
+			"tableName": "pts_point_operation_temp"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

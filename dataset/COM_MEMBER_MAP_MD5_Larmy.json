@@ -1,0 +1,55 @@
+{
+	"name": "COM_MEMBER_MAP_MD5_Larmy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmk11rawprod",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "[CRM].[COM_MEMBER_MAP_MD5].parquet",
+				"folderPath": "CRM/COM_MEMBER_MAP_MD5",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_id_md5",
+				"type": "UTF8"
+			},
+			{
+				"name": "vip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "vip_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "createtime",
+				"type": "INT32"
+			},
+			{
+				"name": "updatetime",
+				"type": "INT32"
+			},
+			{
+				"name": "last_id",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

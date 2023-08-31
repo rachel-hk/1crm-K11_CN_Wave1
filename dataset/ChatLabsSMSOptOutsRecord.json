@@ -1,0 +1,70 @@
+{
+	"name": "ChatLabsSMSOptOutsRecord",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC_Azure"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "chatlabsid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "entity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "datetime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "wechataccountid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ChatLabsaccountid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ChatLabsaccountname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "actionname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "contactkey",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unionid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "ChatLabsSMSOptOutsRecord"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

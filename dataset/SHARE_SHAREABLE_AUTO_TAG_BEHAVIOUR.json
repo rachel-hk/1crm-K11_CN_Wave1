@@ -1,0 +1,34 @@
+{
+	"name": "SHARE_SHAREABLE_AUTO_TAG_BEHAVIOUR",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtFileShare",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"fileName": {
+					"value": "@concat('Shareable_Behavior_Auto_Tag_',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'),'.csv.gz')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd')",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": "|",
+			"compressionCodec": "gzip",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

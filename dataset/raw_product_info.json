@@ -1,0 +1,318 @@
+{
+	"name": "raw_product_info",
+	"properties": {
+		"description": "@concat('[PRODUCT].[PRODUCT_INFO]_',formatDateTime(utcnow(),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_New_KGO/product"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "PRODUCT/PRODUCT_INFO",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "merchant_prod_volume",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "shelfLife_days",
+				"type": "INT32"
+			},
+			{
+				"name": "return_days",
+				"type": "INT32"
+			},
+			{
+				"name": "english_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "merchant_category_id",
+				"type": "INT64"
+			},
+			{
+				"name": "gross_weight",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "subtitle",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "replacement_days",
+				"type": "INT32"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "merchant_prod_length",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "merchant_prod_height",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "net_weight",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "net_weight_start",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "chinese_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "guarantee_days",
+				"type": "INT32"
+			},
+			{
+				"name": "merchant_prod_width",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "sale_calc_unit_id",
+				"type": "INT64"
+			},
+			{
+				"name": "is_inner_supplier",
+				"type": "INT32"
+			},
+			{
+				"name": "supplier_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "supplier_id",
+				"type": "INT64"
+			},
+			{
+				"name": "supplier_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "tax_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_available",
+				"type": "INT32"
+			},
+			{
+				"name": "is_deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "version_no",
+				"type": "INT32"
+			},
+			{
+				"name": "create_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "update_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "client_versionno",
+				"type": "UTF8"
+			},
+			{
+				"name": "company_id",
+				"type": "INT64"
+			},
+			{
+				"name": "category_id",
+				"type": "INT64"
+			},
+			{
+				"name": "brand_id",
+				"type": "INT64"
+			},
+			{
+				"name": "warehouse_type",
+				"type": "INT32"
+			},
+			{
+				"name": "subtitle_lan2",
+				"type": "UTF8"
+			},
+			{
+				"name": "use_type",
+				"type": "INT32"
+			},
+			{
+				"name": "machining_type",
+				"type": "INT32"
+			},
+			{
+				"name": "combine_type",
+				"type": "INT32"
+			},
+			{
+				"name": "place_origin_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "fast_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "mp_model",
+				"type": "INT64"
+			},
+			{
+				"name": "category_full_id_path",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_invoice",
+				"type": "INT32"
+			},
+			{
+				"name": "is_force_invoice",
+				"type": "INT32"
+			},
+			{
+				"name": "is_vat_invoice",
+				"type": "INT32"
+			},
+			{
+				"name": "expiry_date_type",
+				"type": "INT32"
+			},
+			{
+				"name": "expiry_date_value",
+				"type": "INT32"
+			},
+			{
+				"name": "expiry_date_unit",
+				"type": "INT32"
+			},
+			{
+				"name": "expiry_date_time",
+				"type": "INT96"
+			},
+			{
+				"name": "face_value",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "batch_strategy_id",
+				"type": "INT64"
+			},
+			{
+				"name": "outbound_strategy",
+				"type": "INT32"
+			},
+			{
+				"name": "purchase_limit_type",
+				"type": "INT32"
+			},
+			{
+				"name": "purchase_limit_interval_type",
+				"type": "INT32"
+			},
+			{
+				"name": "purchase_limit_interval",
+				"type": "INT32"
+			},
+			{
+				"name": "purchase_limit_date_start",
+				"type": "INT96"
+			},
+			{
+				"name": "purchase_limit_date_end",
+				"type": "INT96"
+			},
+			{
+				"name": "purchase_limit_per_user",
+				"type": "INT32"
+			},
+			{
+				"name": "auto_refund",
+				"type": "INT32"
+			},
+			{
+				"name": "selling_points",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_drop_shipping",
+				"type": "INT32"
+			},
+			{
+				"name": "ext_field1",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field2",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field3",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field4",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field5",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

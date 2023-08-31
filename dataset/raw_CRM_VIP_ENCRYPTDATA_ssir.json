@@ -1,0 +1,57 @@
+{
+	"name": "raw_CRM_VIP_ENCRYPTDATA_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "prc_crmplus_uplolad/DBO/CRMP_VIP_ENCRYPTDATA",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "vip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "phone",
+				"type": "UTF8"
+			},
+			{
+				"name": "email",
+				"type": "UTF8"
+			},
+			{
+				"name": "addr",
+				"type": "UTF8"
+			},
+			{
+				"name": "real_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "nick_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "en_name",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

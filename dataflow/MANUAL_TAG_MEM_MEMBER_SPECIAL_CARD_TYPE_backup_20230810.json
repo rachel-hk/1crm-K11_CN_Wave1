@@ -1,0 +1,117 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_SPECIAL_CARD_TYPE_backup_20230810",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_PERSONAL_SPECIAL_CARD",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMPERSONALPROFILEEXTRA"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_SPECIAL_CARD_TYPE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToMemMemberSpecialCardType"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddCoulmn"
+				},
+				{
+					"name": "dedup"
+				},
+				{
+					"name": "DropCount"
+				},
+				{
+					"name": "DropColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Special_Card_UID as integer,",
+				"          Special_Card_Type as integer,",
+				"          BU_Source as string,",
+				"          Area_ID as integer,",
+				"          Card_Area_ID as integer,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          Start_At as timestamp,",
+				"          End_At as timestamp,",
+				"          Order_ID as integer,",
+				"          Card_Level as integer,",
+				"          Card_Type as integer,",
+				"          Is_Get_Benefits as integer,",
+				"          Is_Get_Birthday_Benefits as integer,",
+				"          Delay_Birthday_Benefits as integer,",
+				"          Disabled_At as timestamp,",
+				"          Disabled_Remark as string,",
+				"          Card_Remark as string,",
+				"          Origin_ID as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Create_By as integer,",
+				"          Update_By as integer,",
+				"          Is_Deleted as integer,",
+				"          Delete_By as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMPERSONALPROFILEEXTRA",
+				"DropColumn derive(special_card_type_name = \"\",",
+				"          create_date = fromUTC(currentUTC(),'YYYY-MM-DD HH:mm')) ~> AddCoulmn",
+				"AddCoulmn aggregate(groupBy(id,",
+				"          special_card_type_name,",
+				"          create_date),",
+				"     count = count()) ~> dedup",
+				"dedup select(mapColumn(",
+				"          id,",
+				"          special_card_type_name,",
+				"          create_date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropCount",
+				"IngestCDMPERSONALPROFILEEXTRA select(mapColumn(",
+				"          id = Special_Card_Type",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropColumn",
+				"DropCount sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          card_type as long,",
+				"          special_card_type_name as string,",
+				"          create_date as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     postSQLs:['Update K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'体验金\\'\\nwhere id = 1;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'普通ak\\'\\nwhere id = 2;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'学生ak\\'\\nwhere id = 3;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'个人ak\\'\\nwhere id = 4;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'家庭ak\\'\\nwhere id = 5;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'atelier广州\\'\\nwhere id = 6;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'atelier上海\\'\\nwhere id = 7;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'glp会员\\'\\nwhere id = 10;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'钱包普通会员\\'\\nwhere id = 11;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'钱包付费会员\\'\\nwhere id = 12;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'新世界花园会员\\'\\nwhere id = 13;\\nUpdate K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'荣誉黑卡\\'\\nwhere id = 14;\\nUpdate  K11_PUB.MANUAL_TAG_MEM_MEMBER_SPECIAL_card_type\\nset special_card_type_name = N\\'ak甄选\\'\\nwhere id = 15;'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToMemMemberSpecialCardType"
+			]
+		}
+	}
+}

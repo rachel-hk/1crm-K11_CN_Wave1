@@ -1,0 +1,51 @@
+{
+	"name": "SFTP_CUIDVerification",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_CUID_Verification_SH_Active",
+						"type": "DatasetReference"
+					},
+					"name": "CUIDVerificationSHActive"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_Profile_CUID_Verification",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToSFMC"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Customer_UID as string,",
+				"          HaveK11Tag as string,",
+				"          IsGroupMember as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CUIDVerificationSHActive",
+				"CUIDVerificationSHActive sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SinkToSFMC"
+			]
+		}
+	}
+}

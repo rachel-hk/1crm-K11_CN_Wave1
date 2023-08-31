@@ -1,0 +1,136 @@
+{
+	"name": "REF_APP_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "App_Unique_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Account_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "App_ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Area_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_Period",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Landing_Page_Url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_Budget",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Event_Url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_Desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "App_Status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trigger_Switch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Debug_Switch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "App_Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Coupon_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_Type",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BU_Source",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "REF_APP"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

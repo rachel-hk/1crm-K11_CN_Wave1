@@ -1,0 +1,32 @@
+{
+	"name": "vw_MANUAL_TAG_MEM_MEMBER_patch_up_origin_20230818",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "personal_customer_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "up_origin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "upgrade_origin",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_MANUAL_TAG_MEM_MEMBER_patch_up_origin_20230818"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

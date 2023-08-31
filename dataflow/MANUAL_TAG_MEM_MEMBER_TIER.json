@@ -1,0 +1,108 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_TIER",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_CUSTOMER_LEVEL",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFCUSTOMERLEVEL"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MANUAL_TAG_MEM_MEMBER_TIER",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToTempTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterActiveLevel"
+				},
+				{
+					"name": "RenameColumn"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Tier_Code as string,",
+				"          System_ID as integer,",
+				"          Source_BU as string,",
+				"          Account_ID as integer,",
+				"          App_ID as string,",
+				"          Card_ID as string,",
+				"          Card_BD as string,",
+				"          Name_Fenze as string,",
+				"          Tier_Name as string,",
+				"          Valid_Type as integer,",
+				"          Start_At as timestamp,",
+				"          Expire_At as timestamp,",
+				"          Upgrade_Rule as integer,",
+				"          Upgrade_Model as integer,",
+				"          Kpoint_Rate as decimal(18,0),",
+				"          Spoint_Rate as decimal(18,0),",
+				"          Tier_Discount as integer,",
+				"          Is_Sync as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFCUSTOMERLEVEL",
+				"FilterActiveLevel derive(tier_level = 1,",
+				"          active_flag = 1,",
+				"          create_by = 1,",
+				"          create_date = currentUTC(),",
+				"          tenant_id = 1,",
+				"          status = 1,",
+				"          member_tier_code = Tier_Code,",
+				"          default_tier = 0) ~> AddColumn",
+				"IngestREFCUSTOMERLEVEL filter(toInteger(Is_Deleted) == 0) ~> FilterActiveLevel",
+				"AddColumn select(mapColumn(",
+				"          id = Tier_Code,",
+				"          member_tier_name = Tier_Name,",
+				"          tier_level,",
+				"          active_flag,",
+				"          create_by,",
+				"          create_date,",
+				"          tenant_id,",
+				"          status,",
+				"          member_tier_code,",
+				"          default_tier",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RenameColumn",
+				"RenameColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToTempTable"
+			]
+		}
+	}
+}

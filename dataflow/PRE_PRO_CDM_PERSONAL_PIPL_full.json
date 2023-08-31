@@ -1,0 +1,135 @@
+{
+	"name": "PRE_PRO_CDM_PERSONAL_PIPL_full",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_member_privacy_policy",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawPrivacyPolicy"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMCUSTOMERMAPPING"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRE_PRO_CDM_PERSONAL_PIPL",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"rejectedDataLinkedService": {
+						"referenceName": "1crmTagMgmtRawProd",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "JoinMapping"
+				},
+				{
+					"name": "DropUnwantColumn"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          policy_version as integer,",
+				"          api_key as string,",
+				"          account_id as integer,",
+				"          create_at as integer,",
+				"          update_at as integer,",
+				"          deleted as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestRawPrivacyPolicy",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMCUSTOMERMAPPING",
+				"DropUnwantColumn derive(BU_Source = 'K11 PRC',",
+				"          Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          Create_At = toTimestamp((toInteger(toString(create_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss'),",
+				"          Update_At = toTimestamp((toInteger(toString(update_at))+28800)*1000l,'yyyy-MM-dd HH:mm:ss')) ~> AddColumn",
+				"IngestRawPrivacyPolicy, IngestCDMCUSTOMERMAPPING join(member_id == K11PRC_Member_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinMapping",
+				"JoinMapping select(mapColumn(",
+				"          id,",
+				"          member_id = Hashed_Member_ID,",
+				"          policy_version,",
+				"          account_id,",
+				"          create_at,",
+				"          update_at,",
+				"          deleted,",
+				"          Customer_UID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantColumn",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Customer_UID,",
+				"          Member_ID = member_id,",
+				"          BU_Source,",
+				"          Policy_Ver = policy_version,",
+				"          Account_ID = account_id,",
+				"          Create_At = AddColumn@Create_At,",
+				"          Update_At = AddColumn@Update_At,",
+				"          Is_Deleted = deleted,",
+				"          Start_Date",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

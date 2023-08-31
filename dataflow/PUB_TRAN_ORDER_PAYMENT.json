@@ -1,0 +1,70 @@
+{
+	"name": "PUB_TRAN_ORDER_PAYMENT",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TRAN_ORDER_PAYMENT",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromTRANORDERDETAILS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_TRAN_ORDER_PAYMENT",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"description": "Export data to PUB_CDM_PERSONAL_PIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Payment_UID as integer,",
+				"          Order_Code as string,",
+				"          Payment_Type as string,",
+				"          Type_ID as string,",
+				"          Payment_Kpoint as integer,",
+				"          Pay_Price as decimal(30,4),",
+				"          Is_Real as integer,",
+				"          Is_Free as integer,",
+				"          Create_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromTRANORDERDETAILS",
+				"IngestionfromTRANORDERDETAILS filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          each(match(/* All input columns */true()),",
+				"               /* Input name */$$ = $$)",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

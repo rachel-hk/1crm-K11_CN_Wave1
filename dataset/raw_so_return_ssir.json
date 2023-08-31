@@ -1,0 +1,482 @@
+{
+	"name": "raw_so_return_ssir",
+	"properties": {
+		"description": "@concat('[OMS].[SO_RETURN]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_New_KGO/oms"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "OMS/SO_RETURN",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "parent_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "merchant_id",
+				"type": "INT64"
+			},
+			{
+				"name": "customer_id",
+				"type": "INT64"
+			},
+			{
+				"name": "customer_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "return_status",
+				"type": "INT32"
+			},
+			{
+				"name": "refund_status",
+				"type": "INT32"
+			},
+			{
+				"name": "actual_return_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "apply_return_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "return_remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "service_user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "service_desc",
+				"type": "UTF8"
+			},
+			{
+				"name": "service_return_reason",
+				"type": "UTF8"
+			},
+			{
+				"name": "apply_time",
+				"type": "INT96"
+			},
+			{
+				"name": "return_reason",
+				"type": "UTF8"
+			},
+			{
+				"name": "refund_time",
+				"type": "INT96"
+			},
+			{
+				"name": "consignee_warehouse_id",
+				"type": "INT64"
+			},
+			{
+				"name": "consignee_address",
+				"type": "UTF8"
+			},
+			{
+				"name": "consignee_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "consignee_mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "consignee_create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "courier_number",
+				"type": "UTF8"
+			},
+			{
+				"name": "logistics_company",
+				"type": "UTF8"
+			},
+			{
+				"name": "logistics_company_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "refund_confirm_user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "refund_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "audit_reason",
+				"type": "UTF8"
+			},
+			{
+				"name": "audit_user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "audit_user_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "freight",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "is_available",
+				"type": "INT32"
+			},
+			{
+				"name": "is_deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "create_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "create_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "create_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "server_ip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "update_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "update_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "company_id",
+				"type": "INT64"
+			},
+			{
+				"name": "audit_time",
+				"type": "INT96"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "return_reason_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "return_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "settle_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "settle_status",
+				"type": "INT32"
+			},
+			{
+				"name": "is_pick_up",
+				"type": "INT32"
+			},
+			{
+				"name": "user_courier_number",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_logistics_company_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_logistics_company",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_return_freight",
+				"type": "UTF8"
+			},
+			{
+				"name": "distributor_id",
+				"type": "INT64"
+			},
+			{
+				"name": "source",
+				"type": "UTF8"
+			},
+			{
+				"name": "compensatory_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "goods_return_type",
+				"type": "INT32"
+			},
+			{
+				"name": "take_goods_address",
+				"type": "UTF8"
+			},
+			{
+				"name": "take_goods_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "take_goods_mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "take_goods_province_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "take_goods_city_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "take_goods_county_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "take_goods_area_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "out_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "out_return_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_good_other_contact_phone",
+				"type": "UTF8"
+			},
+			{
+				"name": "inspection_result",
+				"type": "INT32"
+			},
+			{
+				"name": "inspection_desc",
+				"type": "UTF8"
+			},
+			{
+				"name": "inspection_date",
+				"type": "INT96"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT64"
+			},
+			{
+				"name": "merchant_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_id",
+				"type": "INT64"
+			},
+			{
+				"name": "store_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_drop_shipping",
+				"type": "INT32"
+			},
+			{
+				"name": "supplier_id",
+				"type": "INT64"
+			},
+			{
+				"name": "supplier_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "supplier_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "sys_source",
+				"type": "UTF8"
+			},
+			{
+				"name": "equip_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "send_back_status",
+				"type": "INT32"
+			},
+			{
+				"name": "goods_status",
+				"type": "INT32"
+			},
+			{
+				"name": "completion_time",
+				"type": "INT96"
+			},
+			{
+				"name": "deadline_time",
+				"type": "INT96"
+			},
+			{
+				"name": "user_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field1",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field2",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field3",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field4",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field5",
+				"type": "UTF8"
+			},
+			{
+				"name": "exchange_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "actual_return_packaging_fee",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "packaging_fee",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "apply_union_return_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_union_return_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_points",
+				"type": "INT64"
+			},
+			{
+				"name": "actual_return_point_money",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_commission",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_gift_card",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field1",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field2",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field3",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field4",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field5",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

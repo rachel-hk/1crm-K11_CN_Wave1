@@ -1,0 +1,99 @@
+{
+	"name": "SFMC_DIGIT_PAGE_BROWSE",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_PAGE_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "DIGITPAGEBROWSE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "RecordCount"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Browse_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Session_ID as string,",
+				"          Page_ID as string,",
+				"          Title_ID as string,",
+				"          App_ID as string,",
+				"          App_Name as string,",
+				"          Visitor_ID as string,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Event_Log_ID as string,",
+				"          Event_ID as string,",
+				"          Create_Time as timestamp,",
+				"          View_Page as string,",
+				"          View_Page_Name as string,",
+				"          Area_ID as string,",
+				"          Product_SN as string,",
+				"          Product_Channel as string,",
+				"          Land_Page as string,",
+				"          Land_Page_Time as timestamp,",
+				"          Browse_Duration as integer,",
+				"          Is_Exit_Page as integer,",
+				"          Is_Landing_Page as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Channel_ID as integer,",
+				"          Visit_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false,",
+				"     wildcardPaths:[(concat('DIGIT_PAGE_BROWSE',toString(toDate(fromUTC(currentUTC(),'China Standard Time')),'yyyyMMdd')))]) ~> DIGITPAGEBROWSE",
+				"RecordCount derive(Name = 'Azure_Digit_Page_Browse',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"DIGITPAGEBROWSE aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

@@ -1,0 +1,137 @@
+{
+	"name": "SFMC_DIGIT_KGO_BROWSE",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_DIGIT_KGO_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "DIGITKGOBROWSE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TEMP_SFMC_DIGIT_KGO_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToDataLake"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToRecordCount"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "AddColumns"
+				},
+				{
+					"name": "nullstring"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          Browse_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Platform_ID as integer,",
+				"          User_ID as long,",
+				"          Domain_Info_ID as long,",
+				"          Parent_ID as long,",
+				"          Mp_ID as long,",
+				"          Merchant_ID as long,",
+				"          Store_ID as long,",
+				"          Browsing_Time as timestamp,",
+				"          Business_Type as integer,",
+				"          Is_Available as integer,",
+				"          Is_Deleted as integer,",
+				"          Create_Time as timestamp,",
+				"          Create_Time_Db as timestamp,",
+				"          Update_Time as timestamp,",
+				"          Update_Time_Db as timestamp,",
+				"          Company_ID as long,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> DIGITKGOBROWSE",
+				"DIGITKGOBROWSE filter(toDate(Start_Date) == toDate($Start_Date,'yyyyMMdd')) ~> FilterLatestData",
+				"DIGITKGOBROWSE aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_Digit_NewKGO_Browse',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> AddColumns",
+				"FilterLatestData derive(null_string = toString(null())) ~> nullstring",
+				"nullstring sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Browse_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Platform_ID,",
+				"          User_ID = null_string,",
+				"          Domain_Info_ID,",
+				"          Parent_ID,",
+				"          Mp_ID,",
+				"          Merchant_ID,",
+				"          Store_ID,",
+				"          Browsing_Time,",
+				"          Business_Type,",
+				"          Is_Available,",
+				"          Is_Deleted,",
+				"          Create_Time,",
+				"          Create_Time_Db,",
+				"          Update_Time,",
+				"          Update_Time_Db,",
+				"          Company_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToDataLake",
+				"AddColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkToRecordCount"
+			]
+		}
+	}
+}

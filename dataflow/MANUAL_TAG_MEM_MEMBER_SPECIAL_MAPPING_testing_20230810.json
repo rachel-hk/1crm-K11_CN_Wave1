@@ -1,0 +1,159 @@
+{
+	"name": "MANUAL_TAG_MEM_MEMBER_SPECIAL_MAPPING_testing_20230810",
+	"properties": {
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_PERSONAL_SPECIAL_CARD",
+						"type": "DatasetReference"
+					},
+					"name": "MemberSpecialCard"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerMapping"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_MANUAL_TAG_MEM_MEMBER_SPECIAL_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoTempFile"
+				}
+			],
+			"transformations": [
+				{
+					"name": "JoinMapping"
+				},
+				{
+					"name": "RenameColumn"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "Dedup"
+				},
+				{
+					"name": "FilterLatest"
+				},
+				{
+					"name": "filter1",
+					"description": "Filtering rows using expressions on columns 'member_id'"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Special_Card_UID as integer,",
+				"          Special_Card_Type as integer,",
+				"          BU_Source as string,",
+				"          Area_ID as integer,",
+				"          Card_Area_ID as integer,",
+				"          Customer_UID as string,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          Start_At as timestamp,",
+				"          End_At as timestamp,",
+				"          Order_ID as integer,",
+				"          Card_Level as integer,",
+				"          Card_Type as integer,",
+				"          Is_Get_Benefits as integer,",
+				"          Is_Get_Birthday_Benefits as integer,",
+				"          Delay_Birthday_Benefits as integer,",
+				"          Disabled_At as timestamp,",
+				"          Disabled_Remark as string,",
+				"          Card_Remark as string,",
+				"          Origin_ID as integer,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Create_By as integer,",
+				"          Update_By as integer,",
+				"          Is_Deleted as integer,",
+				"          Delete_By as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> MemberSpecialCard",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CustomerMapping",
+				"FilterLatest, CustomerMapping join(MemberSpecialCard@Customer_UID == CustomerMapping@Customer_UID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinMapping",
+				"derivedColumn1 select(mapColumn(",
+				"          special_card_type = Special_Card_Type_Mix,",
+				"          id = Special_Card_UID,",
+				"          member_id = manual_tag_id",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RenameColumn",
+				"Dedup derive(active_flag = 1,",
+				"          create_date = currentUTC(),",
+				"          create_by = 1,",
+				"          tenant_id = 1) ~> AddColumn",
+				"RenameColumn aggregate(groupBy(id,",
+				"          special_card_type,",
+				"          member_id),",
+				"     count = count()) ~> Dedup",
+				"MemberSpecialCard filter(toDate(Start_Date) == addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn filter(isNull(member_id) == false()) ~> filter1",
+				"JoinMapping derive(Special_Card_Type_Mix = toInteger(concat(toString(Special_Card_Type), toString(Card_Level)))) ~> derivedColumn1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          special_card_type,",
+				"          id,",
+				"          member_id,",
+				"          active_flag,",
+				"          create_date,",
+				"          create_by,",
+				"          tenant_id",
+				"     )) ~> SinktoTempFile"
+			]
+		}
+	}
+}

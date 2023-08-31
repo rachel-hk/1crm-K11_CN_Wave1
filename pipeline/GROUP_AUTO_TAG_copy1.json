@@ -1,0 +1,63 @@
+{
+	"name": "GROUP_AUTO_TAG_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "SFMC_SHAREABLE_AUTO_TAG_BEHAVIOR",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_SHAREABLE_AUTO_TAG_FACT",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_SHAREABLE_AUTO_TAG_BEHAVIOR",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_SHAREABLE_AUTO_TAG_FACT",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_SHAREABLE_AUTO_TAG_FACT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SFMC_SHAREABLE_AUTO_TAG_OPERATION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SFMC_SHAREABLE_AUTO_TAG_BEHAVIOR",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SFMC_SHAREABLE_AUTO_TAG_OPERATION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-07-27T03:31:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

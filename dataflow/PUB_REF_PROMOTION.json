@@ -1,0 +1,103 @@
+{
+	"name": "PUB_REF_PROMOTION",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "REF_PROMOTION",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromREFPROMOTION"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PUB_REF_PROMOTION",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Prom_ID as string,",
+				"          Area_ID as integer,",
+				"          Source_BU as string,",
+				"          Prom_Name as string,",
+				"          Prom_Type as string,",
+				"          Start_Time as timestamp,",
+				"          End_Time as timestamp,",
+				"          Is_Pause as integer,",
+				"          Prom_Status as integer,",
+				"          Is_Show as integer,",
+				"          Prom_Warm_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromREFPROMOTION",
+				"IngestionfromREFPROMOTION filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Prom_ID as string,",
+				"          Area_ID as integer,",
+				"          Source_BU as string,",
+				"          Prom_Name as string,",
+				"          Prom_Type as string,",
+				"          Start_Time as timestamp,",
+				"          End_Time as timestamp,",
+				"          Is_Pause as integer,",
+				"          Prom_Status as integer,",
+				"          Is_Show as integer,",
+				"          Prom_Warm_Time as timestamp,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['DELETE FROM REF_PROMOTION WHERE Start_Date = FORMAT(GetDate(), \\'yyyy-MM-dd\\');'],",
+				"     postSQLs:['WITH TEMP AS (\\nSELECT [Prom_ID], ROW_NUMBER() OVER (PARTITION BY [Area_ID]\\n,[Source_BU]\\n,[Prom_Name]\\n,[Prom_Type]\\n,[Start_Time]\\n,[End_Time]\\n,[Is_Pause]\\n,[Prom_Status]\\n,[Is_Show]\\n,[Prom_Warm_Time] ORDER BY Start_Date DESC) AS SEQUENCE \\n FROM [dbo].[REF_PROMOTION])\\n\\nDelete from REF_PROMOTION where CONCAT([Prom_ID],START_DATE) in (select CONCAT([Prom_ID],START_DATE) from TEMP where SEQUENCE > 1);'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Prom_ID,",
+				"          Area_ID,",
+				"          Source_BU,",
+				"          Prom_Name,",
+				"          Prom_Type,",
+				"          Start_Time,",
+				"          End_Time,",
+				"          Is_Pause,",
+				"          Prom_Status,",
+				"          Is_Show,",
+				"          Prom_Warm_Time,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

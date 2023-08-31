@@ -1,0 +1,17 @@
+{
+	"name": "GroupCRM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GroupCRM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COM_MEMBER_MAP_MD5"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

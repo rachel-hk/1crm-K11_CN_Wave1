@@ -1,0 +1,87 @@
+{
+	"name": "12B_CDM_PERSONAL_PROFILE_20230808",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_CDM_PERSONAL_PROFILE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRE_PRO_CDM_PERSONAL_PROFILE_20230808",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_CDM_PERSONAL_PROFILE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_CDM_PERSONAL_PROFILE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_CDM_PERSONAL_PROFILE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_PERSONAL_PROFILE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Temp_Raw_CRM_vip_encryptdata",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Temp_Raw_CRM_vip_encryptdata",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRE_PRO_CDM_PERSONAL_PROFILE_20230808",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Temp_Raw_CRM_vip_encryptdata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRE_PRO_CDM_PERSONAL_PROFILE_20230808",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-08-08T09:35:23Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

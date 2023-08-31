@@ -1,0 +1,498 @@
+{
+	"name": "vw_Latest_so_item",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "product_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "mp_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_mp_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "item_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "warehouse_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "contract_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "settle_method",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "settle_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "settle_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_item_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_item_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_cname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_pic_path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_sale_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "product_price_original",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_price_market",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_price_sale",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_price_point",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "product_tax_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "purchase_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "buy_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "frozen_virtal_stock_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_gross_weight",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "parent_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_item_before_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "third_merchant_product_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sale_unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "place_of_origin",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_info",
+				"type": "nvarchar"
+			},
+			{
+				"name": "standard",
+				"type": "nvarchar"
+			},
+			{
+				"name": "material",
+				"type": "nvarchar"
+			},
+			{
+				"name": "product_price_before_final",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "comment_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "series_parent_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "brand_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "brand_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "category_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "whole_category_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "whole_category_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "relation_mp_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "bar_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "art_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "un_do_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "un_delivery_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "delivery_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "line_num",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "virtal_warehouse_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "product_price_final",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "setmeal_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "waiter_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "setmeal_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "support_invoice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "setmeal_num",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "tax_rate",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "tax_group_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "gift_card_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "live_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "send_coupon",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "version_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "create_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "server_ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "out_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_inner_supplier",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "supplier_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "supplier_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_drop_shipping",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "supplier_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "packaging_fee",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "auto_refund",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "expiry_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "series_product_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "service_date_time",
+				"type": "varbinary"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_so_item"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

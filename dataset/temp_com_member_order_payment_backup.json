@@ -1,0 +1,36 @@
+{
+	"name": "temp_com_member_order_payment_backup",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"run_date": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Backup_ssir"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('temp_com_member_order_payment_',dataset().run_date,'.parquet')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('total_raw_backup/backup_',dataset().run_date)",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,82 @@
+{
+	"name": "raw_com_member_order_extend",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_ORDER_EXTEND]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_ORDER_EXTEND",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT64"
+			},
+			{
+				"name": "operator_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "fz_channel",
+				"type": "INT32"
+			},
+			{
+				"name": "sales_ticket",
+				"type": "UTF8"
+			},
+			{
+				"name": "pay_ticket",
+				"type": "UTF8"
+			},
+			{
+				"name": "online_category",
+				"type": "UTF8"
+			},
+			{
+				"name": "kpos_input_type",
+				"type": "INT32"
+			},
+			{
+				"name": "old_kpos_input_type",
+				"type": "INT32"
+			},
+			{
+				"name": "order_promotion_discount",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_delivery_fee",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,466 @@
+{
+	"name": "raw_com_member_extend",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_EXTEND]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_EXTEND",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "kids",
+				"type": "INT32"
+			},
+			{
+				"name": "kids_age",
+				"type": "INT32"
+			},
+			{
+				"name": "fav_prod",
+				"type": "UTF8"
+			},
+			{
+				"name": "hobby",
+				"type": "UTF8"
+			},
+			{
+				"name": "fav_item",
+				"type": "UTF8"
+			},
+			{
+				"name": "month_income",
+				"type": "INT32"
+			},
+			{
+				"name": "year_income",
+				"type": "INT32"
+			},
+			{
+				"name": "kid1_sex",
+				"type": "INT32"
+			},
+			{
+				"name": "kid1_birthday",
+				"type": "INT32"
+			},
+			{
+				"name": "kid2_sex",
+				"type": "INT32"
+			},
+			{
+				"name": "kid2_birthday",
+				"type": "INT32"
+			},
+			{
+				"name": "from_know",
+				"type": "UTF8"
+			},
+			{
+				"name": "addr2",
+				"type": "UTF8"
+			},
+			{
+				"name": "addr3",
+				"type": "UTF8"
+			},
+			{
+				"name": "phone2",
+				"type": "UTF8"
+			},
+			{
+				"name": "qq",
+				"type": "UTF8"
+			},
+			{
+				"name": "weibo",
+				"type": "UTF8"
+			},
+			{
+				"name": "alipay",
+				"type": "UTF8"
+			},
+			{
+				"name": "company",
+				"type": "UTF8"
+			},
+			{
+				"name": "industry",
+				"type": "UTF8"
+			},
+			{
+				"name": "job",
+				"type": "UTF8"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "bank_number",
+				"type": "UTF8"
+			},
+			{
+				"name": "bank_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_mail_market",
+				"type": "INT32"
+			},
+			{
+				"name": "company_size",
+				"type": "INT32"
+			},
+			{
+				"name": "is_k11",
+				"type": "INT32"
+			},
+			{
+				"name": "customer_leader",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_vipid",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_issuetillid",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_groupid16",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_groupid18",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_lastmodby",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_lastmodtime",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_issuetime",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_newaccumpur",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_newttlpurcount",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_ismainvip",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_vipcardtype",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_club",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_joinclubdate",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_infosource",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_applicationid",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_applicationdate",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_certificatetype",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_passwordflag",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_zone",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_region",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_educationcode",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_smscontact",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_emailcontact",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_phonecontact",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_postcontact",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_lastupdowndate",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_lastexpirydate",
+				"type": "INT64"
+			},
+			{
+				"name": "xf_language",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_tochinatimes",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_tochinareason",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_nameoncard",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_title",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_monthlyincome",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_companyname",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_businesstitle",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_occupation",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_visitk11reason",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_allowsendpromomsg",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_catofpromomsg",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_allowsharemyinfo",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_compofsharemyinfo",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_agegroup",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_references",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_childagegroup",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_terminalip",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_requested",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_likeproductother",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_interestother",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_tradesources",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_shownameoncardtype",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_currentrewardbonus_cs",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_populationattribute",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_memberstatus",
+				"type": "INT32"
+			},
+			{
+				"name": "person",
+				"type": "UTF8"
+			},
+			{
+				"name": "requested_source",
+				"type": "UTF8"
+			},
+			{
+				"name": "employeeno",
+				"type": "UTF8"
+			},
+			{
+				"name": "activityname",
+				"type": "UTF8"
+			},
+			{
+				"name": "active",
+				"type": "INT32"
+			},
+			{
+				"name": "first_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "last_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "join_show",
+				"type": "UTF8"
+			},
+			{
+				"name": "avg_expense",
+				"type": "INT32"
+			},
+			{
+				"name": "trip_mode",
+				"type": "UTF8"
+			},
+			{
+				"name": "fz_bonus_expire_at",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "fz_expire_at",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "xf_storecode",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_employeeno",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_requested_relationship",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_references_phone",
+				"type": "UTF8"
+			},
+			{
+				"name": "push_classification",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_special_remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_sales_ticket",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_head_img",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_vipaccountno",
+				"type": "UTF8"
+			},
+			{
+				"name": "xf_kpoint_total",
+				"type": "INT32"
+			},
+			{
+				"name": "xf_personal_needs",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

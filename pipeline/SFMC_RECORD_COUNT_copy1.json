@@ -1,0 +1,460 @@
+{
+	"name": "SFMC_RECORD_COUNT_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "SFMC_RECORD_COUNT_20230717",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": {
+								"value": "@concat('BATCH_HEADER',formatDateTime(convertTimeZone(utcNow(),'UTC','China Standard Time'),'yyyyMMdd'))",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.csv.gz",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureFileStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Azure_Coupon_Record",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Coupon_Record"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_CS_Return",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_CS_Return"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Customer_CarPark",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Customer_CarPark"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Customer_Tier_Upgrade",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Customer_Tier_Upgrade"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Digit_Click",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Digit_Click"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Digit_NewKGO_Browse",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Digit_NewKGO_Browse"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Digit_Page_Browse",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Digit_Page_Browse"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Digit_Share",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Digit_Share"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_K11_Customer_KDP",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_K11_Customer_KDP"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_K11_Gift_Record",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_K11_Gift_Record"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_K11_Transaction",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_K11_Transaction"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_ManualTag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_ManualTag"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Member_QRCode_Scan",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Member_QRCode_Scan"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_NewKGO_Lottery",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_NewKGO_Lottery"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_OldKGO_Shopping_Cart",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_OldKGO_Shopping_Cart"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Online_Transaction_Details",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Online_Transaction_Details"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Personal_Family_Details",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Personal_Family_Details"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Personal_PIPL",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Personal_PIPL"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Personal_Profile",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Personal_Profile"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Personal_Profile_Extra",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Personal_Profile_Extra"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Personal_Special_Card",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Personal_Special_Card"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_App",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_App"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Area",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Area"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Channel",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Channel"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Coupon",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Coupon"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Event",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Event"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Page",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Page"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Product",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Product"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Promotion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Promotion"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_QRCode",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_QRCode"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Site",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Site"
+								}
+							},
+							{
+								"source": {
+									"name": "Azure_Ref_Tenant",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Azure_Ref_Tenant"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Behavior_tag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "K11_Behavior_tag"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Fact_tag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "K11_Fact_tag"
+								}
+							},
+							{
+								"source": {
+									"name": "K11_Operation_tag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "K11_Operation_tag"
+								}
+							},
+							{
+								"source": {
+									"name": "Shareable_Behavior_Tag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Shareable_Behavior_Tag"
+								}
+							},
+							{
+								"source": {
+									"name": "Shareable_Fact_Tag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Shareable_Fact_Tag"
+								}
+							},
+							{
+								"source": {
+									"name": "Shareable_Operation _Tag",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Shareable_Operation _Tag"
+								}
+							},
+							{
+								"source": {
+									"name": "Record_Date",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "RecordDate"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "TEMP_SFMC_BATCH_HEADER",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SHARE_SFTP_SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "SFMC_RECORD_COUNT_20230717",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "SFMC_RECORD_COUNT_20230717",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "SFMC"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-17T03:59:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,140 @@
+{
+	"name": "temp_lottery_record_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/New_KGO/Raw_hermes"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "hermes_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "lottery_awards_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "user_mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_nickname",
+				"type": "nvarchar"
+			},
+			{
+				"name": "receiver_mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "receiver_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "receiver_address",
+				"type": "varbinary"
+			},
+			{
+				"name": "use_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "use_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "create_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "server_ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "give_status",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_lottery_record"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

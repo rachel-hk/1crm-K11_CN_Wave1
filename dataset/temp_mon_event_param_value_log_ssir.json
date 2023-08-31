@@ -1,0 +1,72 @@
+{
+	"name": "temp_mon_event_param_value_log_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm_tool"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "dim_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "app_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "event_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "param_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "value_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "value",
+				"type": "nvarchar"
+			},
+			{
+				"name": "status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "createtime",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_mon_event_param_value_log"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

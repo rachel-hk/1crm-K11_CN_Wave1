@@ -1,0 +1,248 @@
+{
+	"name": "REF_COUPON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Coupon_UID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Coupon_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Source_BU",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Account_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Source",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Coupon_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Put",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Push_View",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Code_Type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brand_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Color",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Notice",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Coupon_Quan",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total_Quan",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Avail_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Begin_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Final_End_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Custom_Code",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Bind_Open_ID",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Location_ID_List",
+				"type": "nvarchar"
+			},
+			{
+				"name": "All_Location",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Get_Limit_Quan",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Get_Limit_Time",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Use_Limit_Quan",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Can_Share",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Can_Give_Friend",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Use_Con",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Time_Limit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Create_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Update_Time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Rej_Reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Is_Deleted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Is_Primary",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "All_App",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "All_Product",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Group_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "App_ID_List",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Ver_Customer",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Use_Refuse",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Can_Provide",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "End_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Is_Current",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "REF_COUPON"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

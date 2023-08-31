@@ -1,0 +1,78 @@
+{
+	"name": "raw_mall_shopping_cart_ssir",
+	"properties": {
+		"description": "@concat('[MALL].[MALL_SHOPPING_CART]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_KGO/mall"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "MALL/MALL_SHOPPING_CART",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "user_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "goods_id",
+				"type": "INT32"
+			},
+			{
+				"name": "goods_map_id",
+				"type": "INT32"
+			},
+			{
+				"name": "goods_area_id",
+				"type": "INT32"
+			},
+			{
+				"name": "order_id",
+				"type": "INT32"
+			},
+			{
+				"name": "number",
+				"type": "INT32"
+			},
+			{
+				"name": "time_of_day",
+				"type": "INT32"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "price_id",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,524 @@
+{
+	"name": "temp_so_return_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/New_KGO/Raw_oms"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "parent_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "customer_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "customer_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "return_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "refund_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "actual_return_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "apply_return_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "return_remark",
+				"type": "nvarchar"
+			},
+			{
+				"name": "service_user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "service_desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "service_return_reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "apply_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "return_reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "refund_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "consignee_warehouse_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "consignee_address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consignee_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consignee_mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "consignee_create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "courier_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "logistics_company",
+				"type": "nvarchar"
+			},
+			{
+				"name": "logistics_company_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "refund_confirm_user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "refund_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "audit_reason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "audit_user_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "audit_user_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "freight",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "create_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "server_ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "audit_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "return_reason_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "return_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "settle_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "settle_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_pick_up",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "user_courier_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_logistics_company_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_logistics_company",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_return_freight",
+				"type": "nvarchar"
+			},
+			{
+				"name": "distributor_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "compensatory_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "goods_return_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "take_goods_address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "take_goods_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "take_goods_mobile",
+				"type": "nvarchar"
+			},
+			{
+				"name": "take_goods_province_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "take_goods_city_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "take_goods_county_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "take_goods_area_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "out_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "out_return_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_good_other_contact_phone",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inspection_result",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "inspection_desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "inspection_date",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "operator_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "merchant_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_drop_shipping",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "supplier_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "supplier_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "supplier_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sys_source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "equip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "send_back_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "goods_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "completion_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "deadline_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "user_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "exchange_order_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "actual_return_packaging_fee",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "packaging_fee",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "apply_union_return_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_union_return_amount",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_points",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "actual_return_point_money",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_commission",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_gift_card",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field1",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field2",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field3",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field4",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "actual_return_ext_field5",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_so_return"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

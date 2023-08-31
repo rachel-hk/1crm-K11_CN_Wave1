@@ -1,0 +1,25 @@
+{
+	"name": "vw_PIPL_CUID_Verification_SH_Active_copy1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_PIPL_CUID_Verification_SH_Active"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

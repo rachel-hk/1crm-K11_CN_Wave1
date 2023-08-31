@@ -1,0 +1,35 @@
+{
+	"name": "K11_MANUAL_TAG",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "member_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "tid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "group_name",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "K11_MANUAL_TAG"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

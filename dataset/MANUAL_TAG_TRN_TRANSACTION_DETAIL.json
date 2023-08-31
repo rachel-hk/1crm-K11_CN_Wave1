@@ -1,0 +1,20 @@
+{
+	"name": "MANUAL_TAG_TRN_TRANSACTION_DETAIL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Manual_Tag"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TRN_TRANSACTION_DETAIL"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

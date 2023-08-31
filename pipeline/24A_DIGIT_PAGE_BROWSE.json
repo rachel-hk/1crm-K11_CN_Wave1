@@ -1,0 +1,107 @@
+{
+	"name": "24A_DIGIT_PAGE_BROWSE",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRO_DIGIT_PAGE_BROWSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "temp_mon_visit_log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_DIGIT_PAGE_BROWSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_DIGIT_PAGE_BROWSE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_DIGIT_PAGE_BROWSE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_DIGIT_PAGE_BROWSE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "temp_mon_event_param_union_log",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "temp_mon_event_param_value_log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "temp_mon_event_param_union_log",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "temp_mon_visit_log",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "temp_mon_event_param_union_log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "temp_mon_visit_log",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "temp_mon_event_param_value_log",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "temp_mon_event_param_value_log",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"concurrency": 20,
+		"folder": {
+			"name": "Trigger"
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-06-08T07:02:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

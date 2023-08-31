@@ -1,0 +1,89 @@
+{
+	"name": "raw_com_area",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProd",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_AREA",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "name",
+				"type": "UTF8"
+			},
+			{
+				"name": "reg_protocol_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "policy_version",
+				"type": "UTF8"
+			},
+			{
+				"name": "alias_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "sp",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "kp",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "desc",
+				"type": "UTF8"
+			},
+			{
+				"name": "site_id",
+				"type": "INT32"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "fenze_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "area_group",
+				"type": "INT32"
+			},
+			{
+				"name": "partner_code",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

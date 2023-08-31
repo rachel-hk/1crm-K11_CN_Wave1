@@ -1,0 +1,103 @@
+{
+	"name": "CDM_INITIAL_LOAD",
+	"properties": {
+		"activities": [
+			{
+				"name": "PRE_PRO_CDM_PERSONAL_PROFILE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRE_PRO_CDM_PERSONAL_PROFILE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PRO_CDM_PERSONAL_PROFILE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRE_PRO_CDM_PERSONAL_PROFILE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PRO_CDM_PERSONAL_PROFILE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PUB_CDM_PERSONAL_PROFILE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PRO_CDM_PERSONAL_PROFILE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PUB_CDM_PERSONAL_PROFILE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12C_CDM_PERSONAL_PROFILE_EXTRA",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PUB_CDM_PERSONAL_PROFILE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12C_CDM_PERSONAL_PROFILE_EXTRA",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "12D_CDM_PERSONAL_FAMILY_DETAILS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PUB_CDM_PERSONAL_PROFILE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "12D_CDM_PERSONAL_FAMILY_DETAILS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-13T06:54:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

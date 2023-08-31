@@ -1,0 +1,178 @@
+{
+	"name": "PRO_TRAN_LOTTERY",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_lottery_record",
+						"type": "DatasetReference"
+					},
+					"name": "IngestRawLOTTERYRECORD"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMCUSTOMERMAPPING"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_TRAN_LOTTERY",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "JoinToGetCustomerUID",
+					"description": "IngestRawLOTTERYRECORD”和“IngestCDMCUSTOMERMAPPING”上的 内部 联接"
+				},
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          hermes_id as long,",
+				"          lottery_awards_id as long,",
+				"          status as integer,",
+				"          user_id as string,",
+				"          user_mobile as string,",
+				"          user_nickname as string,",
+				"          receiver_mobile as string,",
+				"          receiver_name as string,",
+				"          receiver_address as binary,",
+				"          use_order_code as string,",
+				"          use_status as integer,",
+				"          is_deleted as integer,",
+				"          create_userid as long,",
+				"          create_username as string,",
+				"          create_time as timestamp,",
+				"          create_time_db as timestamp,",
+				"          server_ip as string,",
+				"          update_userid as long,",
+				"          update_username as string,",
+				"          update_time as timestamp,",
+				"          update_time_db as timestamp,",
+				"          company_id as long,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          give_status as integer,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestRawLOTTERYRECORD",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMCUSTOMERMAPPING",
+				"IngestRawLOTTERYRECORD, IngestCDMCUSTOMERMAPPING join(user_id == New_KGO_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinToGetCustomerUID",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          hermes_id,",
+				"          lottery_awards_id,",
+				"          status,",
+				"          user_id,",
+				"          user_mobile,",
+				"          user_nickname,",
+				"          receiver_mobile,",
+				"          receiver_name,",
+				"          receiver_address,",
+				"          use_order_code,",
+				"          use_status,",
+				"          is_deleted,",
+				"          create_userid,",
+				"          create_username,",
+				"          create_time,",
+				"          create_time_db,",
+				"          server_ip,",
+				"          update_userid,",
+				"          update_username,",
+				"          update_time,",
+				"          update_time_db,",
+				"          company_id,",
+				"          Customer_UID,",
+				"          give_status",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          BU_Source = 'K11 PRC',",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1) ~> AddColumn",
+				"JoinToGetCustomerUID filter(toDate(Insert_Date)>=addDays(toDate(currentUTC()+hours(8)),0)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Campaign_ID = hermes_id,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Lottery_Awards_ID = lottery_awards_id,",
+				"          Status = status,",
+				"          User_ID = user_id,",
+				"          User_Mobile = user_mobile,",
+				"          Use_Order_Code = use_order_code,",
+				"          Use_Status = use_status,",
+				"          Is_Deleted = is_deleted,",
+				"          Create_Time = create_time,",
+				"          Update_Time = update_time,",
+				"          Company_ID = company_id,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          Lottery_Unique_ID = id,",
+				"          Give_Status = give_status",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

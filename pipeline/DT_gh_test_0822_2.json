@@ -1,0 +1,43 @@
+{
+	"name": "DT_gh_test_0822_2",
+	"properties": {
+		"activities": [
+			{
+				"name": "K11_AUTO_TAG",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_useDT",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "K11_AUTO_TAG_SUMMARY",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "K11_AUTO_TAG",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "K11_AUTO_TAG_SUMMARY",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-08-22T09:58:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

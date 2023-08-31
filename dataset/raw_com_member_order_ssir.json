@@ -1,0 +1,154 @@
+{
+	"name": "raw_com_member_order_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[COM_MEMBER_ORDER]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/COM_MEMBER_ORDER",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "level_id",
+				"type": "INT64"
+			},
+			{
+				"name": "special_level_id",
+				"type": "INT64"
+			},
+			{
+				"name": "special_level_time",
+				"type": "INT64"
+			},
+			{
+				"name": "area_id",
+				"type": "INT64"
+			},
+			{
+				"name": "order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_parent_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "wechat_pay_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "origin_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "not_discount_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "sales_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "real_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "kp_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "gvamount",
+				"type": "UTF8"
+			},
+			{
+				"name": "bonus_point",
+				"type": "INT64"
+			},
+			{
+				"name": "bonus_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "order_at",
+				"type": "INT64"
+			},
+			{
+				"name": "order_source",
+				"type": "INT64"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "cancel_at",
+				"type": "INT64"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "return_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "return_bonus_point",
+				"type": "INT64"
+			},
+			{
+				"name": "api_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "async_status",
+				"type": "INT32"
+			},
+			{
+				"name": "central_store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT64"
+			},
+			{
+				"name": "update_at",
+				"type": "INT64"
+			},
+			{
+				"name": "deleted",
+				"type": "INT64"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

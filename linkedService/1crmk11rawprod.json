@@ -1,0 +1,16 @@
+{
+	"name": "1crmk11rawprod",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://1crmk11rawprod.dfs.core.chinacloudapi.cn/",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyZDU0MDMzNC00N2M0LTQ4ZmUtOWEzMi00YWJhOWExNjE1ZmEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "1crm-k11-ir-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

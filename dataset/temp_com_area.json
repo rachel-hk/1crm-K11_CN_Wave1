@@ -1,0 +1,99 @@
+{
+	"name": "temp_com_area",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp/CRM+/Raw_crm"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "reg_protocol_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "policy_version",
+				"type": "nvarchar"
+			},
+			{
+				"name": "alias_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sp",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "kp",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "desc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "site_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "update_at",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fenze_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "area_group",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "partner_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Raw_Temp",
+			"table": "temp_com_area"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

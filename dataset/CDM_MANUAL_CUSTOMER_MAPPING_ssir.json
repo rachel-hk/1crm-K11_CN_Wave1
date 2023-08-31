@@ -1,0 +1,36 @@
+{
+	"name": "CDM_MANUAL_CUSTOMER_MAPPING_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Pro"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "manual_tag_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Start_Date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PRO",
+			"table": "CDM_MANUAL_CUSTOMER_MAPPING"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,109 @@
+{
+	"name": "PRO_REF_MERCHANT_20230724",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_merchant",
+						"type": "DatasetReference"
+					},
+					"name": "IngestREFMERCHANT"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_REF_MERCHANT",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToProcessTable",
+					"description": "将数据导出到 REF_MERCHANT"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DropUnwantedColumns"
+				},
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "FilterLatest"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          mchid as string,",
+				"          merchant_name as string,",
+				"          area_id as long,",
+				"          mall_id as string,",
+				"          is_shangquan as integer,",
+				"          serial_no as string,",
+				"          private_key as string,",
+				"          v3_key as string,",
+				"          deleted as integer,",
+				"          create_at as decimal(38,18),",
+				"          update_at as decimal(38,18),",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestREFMERCHANT",
+				"FilterLatest select(mapColumn(",
+				"          id,",
+				"          mchid,",
+				"          merchant_name,",
+				"          area_id,",
+				"          mall_id,",
+				"          is_shangquan,",
+				"          serial_no,",
+				"          private_key,",
+				"          v3_key,",
+				"          deleted,",
+				"          create_at,",
+				"          update_at",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantedColumns",
+				"DropUnwantedColumns derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toDate(toString(null())),",
+				"          Is_Current = 1,",
+				"          Source_BU = 'K11 PRC') ~> AddColumn",
+				"IngestREFMERCHANT filter(toDate(Insert_Date)==addDays(currentDate(),-1)) ~> FilterLatest",
+				"AddColumn sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Merchant_ID = mchid,",
+				"          Source_BU,",
+				"          Merchant_Name = merchant_name,",
+				"          Area_ID = area_id,",
+				"          Mall_ID = mall_id,",
+				"          Is_Shangquan = is_shangquan,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToProcessTable"
+			]
+		}
+	}
+}

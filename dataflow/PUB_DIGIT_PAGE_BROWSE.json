@@ -1,0 +1,110 @@
+{
+	"name": "PUB_DIGIT_PAGE_BROWSE",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DIGIT_PAGE_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromDIGITPAGEBROWSE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_DIGIT_PAGE_BROWSE",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Browse_ID as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Session_ID as string,",
+				"          Page_ID as string,",
+				"          Title_ID as string,",
+				"          App_ID as string,",
+				"          App_Name as string,",
+				"          Visitor_ID as string,",
+				"          User_ID as string,",
+				"          Member_ID as string,",
+				"          Event_Log_ID as string,",
+				"          Event_ID as string,",
+				"          Create_Time as timestamp,",
+				"          View_Page as string,",
+				"          View_Page_Name as string,",
+				"          Area_ID as string,",
+				"          Product_SN as string,",
+				"          Product_Channel as string,",
+				"          Land_Page as string,",
+				"          Land_Page_Time as timestamp,",
+				"          Browse_Duration as integer,",
+				"          Is_Exit_Page as integer,",
+				"          Is_Landing_Page as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Channel_ID as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromDIGITPAGEBROWSE",
+				"IngestionfromDIGITPAGEBROWSE filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Browse_ID,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Session_ID,",
+				"          Page_ID,",
+				"          Title_ID,",
+				"          App_ID,",
+				"          Visitor_ID,",
+				"          User_ID,",
+				"          Member_ID,",
+				"          Event_Log_ID,",
+				"          Event_ID,",
+				"          Create_Time,",
+				"          View_Page,",
+				"          View_Page_Name,",
+				"          Area_ID,",
+				"          Product_SN,",
+				"          Product_Channel,",
+				"          Land_Page,",
+				"          Land_Page_Time,",
+				"          Browse_Duration,",
+				"          Is_Exit_Page,",
+				"          Is_Landing_Page,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          App_Name",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

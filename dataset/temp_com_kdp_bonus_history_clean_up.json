@@ -1,0 +1,37 @@
+{
+	"name": "temp_com_kdp_bonus_history_clean_up",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"run_time": {
+				"type": "string",
+				"defaultValue": "XXXXXXXX"
+			}
+		},
+		"folder": {
+			"name": "clean_up_ssir"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat('temp_com_kdp_bonus_history_clean_up','.parquet')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('total_backup_cleanup/temp_com_kdp_bonus_history_clean_up',dataset().run_time)",
+					"type": "Expression"
+				},
+				"fileSystem": "synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

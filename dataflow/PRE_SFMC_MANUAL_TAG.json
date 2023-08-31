@@ -1,0 +1,152 @@
+{
+	"name": "PRE_SFMC_MANUAL_TAG",
+	"properties": {
+		"folder": {
+			"name": "SFMC"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "K11_MANUAL_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "K11MANUALTAG"
+				},
+				{
+					"dataset": {
+						"referenceName": "PUB_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "CDMMAPPING"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_K11_MANUAL_TAG",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToManualTagTable"
+				},
+				{
+					"dataset": {
+						"referenceName": "SFMC_RECORD_COUNT",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "JoinMapping"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "SelectRelatedColumn"
+				},
+				{
+					"name": "RecordCount"
+				},
+				{
+					"name": "derivedColumn2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          member_id as long,",
+				"          tid as long,",
+				"          group_name as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> K11MANUALTAG",
+				"source(output(",
+				"          Customer_UID as string,",
+				"          K11PRC_Member_ID as string,",
+				"          Union_ID as string,",
+				"          KDP_ID as string,",
+				"          CL_ID as string,",
+				"          KGO_ID as string,",
+				"          New_KGO_ID as string,",
+				"          manual_tag_id as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string,",
+				"          Hashed_Member_ID as string,",
+				"          Hashed_VIP_Code as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> CDMMAPPING",
+				"K11MANUALTAG, CDMMAPPING join(member_id == manual_tag_id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinMapping",
+				"SelectRelatedColumn derive(BU_Source = \"K11 PRC\",",
+				"          Tag_Type = \"Manual Tag\",",
+				"          Start_Date = currentUTC()+hours(8),",
+				"          End_Date = toTimestamp(null()),",
+				"          Is_Current = \"1\") ~> derivedColumn1",
+				"JoinMapping select(mapColumn(",
+				"          Tag_ID = tid,",
+				"          Tag_Name = group_name,",
+				"          Customer_UID,",
+				"          Union_ID,",
+				"          Member_ID = Hashed_Member_ID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectRelatedColumn",
+				"JoinMapping aggregate(groupBy({1} = 1),",
+				"     Record_Count = count(1)) ~> RecordCount",
+				"RecordCount derive(Name = 'Azure_ManualTag',",
+				"          Insert_Date = currentUTC()+hours(8)) ~> derivedColumn2",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Tag_ID,",
+				"          Tag_Name,",
+				"          Customer_UID,",
+				"          Union_ID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Tag_Type,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinkToManualTagTable",
+				"derivedColumn2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Record_Count as integer,",
+				"          Insert_Date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,122 @@
+{
+	"name": "PUB_TRAN_CAR_PARK",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TRAN_CAR_PARK",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromTRANCARPARK"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PUB_TRAN_CAR_PARK",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"description": "Export data to PUB_CDM_PERSONAL_PIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Order_No as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Area_ID as integer,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          License_Plate as string,",
+				"          Pay_Time as date,",
+				"          Customer_Tier as integer,",
+				"          Total_Amount as decimal(18,0),",
+				"          Order_Amount as decimal(18,0),",
+				"          Coupon_Type as string,",
+				"          Enter_Time as date,",
+				"          Leave_Time as date,",
+				"          Create_At as date,",
+				"          Update_At as date,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromTRANCARPARK",
+				"IngestionfromTRANCARPARK filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Order_No as string,",
+				"          Customer_UID as string,",
+				"          BU_Source as string,",
+				"          Area_ID as integer,",
+				"          Member_ID as string,",
+				"          Union_ID as string,",
+				"          License_Plate as string,",
+				"          Pay_Time as timestamp,",
+				"          Customer_Tier as integer,",
+				"          Total_Amount as decimal(18,0),",
+				"          Order_Amount as decimal(18,0),",
+				"          Coupon_Type as string,",
+				"          Enter_Time as timestamp,",
+				"          Leave_Time as timestamp,",
+				"          Create_At as timestamp,",
+				"          Update_At as timestamp,",
+				"          Is_Deleted as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: false,",
+				"     preSQLs:['DELETE FROM TRAN_CAR_PARK WHERE Start_Date = FORMAT(GetDate(), \\'yyyy-MM-dd\\');'],",
+				"     postSQLs:['WITH TEMP AS (\\nSELECT [Order_No], ROW_NUMBER() OVER (PARTITION BY [Customer_UID]\\n,[BU_Source]\\n,[Area_ID]\\n,[Member_ID]\\n,[Union_ID]\\n,[License_Plate]\\n,[Pay_Time]\\n,[Customer_Tier]\\n,[Total_Amount]\\n,[Order_Amount]\\n,[Coupon_Type]\\n,[Enter_Time]\\n,[Leave_Time]\\n,[Create_At]\\n,[Update_At]\\n,[Is_Deleted] ORDER BY Start_Date DESC) AS SEQUENCE \\n FROM [dbo].[TRAN_CAR_PARK])\\n\\nDelete from TRAN_CAR_PARK where CONCAT([Order_No],START_DATE) in (select CONCAT([Order_No],START_DATE) from TEMP where SEQUENCE > 1);'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Order_No,",
+				"          Customer_UID,",
+				"          BU_Source,",
+				"          Area_ID,",
+				"          Member_ID,",
+				"          Union_ID,",
+				"          License_Plate,",
+				"          Pay_Time,",
+				"          Customer_Tier,",
+				"          Total_Amount,",
+				"          Order_Amount,",
+				"          Coupon_Type,",
+				"          Enter_Time,",
+				"          Leave_Time,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Is_Deleted,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

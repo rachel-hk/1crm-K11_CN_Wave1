@@ -1,0 +1,279 @@
+{
+	"name": "vw_Latest_category_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "buckle_point",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "category_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "full_id_path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "full_name_path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_highlight",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_visible",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_leaves",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "level",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "list_sort",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "merchant_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "parent_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "picture_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "taxRate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "third_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "first_category_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "enable_add_att",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "high_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "low_price",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "high_gross_margin",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "low_gross_margin",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "tax_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ext_field5",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_available",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_deleted",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "version_no",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "create_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_userip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_usermac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "create_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "create_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "server_ip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userid",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_username",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_userip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_usermac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "update_time",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "update_time_db",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "client_versionno",
+				"type": "nvarchar"
+			},
+			{
+				"name": "company_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "store_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ref_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "full_name_path_lan2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "name_lan2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_category"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,22 @@
+{
+	"name": "mem_member_active_flag_update_list_active_list_to_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynapseProd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Customer_UID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "K11_PUB",
+			"table": "mem_member_active_flag_update_list_active_list_to_1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,194 @@
+{
+	"name": "raw_we_card_record_ssir",
+	"properties": {
+		"description": "@concat('[CRM].[WE_CARD_RECORD]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_CRM+/crm"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "CRM/WE_CARD_RECORD",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "account_id",
+				"type": "INT32"
+			},
+			{
+				"name": "app_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "cid",
+				"type": "INT32"
+			},
+			{
+				"name": "card_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "card_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "outer_id",
+				"type": "INT32"
+			},
+			{
+				"name": "outer_str",
+				"type": "UTF8"
+			},
+			{
+				"name": "consume_outer_str",
+				"type": "UTF8"
+			},
+			{
+				"name": "open_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "union_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "level_id",
+				"type": "INT64"
+			},
+			{
+				"name": "code",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_give",
+				"type": "INT32"
+			},
+			{
+				"name": "give_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "give_openid",
+				"type": "UTF8"
+			},
+			{
+				"name": "consume_source",
+				"type": "UTF8"
+			},
+			{
+				"name": "staff_openid",
+				"type": "UTF8"
+			},
+			{
+				"name": "delete_at",
+				"type": "INT32"
+			},
+			{
+				"name": "consume_at",
+				"type": "INT32"
+			},
+			{
+				"name": "consume_amount",
+				"type": "UTF8"
+			},
+			{
+				"name": "consume_store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "consume_app_id",
+				"type": "INT64"
+			},
+			{
+				"name": "consume_level_id",
+				"type": "INT32"
+			},
+			{
+				"name": "consume_origin_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "give_at",
+				"type": "INT32"
+			},
+			{
+				"name": "location_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "status",
+				"type": "INT32"
+			},
+			{
+				"name": "start_at",
+				"type": "INT32"
+			},
+			{
+				"name": "end_at",
+				"type": "INT32"
+			},
+			{
+				"name": "cpc_id",
+				"type": "INT32"
+			},
+			{
+				"name": "cps_id",
+				"type": "INT32"
+			},
+			{
+				"name": "cm_id",
+				"type": "INT32"
+			},
+			{
+				"name": "api_key",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_at",
+				"type": "INT32"
+			},
+			{
+				"name": "update_at",
+				"type": "INT32"
+			},
+			{
+				"name": "deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "operator_id",
+				"type": "INT64"
+			},
+			{
+				"name": "operator_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "verify_staff_unionid",
+				"type": "UTF8"
+			},
+			{
+				"name": "exchange_no",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

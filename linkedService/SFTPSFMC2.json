@@ -1,0 +1,20 @@
+{
+	"name": "SFTPSFMC2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Sftp",
+		"typeProperties": {
+			"host": "mc3bzyhls-bs5xk5h3whw6djt48q.ftp.marketingcloudops.com",
+			"port": 22,
+			"skipHostKeyValidation": true,
+			"authenticationType": "Basic",
+			"userName": "546001435",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3NjYzNjUwZC1lMTNjLTRmYmUtYTNhNS0xMTFkNzEzNjIyNzgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "1crm-k11-ir-prod",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

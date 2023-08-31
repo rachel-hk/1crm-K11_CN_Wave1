@@ -1,0 +1,133 @@
+{
+	"name": "PUB_CDM_TIER_UPGRADE",
+	"properties": {
+		"folder": {
+			"name": "Pub"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CDM_TIER_UPGRADE",
+						"type": "DatasetReference"
+					},
+					"name": "IngestionfromCDMTIERUPGRADE"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PUB_CDM_TIER_UPGRADE",
+						"type": "DatasetReference"
+					},
+					"name": "SinktoPublishedTable",
+					"description": "Export data to PUB_CDM_PERSONAL_PIPL"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FilterLatestData"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Tier_Upgrade_Unique_ID as string,",
+				"          Customer_UID as string,",
+				"          Area_ID as integer,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          Account_ID as integer,",
+				"          Open_ID as string,",
+				"          Tier_ID as integer,",
+				"          Tier_Name as string,",
+				"          Tier_ID_Old as integer,",
+				"          Tier_Name_Old as string,",
+				"          Tier_Remark as string,",
+				"          Upgrade_Origin as integer,",
+				"          Create_At as date,",
+				"          Update_At as date,",
+				"          Submit_At as date,",
+				"          Reach_At as date,",
+				"          Is_Deleted as integer,",
+				"          VIP_Code as string,",
+				"          VIP_Code_Old as string,",
+				"          Store_Code as string,",
+				"          Upgrade_Type as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestionfromCDMTIERUPGRADE",
+				"IngestionfromCDMTIERUPGRADE filter(toDate(Start_Date)==currentDate()) ~> FilterLatestData",
+				"FilterLatestData sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Tier_Upgrade_Unique_ID as string,",
+				"          Customer_UID as string,",
+				"          Area_ID as integer,",
+				"          Member_ID as string,",
+				"          BU_Source as string,",
+				"          Account_ID as integer,",
+				"          Open_ID as string,",
+				"          Tier_ID as integer,",
+				"          Tier_Name as string,",
+				"          Tier_ID_Old as integer,",
+				"          Tier_Name_Old as string,",
+				"          Tier_Remark as string,",
+				"          Upgrade_Origin as integer,",
+				"          Create_At as date,",
+				"          Update_At as date,",
+				"          Submit_At as date,",
+				"          Reach_At as date,",
+				"          Is_Deleted as integer,",
+				"          VIP_Code as string,",
+				"          VIP_Code_Old as string,",
+				"          Store_Code as string,",
+				"          Upgrade_Type as integer,",
+				"          Start_Date as timestamp,",
+				"          End_Date as timestamp,",
+				"          Is_Current as string",
+				"     ),",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Tier_Upgrade_Unique_ID,",
+				"          Customer_UID,",
+				"          Area_ID,",
+				"          Member_ID,",
+				"          BU_Source,",
+				"          Account_ID,",
+				"          Open_ID,",
+				"          Tier_ID,",
+				"          Tier_Name,",
+				"          Tier_ID_Old,",
+				"          Tier_Name_Old,",
+				"          Tier_Remark,",
+				"          Upgrade_Origin,",
+				"          Create_At,",
+				"          Update_At,",
+				"          Submit_At,",
+				"          Reach_At,",
+				"          Is_Deleted,",
+				"          VIP_Code,",
+				"          VIP_Code_Old,",
+				"          Store_Code,",
+				"          Upgrade_Type,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current",
+				"     )) ~> SinktoPublishedTable"
+			]
+		}
+	}
+}

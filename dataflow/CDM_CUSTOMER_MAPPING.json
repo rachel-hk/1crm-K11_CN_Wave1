@@ -1,0 +1,220 @@
+{
+	"name": "CDM_CUSTOMER_MAPPING",
+	"properties": {
+		"folder": {
+			"name": "Pro"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vw_latest_com_member",
+						"type": "DatasetReference"
+					},
+					"name": "IngestCDMPERSONPROFILE"
+				},
+				{
+					"dataset": {
+						"referenceName": "vw_u_user_identity",
+						"type": "DatasetReference"
+					},
+					"name": "NewKGOMapping"
+				},
+				{
+					"dataset": {
+						"referenceName": "vw_mall_member",
+						"type": "DatasetReference"
+					},
+					"name": "KGOMapping"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Par_PRO_CDM_CUSTOMER_MAPPING",
+						"type": "DatasetReference"
+					},
+					"name": "SinkToCDMCUSTOMERMAPPING"
+				}
+			],
+			"transformations": [
+				{
+					"name": "AddColumn"
+				},
+				{
+					"name": "DropUnwantColumn"
+				},
+				{
+					"name": "JoinNewKGOMapping"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "JoinKGOMapping"
+				},
+				{
+					"name": "AddUID"
+				},
+				{
+					"name": "AddCustomerUID"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     Start_Date as string",
+				"}",
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          area_id as integer,",
+				"          real_name as string,",
+				"          nick_name as string,",
+				"          en_name as string,",
+				"          phone as string,",
+				"          phone_code as string,",
+				"          tel as string,",
+				"          head_img as string,",
+				"          level_id as integer,",
+				"          is_special_level as integer,",
+				"          vip_code as string,",
+				"          vip_pass as string,",
+				"          union_id as string,",
+				"          is_marry as integer,",
+				"          reg_at as long,",
+				"          expire_at as long,",
+				"          first_pay as long,",
+				"          last_pay as long,",
+				"          cycle_at as decimal(38,18),",
+				"          issue_at as long,",
+				"          status as integer,",
+				"          zone as string,",
+				"          city as string,",
+				"          province as string,",
+				"          country as string,",
+				"          addr as string,",
+				"          zip as string,",
+				"          sex as integer,",
+				"          birthday as long,",
+				"          birthday_short as integer,",
+				"          age as integer,",
+				"          email as string,",
+				"          wechat_id as string,",
+				"          reg_origin as integer,",
+				"          reg_sub_origin as integer,",
+				"          up_origin as integer,",
+				"          up_at as integer,",
+				"          operator_type as integer,",
+				"          operator_id as integer,",
+				"          operator_name as string,",
+				"          kpoint as integer,",
+				"          expire_kp as integer,",
+				"          clear_kp as integer,",
+				"          spoint as integer,",
+				"          expire_sp as integer,",
+				"          clear_sp as integer,",
+				"          sp_times as integer,",
+				"          balance as integer,",
+				"          sales_total as decimal(38,18),",
+				"          sales_times as integer,",
+				"          eform_status as integer,",
+				"          create_at as long,",
+				"          update_at as long,",
+				"          deleted as integer,",
+				"          update_operator as string,",
+				"          upgrade_type as integer,",
+				"          is_hk_member as integer,",
+				"          File_Path as string,",
+				"          Insert_Date as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> IngestCDMPERSONPROFILE",
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> NewKGOMapping",
+				"source(output(",
+				"          id as long,",
+				"          member_id as string,",
+				"          SEQUENCE as long",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: false) ~> KGOMapping",
+				"select1 derive(Start_Date = toDate($Start_Date, 'yyyyMMdd'),",
+				"          End_Date = toTimestamp(toString(null())),",
+				"          Is_Current = 1,",
+				"          KDP_ID = toString(null()),",
+				"          CL_ID = toString(null()),",
+				"          Hashed_Member_ID = md5(Personal_Customer_ID),",
+				"          Hashed_VIP_Code = md5(vip_code),",
+				"          manual_tag_id = toInteger(null())) ~> AddColumn",
+				"IngestCDMPERSONPROFILE select(mapColumn(",
+				"          Personal_Customer_ID = member_id,",
+				"          Union_ID = union_id,",
+				"          vip_code",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DropUnwantColumn",
+				"DropUnwantColumn, NewKGOMapping join(Personal_Customer_ID == member_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinNewKGOMapping",
+				"JoinKGOMapping select(mapColumn(",
+				"          Personal_Customer_ID,",
+				"          Union_ID,",
+				"          New_KGO_ID = NewKGOMapping@id,",
+				"          KGO_ID = KGOMapping@id,",
+				"          vip_code",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"JoinNewKGOMapping, KGOMapping join(Personal_Customer_ID == KGOMapping@member_id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinKGOMapping",
+				"AddColumn derive(UID = iif(isNull(Personal_Customer_ID)==false(),toString(Hashed_Member_ID),toString(concat(\"WeChat\",toString(md5(Union_ID)))))) ~> AddUID",
+				"AddUID derive(Customer_UID = concat('K11PRC',toString(UID))) ~> AddCustomerUID",
+				"AddCustomerUID sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     truncate: true,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Customer_UID,",
+				"          K11PRC_Member_ID = Personal_Customer_ID,",
+				"          Union_ID,",
+				"          Start_Date,",
+				"          End_Date,",
+				"          Is_Current,",
+				"          KDP_ID,",
+				"          KGO_ID,",
+				"          New_KGO_ID,",
+				"          CL_ID,",
+				"          Hashed_Member_ID,",
+				"          Hashed_VIP_Code,",
+				"          manual_tag_id",
+				"     )) ~> SinkToCDMCUSTOMERMAPPING"
+			]
+		}
+	}
+}

@@ -1,0 +1,450 @@
+{
+	"name": "raw_so_item_ssir",
+	"properties": {
+		"description": "@concat('[OMS].[SO_ITEM]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_New_KGO/oms"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "OMS/SO_ITEM",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "merchant_id",
+				"type": "INT64"
+			},
+			{
+				"name": "product_id",
+				"type": "INT64"
+			},
+			{
+				"name": "mp_id",
+				"type": "INT64"
+			},
+			{
+				"name": "store_mp_id",
+				"type": "INT64"
+			},
+			{
+				"name": "item_status",
+				"type": "INT32"
+			},
+			{
+				"name": "warehouse_type",
+				"type": "INT32"
+			},
+			{
+				"name": "store_id",
+				"type": "INT64"
+			},
+			{
+				"name": "contract_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "settle_method",
+				"type": "INT32"
+			},
+			{
+				"name": "settle_status",
+				"type": "INT32"
+			},
+			{
+				"name": "settle_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_item_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_item_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_cname",
+				"type": "UTF8"
+			},
+			{
+				"name": "product_pic_path",
+				"type": "UTF8"
+			},
+			{
+				"name": "product_sale_type",
+				"type": "INT32"
+			},
+			{
+				"name": "product_price_original",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_price_market",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_price_sale",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_price_point",
+				"type": "INT32"
+			},
+			{
+				"name": "product_tax_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "purchase_price",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "buy_type",
+				"type": "INT32"
+			},
+			{
+				"name": "frozen_virtal_stock_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "product_gross_weight",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "parent_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "product_item_before_amount",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "code",
+				"type": "UTF8"
+			},
+			{
+				"name": "third_merchant_product_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "unit",
+				"type": "UTF8"
+			},
+			{
+				"name": "sale_unit",
+				"type": "UTF8"
+			},
+			{
+				"name": "place_of_origin",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_info",
+				"type": "UTF8"
+			},
+			{
+				"name": "standard",
+				"type": "UTF8"
+			},
+			{
+				"name": "material",
+				"type": "UTF8"
+			},
+			{
+				"name": "product_price_before_final",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "comment_status",
+				"type": "INT32"
+			},
+			{
+				"name": "series_parent_id",
+				"type": "INT64"
+			},
+			{
+				"name": "brand_id",
+				"type": "INT64"
+			},
+			{
+				"name": "brand_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "category_id",
+				"type": "INT64"
+			},
+			{
+				"name": "category_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "whole_category_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "whole_category_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "relation_mp_id",
+				"type": "INT64"
+			},
+			{
+				"name": "type",
+				"type": "INT32"
+			},
+			{
+				"name": "bar_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "art_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "un_do_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "un_delivery_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "delivery_num",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "line_num",
+				"type": "INT32"
+			},
+			{
+				"name": "virtal_warehouse_id",
+				"type": "INT64"
+			},
+			{
+				"name": "product_price_final",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "setmeal_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "waiter_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "setmeal_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "support_invoice",
+				"type": "INT32"
+			},
+			{
+				"name": "setmeal_num",
+				"type": "INT32"
+			},
+			{
+				"name": "tax_rate",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "tax_group_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "gift_card_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "live_id",
+				"type": "INT64"
+			},
+			{
+				"name": "send_coupon",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field1",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field2",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field3",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field4",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field5",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_available",
+				"type": "INT32"
+			},
+			{
+				"name": "is_deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "version_no",
+				"type": "INT32"
+			},
+			{
+				"name": "create_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "create_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "create_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "server_ip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "update_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "update_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "company_id",
+				"type": "INT64"
+			},
+			{
+				"name": "out_order_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_inner_supplier",
+				"type": "INT32"
+			},
+			{
+				"name": "supplier_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "supplier_id",
+				"type": "INT64"
+			},
+			{
+				"name": "is_drop_shipping",
+				"type": "INT32"
+			},
+			{
+				"name": "supplier_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "packaging_fee",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "auto_refund",
+				"type": "INT32"
+			},
+			{
+				"name": "expiry_time",
+				"type": "INT96"
+			},
+			{
+				"name": "series_product_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "service_date_time",
+				"type": "BINARY"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

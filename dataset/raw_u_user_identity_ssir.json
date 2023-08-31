@@ -1,0 +1,366 @@
+{
+	"name": "raw_u_user_identity_ssir",
+	"properties": {
+		"description": "@concat('[OUSER].[U_USER_IDENTITY]_',formatDateTime(adddays(utcnow(),0),'yyyyMMdd'),'.parquet')",
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtRawProdPARSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw/Raw_Source_New_KGO/ouser"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "OUSER/U_USER_IDENTITY",
+				"fileSystem": "1crm-k11-prod"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT64"
+			},
+			{
+				"name": "user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "identity_type_code",
+				"type": "INT64"
+			},
+			{
+				"name": "pay_password",
+				"type": "UTF8"
+			},
+			{
+				"name": "pay_salt",
+				"type": "UTF8"
+			},
+			{
+				"name": "pay_salt_update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "is_new_member",
+				"type": "INT32"
+			},
+			{
+				"name": "source_type",
+				"type": "INT32"
+			},
+			{
+				"name": "country",
+				"type": "UTF8"
+			},
+			{
+				"name": "province",
+				"type": "UTF8"
+			},
+			{
+				"name": "city",
+				"type": "UTF8"
+			},
+			{
+				"name": "subscribe",
+				"type": "INT32"
+			},
+			{
+				"name": "subscribe_time",
+				"type": "INT96"
+			},
+			{
+				"name": "personal_signature",
+				"type": "UTF8"
+			},
+			{
+				"name": "is_available",
+				"type": "INT32"
+			},
+			{
+				"name": "is_deleted",
+				"type": "INT32"
+			},
+			{
+				"name": "version_no",
+				"type": "INT32"
+			},
+			{
+				"name": "create_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "create_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_usermac",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_time",
+				"type": "INT96"
+			},
+			{
+				"name": "create_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "server_ip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userid",
+				"type": "INT64"
+			},
+			{
+				"name": "update_username",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_userip",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_usermac",
+				"type": "UTF8"
+			},
+			{
+				"name": "update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "update_time_db",
+				"type": "INT96"
+			},
+			{
+				"name": "client_versionno",
+				"type": "UTF8"
+			},
+			{
+				"name": "company_id",
+				"type": "INT64"
+			},
+			{
+				"name": "constellation",
+				"type": "UTF8"
+			},
+			{
+				"name": "education",
+				"type": "UTF8"
+			},
+			{
+				"name": "animal_sign",
+				"type": "UTF8"
+			},
+			{
+				"name": "signature",
+				"type": "UTF8"
+			},
+			{
+				"name": "shopping_guider_remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "platform_remark",
+				"type": "UTF8"
+			},
+			{
+				"name": "bound_store_id",
+				"type": "INT64"
+			},
+			{
+				"name": "bound_store_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "bound_store_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "create_userip",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_type_id",
+				"type": "INT64"
+			},
+			{
+				"name": "member_level_id",
+				"type": "INT64"
+			},
+			{
+				"name": "card_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_level_end_time",
+				"type": "INT96"
+			},
+			{
+				"name": "user_account_flow_id",
+				"type": "INT64"
+			},
+			{
+				"name": "order_point_update_time",
+				"type": "INT96"
+			},
+			{
+				"name": "normal_invite_user_id",
+				"type": "INT64"
+			},
+			{
+				"name": "u_employee_id",
+				"type": "INT64"
+			},
+			{
+				"name": "u_employee_bind_time",
+				"type": "INT96"
+			},
+			{
+				"name": "mobile",
+				"type": "UTF8"
+			},
+			{
+				"name": "nickname",
+				"type": "UTF8"
+			},
+			{
+				"name": "email",
+				"type": "UTF8"
+			},
+			{
+				"name": "remarks",
+				"type": "UTF8"
+			},
+			{
+				"name": "sex",
+				"type": "INT32"
+			},
+			{
+				"name": "head_pic_url",
+				"type": "UTF8"
+			},
+			{
+				"name": "birthday",
+				"type": "INT96"
+			},
+			{
+				"name": "birthday_year",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday_month",
+				"type": "INT32"
+			},
+			{
+				"name": "birthday_date",
+				"type": "INT32"
+			},
+			{
+				"name": "ext_field1",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field2",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field3",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field4",
+				"type": "UTF8"
+			},
+			{
+				"name": "ext_field5",
+				"type": "UTF8"
+			},
+			{
+				"name": "notify_type_exclude",
+				"type": "UTF8"
+			},
+			{
+				"name": "final_interests",
+				"type": "BINARY"
+			},
+			{
+				"name": "has_update",
+				"type": "INT32"
+			},
+			{
+				"name": "identity_card_no",
+				"type": "UTF8"
+			},
+			{
+				"name": "identity_card_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "identity_verify_status",
+				"type": "INT32"
+			},
+			{
+				"name": "identity_verify_failure_num",
+				"type": "INT32"
+			},
+			{
+				"name": "member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "member_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "kdp_bind_status",
+				"type": "INT32"
+			},
+			{
+				"name": "kdp_member_id",
+				"type": "UTF8"
+			},
+			{
+				"name": "kdp_bind_time",
+				"type": "INT96"
+			},
+			{
+				"name": "mall_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "fail_message",
+				"type": "UTF8"
+			},
+			{
+				"name": "wx_card_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "wx_event_time",
+				"type": "UTF8"
+			},
+			{
+				"name": "wx_auth_type",
+				"type": "UTF8"
+			},
+			{
+				"name": "wx_auth_status",
+				"type": "INT32"
+			},
+			{
+				"name": "sync_crm_flag",
+				"type": "INT32"
+			},
+			{
+				"name": "new_invite",
+				"type": "INT32"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,271 @@
+{
+	"name": "vw_Latest_mall_order_goods_map_ssir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "1crmTagMgmtSynpaseProdSSIR",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Raw_Temp"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "order_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "area_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "mer_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "store_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "user_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "member_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "union_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "order_no",
+				"type": "nvarchar"
+			},
+			{
+				"name": "unique_id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "goods_map_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "goods_academy_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "goods_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_sn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_icon_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "goods_num",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "goods_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "goods_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "origin_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "coupon_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kpoint_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kdp_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "prom_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "real_amount",
+				"type": "nvarchar"
+			},
+			{
+				"name": "spec_key",
+				"type": "nvarchar"
+			},
+			{
+				"name": "spec_key_name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "member_goods_price",
+				"type": "nvarchar"
+			},
+			{
+				"name": "channel_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pay_type",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "is_comment",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "prom_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "prom_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "gift_id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "send_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "card_status",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "refund_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "delivery_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "profit_num",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "sku",
+				"type": "nvarchar"
+			},
+			{
+				"name": "is_gift",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "unvalid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "is_member_price",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "invoice",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_kpoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_kpoint_type",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_spoint",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "cost_kdp",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "create_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "update_at",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "deleted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "File_Path",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Insert_Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SEQUENCE",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vw_Latest_mall_order_goods_map"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
